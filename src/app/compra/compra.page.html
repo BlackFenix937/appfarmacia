@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-item button *ngFor="let compra of compras">
+    <ion-avatar slot="start">
+        <img src="assets/img/crush.png" alt="Foto">
+    </ion-avatar>
+
+    <ion-label class="ion-text-wrap">
+        <h3></h3>
+        
+    </ion-label>
+    <ion-badge slot="end">{{compra.cli_id}}, {{compra.comp_fecha}}, {{compra.comp_total}}, {{compra.comp_fkestado_id}}</ion-badge>
+</ion-item>
+</ion-content>
