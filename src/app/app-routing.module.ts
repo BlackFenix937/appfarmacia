@@ -49,6 +49,14 @@ const routes: Routes = [
   {
     path: 'entidad-comercial',
     loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then( m => m.EntidadComercialPageModule)
+  },
+  {
+    path: 'devolucion',
+    loadChildren: () => import('./devolucion/devolucion.module').then( m => m.DevolucionPageModule)
+  },
+  {
+    path: 'compra-detalle',
+    loadChildren: () => import('./compra-detalle/compra-detalle.module').then( m => m.CompraDetallePageModule)
   }
 ];
 @NgModule({
