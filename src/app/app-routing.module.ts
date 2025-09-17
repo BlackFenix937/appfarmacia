@@ -17,6 +17,14 @@ const routes: Routes = [
   {
     path: 'municipio',
     loadChildren: () => import('./municipio/municipio.module').then( m => m.MunicipioPageModule)
+  },
+  {
+    path: 'estado',
+    loadChildren: () => import('./estado/estado.module').then( m => m.EstadoPageModule)
+  },
+  {
+    path: 'tipo-estado',
+    loadChildren: () => import('./tipo-estado/tipo-estado.module').then( m => m.TipoEstadoPageModule)
   }
 ];
 @NgModule({
