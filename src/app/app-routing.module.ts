@@ -25,6 +25,14 @@ const routes: Routes = [
   {
     path: 'tipo-estado',
     loadChildren: () => import('./tipo-estado/tipo-estado.module').then( m => m.TipoEstadoPageModule)
+  },
+  {
+    path: 'pago',
+    loadChildren: () => import('./pago/pago.module').then( m => m.PagoPageModule)
+  },
+  {
+    path: 'medicamento',
+    loadChildren: () => import('./medicamento/medicamento.module').then( m => m.MedicamentoPageModule)
   }
 ];
 @NgModule({
