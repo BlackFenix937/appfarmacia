@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Paises</ion-title>
+    <ion-title>Ciudades</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 <ion-list>
-    <ion-item button *ngFor="let pais of paises">
+    <ion-item button *ngFor="let ciudad of ciudades">
     <ion-avatar slot="start">
         <img src="assets/img/crush.png" alt="Foto">
     </ion-avatar>
@@ -16,7 +16,7 @@
         
     </ion-label>
 
-    <ion-badge slot="end">{{pais.pai_nombre}}</ion-badge>
+    <ion-badge slot="end">{{ciudad.ciu_nombre}}, {{ciudad.ciu_fkmun_id}}</ion-badge>
     </ion-item>
 </ion-list>
 </ion-content>
