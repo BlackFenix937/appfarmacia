@@ -41,6 +41,14 @@ const routes: Routes = [
   {
     path: 'factura',
     loadChildren: () => import('./factura/factura.module').then( m => m.FacturaPageModule)
+  },
+  {
+    path: 'entidad-medicamento',
+    loadChildren: () => import('./entidad-medicamento/entidad-medicamento.module').then( m => m.EntidadMedicamentoPageModule)
+  },
+  {
+    path: 'entidad-comercial',
+    loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then( m => m.EntidadComercialPageModule)
   }
 ];
 @NgModule({
