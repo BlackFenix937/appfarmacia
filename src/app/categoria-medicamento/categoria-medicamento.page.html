@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Categoria Medicamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-item button *ngFor="let categoriamedicamento of categoriamedicamentos">
+    <ion-avatar slot="start">
+        <img src="assets/img/crush.png" alt="Foto">
+    </ion-avatar>
+
+    <ion-label class="ion-text-wrap">
+        <h3></h3>
+        
+    </ion-label>
+    <ion-badge slot="end">{{categoriamedicamento.med_id}}, {{categoriamedicamento.catmed_nombre}}, {{categoriamedicamento.catmed_descripcion}}</ion-badge>
+</ion-item>
+</ion-content>

@@ -65,6 +65,14 @@ const routes: Routes = [
   {
     path: 'componente',
     loadChildren: () => import('./componente/componente.module').then( m => m.ComponentePageModule)
+  },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule)
+  },
+  {
+    path: 'categoria-medicamento',
+    loadChildren: () => import('./categoria-medicamento/categoria-medicamento.module').then( m => m.CategoriaMedicamentoPageModule)
   }
 ];
 @NgModule({
