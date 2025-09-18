@@ -12,11 +12,14 @@
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>{{ciudad.ciu_nombre}}</h3>
         
     </ion-label>
 
-    <ion-badge slot="end">{{ciudad.ciu_nombre}}, {{ciudad.municipioNombre}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+    <ion-button [routerLink]="['/ciudad-detalle', ciudad.ciu_id]">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
     </ion-item>
 </ion-list>
 </ion-content>

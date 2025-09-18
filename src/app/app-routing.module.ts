@@ -81,6 +81,14 @@ const routes: Routes = [
   {
     path: 'entidad-comercial-detalle/:ent_id',
     loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then( m => m.EntidadComercialDetallePageModule)
+  },
+  {
+    path: 'ciudad-detalle/:ciu_id',
+    loadChildren: () => import('./ciudad-detalle/ciudad-detalle.module').then( m => m.CiudadDetallePageModule)
+  },
+  {
+    path: 'entidad-medicamento-detalle/:entmed_id',
+    loadChildren: () => import('./entidad-medicamento-detalle/entidad-medicamento-detalle.module').then( m => m.EntidadMedicamentoDetallePageModule)
   }
 ];
 @NgModule({
