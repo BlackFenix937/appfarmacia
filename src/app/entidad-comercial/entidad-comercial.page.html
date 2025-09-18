@@ -11,9 +11,12 @@
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>{{entidadcomercial.ent_nombre}}</h3>
         
     </ion-label>
-    <ion-badge slot="end">{{entidadcomercial.ent_nombre}}, {{entidadcomercial.ent_tipo}}, {{entidadcomercial.ent_telefono}}, {{entidadcomercial.ent_correo}}, {{entidadcomercial.ent_direccion}}, {{entidadcomercial.ent_codigo_postal}}, {{entidadcomercial.ent_fkestado_id}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+<ion-button [routerLink]="['/entidad-comercial-detalle', entidadcomercial.ent_id]">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
     </ion-item>
 </ion-content>

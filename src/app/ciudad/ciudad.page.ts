@@ -28,7 +28,7 @@ ciudades: any=[]
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/ciudad",
+        url: "http://localhost:8080/ciudads?expand=municipioNombre",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'

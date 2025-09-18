@@ -28,7 +28,7 @@ export class ClientePage implements OnInit {
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/clientes",
+        url: "http://localhost:8080/clientes?expand=ciudadNombre",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'
