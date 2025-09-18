@@ -28,7 +28,7 @@ export class DevolucionPage implements OnInit {
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/devolucions",
+        url: "http://localhost:8080/devolucions?expand=cantidadMedicamento,estadoDevolucion",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'

@@ -29,7 +29,7 @@ pagos:any=[];
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/pagos",
+        url: "http://localhost:8080/pagos?expand=pagoEstado, facturaSolicitada",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'

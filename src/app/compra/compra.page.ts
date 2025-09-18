@@ -28,7 +28,7 @@ export class CompraPage implements OnInit {
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/compras",
+        url: "http://localhost:8080/compras?expand=clienteNombre, estadoCompra",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'

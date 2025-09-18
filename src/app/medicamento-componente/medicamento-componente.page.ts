@@ -28,7 +28,7 @@ export class MedicamentoComponentePage implements OnInit {
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/medicamentocomponentes",
+        url: "http://localhost:8080/medicamentocomponentes?expand=medicamentoNombre, componenteNombre",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'
