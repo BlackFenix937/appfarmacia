@@ -89,6 +89,10 @@ const routes: Routes = [
   {
     path: 'entidad-medicamento-detalle/:entmed_id',
     loadChildren: () => import('./entidad-medicamento-detalle/entidad-medicamento-detalle.module').then( m => m.EntidadMedicamentoDetallePageModule)
+  },
+  {
+    path: 'pago-detalle/:pag_id',
+    loadChildren: () => import('./pago-detalle/pago-detalle.module').then( m => m.PagoDetallePageModule)
   }
 ];
 @NgModule({

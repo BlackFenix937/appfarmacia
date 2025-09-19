@@ -1,22 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pago</ion-title>
+    <ion-title>Pagos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-list>
-    <ion-item button *ngFor="let pago of pagos">
+<ion-item button *ngFor="let pago of pagos">
     <ion-avatar slot="start">
         <img src="assets/img/crush.png" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>Pago {{pago.pag_id}}</h3>
         
     </ion-label>
-
-    <ion-badge slot="end">{{pago.comp_id}}, {{pago.pag_monto}}, {{pago.pag_fecha}}, {{pago.facturaSolicitada}}, {{pago.pagoEstado}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+<ion-button [routerLink]="['/pago-detalle', pago.pag_id]">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
     </ion-item>
-</ion-list>
 </ion-content>
