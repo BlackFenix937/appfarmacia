@@ -5,18 +5,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-list>
-    <ion-item button *ngFor="let factura of facturas">
+<ion-item button *ngFor="let factura of facturas">
     <ion-avatar slot="start">
         <img src="assets/img/crush.png" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>Factura {{factura.fac_id}}</h3>
         
     </ion-label>
-
-    <ion-badge slot="end">{{factura.montoPago}}, {{factura.fac_folio}}, {{factura.fac_fecha_emision}}, {{factura.fac_subtotal}}, {{factura.fac_impuestos}}, {{factura.fac_total}}, {{factura.estadoFactura}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+<ion-button [routerLink]="['/factura-detalle', factura.fac_id]">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
     </ion-item>
-</ion-list>
 </ion-content>

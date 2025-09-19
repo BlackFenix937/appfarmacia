@@ -26,7 +26,7 @@ facturas:any=[];
     await loading.present();
     const response = await axios({
         method: 'get',
-        url: "http://localhost:8080/facturas?expand=estadoFactura, facturaSolicitada, montoPago",
+        url: "http://localhost:8080/facturas?expand=estadoFactura, facturaSolicitada, medicamentosFacturados",
         withCredentials: true,
         headers: {
             'Accept': 'application/json'
