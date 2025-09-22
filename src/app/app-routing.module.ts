@@ -55,10 +55,6 @@ const routes: Routes = [
     loadChildren: () => import('./devolucion/devolucion.module').then( m => m.DevolucionPageModule)
   },
   {
-    path: 'compra-detalle',
-    loadChildren: () => import('./compra-detalle/compra-detalle.module').then( m => m.CompraDetallePageModule)
-  },
-  {
     path: 'compra',
     loadChildren: () => import('./compra/compra.module').then( m => m.CompraPageModule)
   },
@@ -101,6 +97,10 @@ const routes: Routes = [
   {
     path: 'devolucion-detalle/:dev_id',
     loadChildren: () => import('./devolucion-detalle/devolucion-detalle.module').then( m => m.DevolucionDetallePageModule)
+  },
+  {
+    path: 'compradetalle',
+    loadChildren: () => import('./compradetalle/compradetalle.module').then( m => m.CompradetallePageModule)
   }
 ];
 @NgModule({
