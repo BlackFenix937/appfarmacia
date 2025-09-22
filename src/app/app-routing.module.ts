@@ -101,6 +101,10 @@ const routes: Routes = [
   {
     path: 'compradetalle',
     loadChildren: () => import('./compradetalle/compradetalle.module').then( m => m.CompradetallePageModule)
+  },
+  {
+    path: 'cliente-detalle/:cli_id',
+    loadChildren: () => import('./cliente-detalle/cliente-detalle.module').then( m => m.ClienteDetallePageModule)
   }
 ];
 @NgModule({

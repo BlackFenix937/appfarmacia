@@ -7,13 +7,16 @@
 <ion-content [fullscreen]="true">
 <ion-item button *ngFor="let cliente of clientes">
     <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
+        <img src="assets/img/xdd.jpg" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>{{cliente.cli_nombre}}</h3>
         
     </ion-label>
-    <ion-badge slot="end">{{cliente.cli_nombre}}, {{cliente.cli_apellido_paterno}}, {{cliente.cli_apellido_materno}}, {{cliente.cli_fecha_nacimiento}}, {{cliente.cli_direccion}}, {{cliente.cli_telefono}}, {{cliente.cli_correo}}, {{cliente.cli_rfc}}, {{cliente.cli_fecha_registro}}, {{cliente.ciudadNombre}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+    <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
 </ion-item>
 </ion-content>
