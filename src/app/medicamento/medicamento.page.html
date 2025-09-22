@@ -12,11 +12,14 @@
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>{{medicamento.med_nombre}}</h3>
         
     </ion-label>
 
-    <ion-badge slot="end">{{medicamento.med_nombre}}, {{medicamento.med_descripcion}}, {{medicamento.med_presentacion}}, {{medicamento.med_concentracion}}, {{medicamento.med_fecha_caducidad}}, {{medicamento.med_precio_unitario}}, {{medicamento.med_lote}}, {{medicamento.med_stock}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+    <ion-button [routerLink]="['/medicamento-detalle', medicamento.med_id]">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
     </ion-item>
 </ion-list>
 </ion-content>

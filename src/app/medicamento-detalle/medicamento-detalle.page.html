@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalles del medicamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="medicamento as medicamento">
+  <div class="center">
+    <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
+  </div>
+  <ion-card-header class="center">
+    <ion-card-title>
+      <h3>{{medicamento.med_nombre}}</h3>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <p>Descripción del medicamento</p>
+          <h2> {{medicamento.med_descripcion}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Presentación del medicamento</p>
+          <h2>{{medicamento.med_presentacion}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Concentración del {{medicamento.med_nombre}}</p>
+          <h2>{{medicamento.med_concentracion}}g</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Fecha de caducidad</p>
+          <h2>{{medicamento.med_fecha_caducidad}}</h2>
+        </ion-label>
+      </ion-item>
+            <ion-item>
+        <ion-label>
+          <p>Precio del {{medicamento.med_nombre}}</p>
+          <h2>{{medicamento.med_precio_unitario}}</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <p>Número de lote</p>
+          <h2>{{medicamento.med_lote}}</h2>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <p>Stock</p>
+          <h2>{{medicamento.med_stock}} piezas</h2>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-content>

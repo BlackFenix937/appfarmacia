@@ -105,6 +105,10 @@ const routes: Routes = [
   {
     path: 'cliente-detalle/:cli_id',
     loadChildren: () => import('./cliente-detalle/cliente-detalle.module').then( m => m.ClienteDetallePageModule)
+  },
+  {
+    path: 'medicamento-detalle/:med_id',
+    loadChildren: () => import('./medicamento-detalle/medicamento-detalle.module').then( m => m.MedicamentoDetallePageModule)
   }
 ];
 @NgModule({
