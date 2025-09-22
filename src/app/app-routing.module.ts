@@ -97,6 +97,10 @@ const routes: Routes = [
   {
     path: 'factura-detalle/:fac_id',
     loadChildren: () => import('./factura-detalle/factura-detalle.module').then( m => m.FacturaDetallePageModule)
+  },
+  {
+    path: 'devolucion-detalle/:dev_id',
+    loadChildren: () => import('./devolucion-detalle/devolucion-detalle.module').then( m => m.DevolucionDetallePageModule)
   }
 ];
 @NgModule({

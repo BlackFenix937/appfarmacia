@@ -11,9 +11,14 @@
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>Devolución de {{devolucion.medicamentoNombre}}</h3>
         
     </ion-label>
-    <ion-badge slot="end">{{devolucion.cantidadMedicamento}}, {{devolucion.dev_cantidad}}, {{devolucion.dev_motivo}}, {{devolucion.dev_fecha}}, {{devolucion.estadoDevolucion}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+
+    <ion-button [routerLink]="['/devolucion-detalle', devolucion.dev_id]">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
+
   </ion-item>
 </ion-content>

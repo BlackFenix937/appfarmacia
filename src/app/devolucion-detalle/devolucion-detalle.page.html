@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Detalle de la devolucion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card *ngIf="devolucion as devolucion">
+  <div class="center">
+    <img src="assets/img/crush.png" alt="Foto">
+  </div>
+  <ion-card-header class="center">
+    <ion-card-title>
+      <h3> Devolucion {{devolucion.dev_id}}</h3>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <p>Medicamentos devueltos</p>
+          <h2>{{devolucion.medicamentoNombre}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Cantidad devuelta</p>
+          <h2>{{devolucion.dev_cantidad}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Motivo de la devolucion</p>
+          <h2>{{devolucion.dev_motivo}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p>Fecha de la devolucion</p>
+          <h2>{{devolucion.dev_fecha}}</h2>
+        </ion-label>
+      </ion-item>
+            <ion-item>
+        <ion-label>
+          <p>Estado de la devolucion</p>
+          <h2>{{devolucion.estadoDevolucion}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+
+</ion-content>
