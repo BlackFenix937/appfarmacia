@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { MedicamentoCrearPage } from '../medicamento-crear/medicamento-crear.page';
 
 @Component({
   selector: 'app-medicamento',
@@ -12,6 +13,8 @@ export class MedicamentoPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    
 
   ) { }
 
@@ -42,5 +45,18 @@ medicamentos:any=[];
     });
     loading.dismiss();
 }
+
+async new() {
+    const paginaModal = await this.modalCtrl.create({
+        component: MedicamentoCrearPage,
+        breakpoints : [0, 0.3, 0.5, 0.95],
+        initialBreakpoint: 0.95
+    });
+    await paginaModal.present();
+    paginaModal.onDidDismiss().then((data) => {
+        this.cargarMedicamentos();
+    });
+}
+
 
 }

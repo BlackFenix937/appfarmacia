@@ -133,6 +133,14 @@ const routes: Routes = [
   {
     path: 'pais-crear',
     loadChildren: () => import('./pais-crear/pais-crear.module').then( m => m.PaisCrearPageModule)
+  },
+  {
+    path: 'ciudad-crear',
+    loadChildren: () => import('./ciudad-crear/ciudad-crear.module').then( m => m.CiudadCrearPageModule)
+  },
+  {
+    path: 'medicamento-crear',
+    loadChildren: () => import('./medicamento-crear/medicamento-crear.module').then( m => m.MedicamentoCrearPageModule)
   }
 ];
 @NgModule({

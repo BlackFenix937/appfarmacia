@@ -1,0 +1,122 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Nuevo Medicameto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="medicamento" (ngSubmit)="guardarDatos()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Nombre del medicameto</ion-label>
+            <ion-input type="text" formControlName="med_nombre" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_nombre">
+            <ion-note color="danger" *ngIf="getError('med_nombre')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Descripción del medicameto</ion-label>
+            <ion-input type="text" formControlName="med_descripcion" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_descripcion">
+            <ion-note color="danger" *ngIf="getError('med_descripcion')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Presentación del medicameto</ion-label>
+            <ion-input type="text" formControlName="med_presentacion" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_presentacion">
+            <ion-note color="danger" *ngIf="getError('med_presentacion')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Concentración del medicameto</ion-label>
+            <ion-input type="int" formControlName="med_concentracion" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_concentracion">
+            <ion-note color="danger" *ngIf="getError('med_concentracion')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Fecha de caducidad</ion-label>
+            <ion-datetime presentation="date" formControlName="med_fecha_caducidad" class="form-control"></ion-datetime>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_fecha_caducidad">
+            <ion-note color="danger" *ngIf="getError('med_fecha_caducidad')[validation.type]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Precio unitario</ion-label>
+            <ion-input type="number" step="0.01" formControlName="med_precio_unitario" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_precio_unitario">
+            <ion-note color="danger" *ngIf="getError('med_precio_unitario')[validation.type]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Lote del medicameto</ion-label>
+            <ion-input type="text" formControlName="med_lote" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_lote">
+            <ion-note color="danger" *ngIf="getError('med_lote')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Stock del medicameto</ion-label>
+            <ion-input type="int" formControlName="med_stock" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_stock">
+            <ion-note color="danger" *ngIf="getError('med_stock')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+
+
+
+
+
+        <ion-col size="12">
+          <p class="ion-text-center">
+            <ion-button type="submit" [disabled]="!medicamento.valid">Guardar</ion-button>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
