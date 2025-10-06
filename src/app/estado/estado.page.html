@@ -16,7 +16,10 @@
         
     </ion-label>
 
-    <ion-badge slot="end">Estado: , Pais: {{estado.paisNombre}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+        <ion-button [routerLink]="['/estado-detalle', estado.estd_id]">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
     </ion-item>
 </ion-list>
 </ion-content>

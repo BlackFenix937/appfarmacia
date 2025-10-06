@@ -1,13 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>estadoDetalle</ion-title>
+    <ion-title>Detalles del estado</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">estadoDetalle</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <ion-card *ngIf="estado as estado">
+  <div class="center">
+    <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
+  </div>
+  <ion-card-header class="center">
+    <ion-card-title>
+      <h3>{{estado.estd_nombre}}</h3>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <p>Pais donde se encuentra</p>
+          <h2> {{estado.paisNombre}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+</ion-card-content>
