@@ -13,7 +13,8 @@ import { EstadoPage } from './estado.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EstadoPageRoutingModule
+    EstadoPageRoutingModule,
+    
   ],
   declarations: [EstadoPage]
 })

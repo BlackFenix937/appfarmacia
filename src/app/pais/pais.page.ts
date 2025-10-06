@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { PaisCrearPage } from '../pais-crear/pais-crear.page';
 
 
 @Component({
@@ -13,6 +14,8 @@ export class PaisPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController
+    
 ) {}
 
 paises: any = [];
@@ -41,6 +44,18 @@ async cargarPaises (event?: InfiniteScrollCustomEvent) {
         console.log(error);     
     });
     loading.dismiss();
+}
+
+async new() {
+    const paginaModal = await this.modalCtrl.create({
+        component: PaisCrearPage,
+        breakpoints : [0, 0.3, 0.5, 0.95],
+        initialBreakpoint: 0.95
+    });
+    await paginaModal.present();
+    paginaModal.onDidDismiss().then((data) => {
+        this.cargarPaises();
+    });
 }
 
 }

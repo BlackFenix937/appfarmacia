@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EstadoCrearPageRoutingModule } from './estado-crear-routing.module';
+import { PaisCrearPageRoutingModule } from './pais-crear-routing.module';
 
-import { EstadoCrearPage } from './estado-crear.page';
+import { PaisCrearPage } from './pais-crear.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EstadoCrearPageRoutingModule,
+    PaisCrearPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EstadoCrearPage]
+  declarations: [PaisCrearPage]
 })
-export class EstadoCrearPageModule {}
+export class PaisCrearPageModule {}

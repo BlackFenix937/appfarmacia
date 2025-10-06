@@ -129,6 +129,10 @@ const routes: Routes = [
   {
     path: 'municipio-detalle/:mun_id',
     loadChildren: () => import('./municipio-detalle/municipio-detalle.module').then( m => m.MunicipioDetallePageModule)
+  },
+  {
+    path: 'pais-crear',
+    loadChildren: () => import('./pais-crear/pais-crear.module').then( m => m.PaisCrearPageModule)
   }
 ];
 @NgModule({

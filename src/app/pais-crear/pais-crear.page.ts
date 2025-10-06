@@ -4,12 +4,12 @@ import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-estado-crear',
-  templateUrl: './estado-crear.page.html',
-  styleUrls: ['./estado-crear.page.scss'],
+  selector: 'app-pais-crear',
+  templateUrl: './pais-crear.page.html',
+  styleUrls: ['./pais-crear.page.scss'],
   standalone:false,
 })
-export class EstadoCrearPage implements OnInit {
+export class PaisCrearPage implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
@@ -17,70 +17,45 @@ export class EstadoCrearPage implements OnInit {
     private modalCtrl: ModalController
   ) { }
 
-    public estados!: FormGroup;
-    pais:any=[];
-    paisUrl:string = "http://localhost:8080/pais";
-    baseUrl:string = "http://localhost:8080/estados";
+  public paises!: FormGroup;
+  baseUrl:string = "http://localhost:8080/pais";
+
 
 
   ngOnInit() {
-        this.cargarPais();
-        this.formulario();
+    this.formulario();
   }
 
   mensajes_validacion:any = {
-    'estd_nombre' : [
-        {type : 'required' , message : 'El nombre del estado es obligatorio'},
+    'pai_nombre' : [
+        {type : 'required' , message : 'El nombre del pais es obligatorio'},
         
-    ],
+    ]}
 
-
-    'estd_fkpai_id' : [
-        {type : 'required' , message : 'El pais es obligatorio.'},
-        
-    ],
-}
-
-  private formulario() {
-    this.estados = this.formBuilder.group({
-    estd_nombre: ['',[Validators.required]],
-    estd_fkpai_id: ['',[Validators.required]],
+    private formulario() {
+    this.paises = this.formBuilder.group({
+    pai_nombre: ['',[Validators.required]],
     })
-}
-
-async cargarPais() {
-    const response = await axios({
-        method: 'get',
-        url : this.paisUrl,
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then( (response) => {
-        this.pais = response.data;
-    }).catch(function (error) {
-        console.log(error);     
-    });
 }
 
 async guardarDatos() {
     try {
-    const estados = this.estados?.value;
+    const pais = this.paises?.value;
     const response = await axios({
         method: 'post',
         url : this.baseUrl,
-        data: estados,
+        data: pais,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer 100-token'
         }
     }).then( (response) => {
         if(response?.status == 201) {
-            this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido registrado');
+            this.alertGuardado(response.data.pai_nombre, 'El pais ' + response.data.pai_nombre + ' ha sido registrado');
         }
     }).catch( (error) => {
         if(error?.response?.status == 422) {
-            this.alertGuardado(estados.estd_nombre, error?.response?.data[0]?.message, "Error");
+            this.alertGuardado(pais.estd_nombre, error?.response?.data[0]?.message, "Error");
         }     
     });
     } catch(e){
@@ -90,16 +65,16 @@ async guardarDatos() {
 
 public getError(controlName: string) {
     let errors: any[] = [];
-    const control = this.estados.get(controlName);
+    const control = this.paises.get(controlName);
     if (control?.touched && control?.errors != null) {
         errors = JSON.parse(JSON.stringify(control?.errors));
     }
     return errors;
 }
 
-private async alertGuardado(estd_nombre: String, msg = "",  subMsg= "Guardado") {
+private async alertGuardado(pai_nombre: String, msg = "",  subMsg= "Guardado") {
     const alert = await this.alert.create({
-        header: 'Estado',
+        header: 'Pais',
         subHeader: subMsg,
         message: msg,
         cssClass: 'alert-center',
