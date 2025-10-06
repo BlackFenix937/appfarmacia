@@ -109,6 +109,26 @@ const routes: Routes = [
   {
     path: 'medicamento-detalle/:med_id',
     loadChildren: () => import('./medicamento-detalle/medicamento-detalle.module').then( m => m.MedicamentoDetallePageModule)
+  },
+  {
+    path: 'compra-detalle/:comp_id',
+    loadChildren: () => import('./compra-detalle/compra-detalle.module').then( m => m.CompraDetallePageModule)
+  },
+  {
+    path: 'municipio-crear',
+    loadChildren: () => import('./municipio-crear/municipio-crear.module').then( m => m.MunicipioCrearPageModule)
+  },
+  {
+    path: 'estado-crear',
+    loadChildren: () => import('./estado-crear/estado-crear.module').then( m => m.EstadoCrearPageModule)
+  },
+  {
+    path: 'estado-detalle/:estd_id',
+    loadChildren: () => import('./estado-detalle/estado-detalle.module').then( m => m.EstadoDetallePageModule)
+  },
+  {
+    path: 'municipio-detalle/:mun_id',
+    loadChildren: () => import('./municipio-detalle/municipio-detalle.module').then( m => m.MunicipioDetallePageModule)
   }
 ];
 @NgModule({

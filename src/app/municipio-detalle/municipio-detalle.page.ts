@@ -4,26 +4,26 @@ import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
 
 @Component({
-  selector: 'app-compra-detalle',
-  templateUrl: './compra-detalle.page.html',
-  styleUrls: ['./compra-detalle.page.scss'],
+  selector: 'app-municipio-detalle',
+  templateUrl: './municipio-detalle.page.html',
+  styleUrls: ['./municipio-detalle.page.scss'],
   standalone:false,
 })
-export class CompraDetallePage implements OnInit {
+export class MunicipioDetallePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
     private loading: LoadingController
   ) { }
 
-  compra:any=false;
+  municipio:any=false;
 
-  ngOnInit(): void {
-    this.cargarCompra();
+  ngOnInit():void {
+    this.cargarMunicipio();
   }
 
-  async cargarCompra() {
-  const comp_id = this.route.snapshot.paramMap.get('comp_id');
+  async cargarMunicipio() {
+  const mun_id = this.route.snapshot.paramMap.get('mun_id');
   const loading = await this.loading.create({
     message: 'Cargando',
     spinner: 'bubbles',
@@ -31,13 +31,13 @@ export class CompraDetallePage implements OnInit {
   await loading.present();
   const response = await axios({
     method: 'get',
-    url: "http://localhost:8080/compras/"+comp_id+"?expand=clienteNombre, estadoCompra, compraDetalle",
+    url: "http://localhost:8080/municipios/"+mun_id+"?expand=estadoNombre",
     withCredentials: true,
     headers: {
       'Accept': 'application/json'
     }
   }).then((response) => {
-    this.compra = response.data;
+    this.municipio = response.data;
   }).catch(function (error) {
     console.log(error);
   });

@@ -12,11 +12,20 @@
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>{{municipio.mun_nombre}}</h3>
         
     </ion-label>
 
-    <ion-badge slot="end">{{municipio.mun_nombre}}, {{municipio.estadoNombre}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+    <ion-button [routerLink]="['/municipio-detalle', municipio.mun_id]">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
     </ion-item>
 </ion-list>
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="new()">
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

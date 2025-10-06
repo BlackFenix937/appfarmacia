@@ -7,13 +7,16 @@
 <ion-content [fullscreen]="true">
 <ion-item button *ngFor="let compra of compras">
     <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
+        <img src="assets/img/uwu.jpg" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3></h3>
+        <h3>Compra de </h3>
         
     </ion-label>
-    <ion-badge slot="end">{{compra.clienteNombre}}, {{compra.comp_fecha}}, {{compra.comp_total}}, {{compra.estadoCompra}}</ion-badge>
+    <ion-badge slot="end"></ion-badge>
+    <ion-button [routerLink]="['/compra-detalle', compra.comp_id]">
+      <ion-icon name="reader-sharp"></ion-icon> 
+    </ion-button>
 </ion-item>
 </ion-content>
