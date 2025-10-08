@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Nueva entidad comercial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="entidadcomercial" (ngSubmit)="guardarDatos()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Nombre de la entidad comercial</ion-label>
+            <ion-input type="text" formControlName="ent_nombre" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_nombre">
+            <ion-note color="danger" *ngIf="getError('ent_nombre')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Tipo de entidad comercial</ion-label>
+            <ion-select formControlName="ent_tipo" class="form-control">
+              <ion-select-option *ngFor="let tipo of tipos" [value]="tipo.ent_tipo">
+                {{ tipo.ent_tipo }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_tipo">
+            <ion-note color="danger" *ngIf="getError('ent_tipo')[validation.type]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Telefono de la entidad comercial</ion-label>
+            <ion-input type="text" formControlName="ent_telefono" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_telefono">
+            <ion-note color="danger" *ngIf="getError('ent_telefono')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Correo electronico</ion-label>
+            <ion-input type="text" formControlName="ent_correo" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_correo">
+            <ion-note color="danger" *ngIf="getError('ent_correo')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Direccion</ion-label>
+            <ion-input type="text" formControlName="ent_direccion" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_direccion">
+            <ion-note color="danger" *ngIf="getError('ent_direccion')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Codigo postal</ion-label>
+            <ion-input type="text" formControlName="ent_codigo_postal" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_codigo_postal">
+            <ion-note color="danger" *ngIf="getError('ent_codigo_postal')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Ciudad</ion-label>
+            <ion-select formControlName="ent_fkciu_id" class="form-control">
+              <ion-select-option *ngFor="let ciudad of ciudad" [value]="ciudad.ciu_id">
+                {{ciudad.ciu_nombre}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.ent_fkciu_id">
+            <ion-note color="danger" *ngIf="getError('ent_fkciu_id')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <p class="ion-text-center">
+            <ion-button type="submit" [disabled]="!entidadcomercial.valid">Guardar</ion-button>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

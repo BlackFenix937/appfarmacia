@@ -5,18 +5,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-item button *ngFor="let cliente of clientes">
+  <ion-item button *ngFor="let cliente of clientes">
     <ion-avatar slot="start">
-        <img src="assets/img/xdd.jpg" alt="Foto">
+      <img src="assets/img/xdd.jpg" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3>{{cliente.cli_nombre}}</h3>
-        
+      <h3>{{cliente.cli_nombre}}</h3>
+
     </ion-label>
     <ion-badge slot="end"></ion-badge>
     <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]">
       <ion-icon name="person-circle"></ion-icon>
     </ion-button>
-</ion-item>
+  </ion-item>
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+  <ion-fab-button (click)="new()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>

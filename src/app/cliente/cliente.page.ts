@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { ClienteCrearPage } from '../cliente-crear/cliente-crear.page';
 
 @Component({
   selector: 'app-cliente',
@@ -12,6 +13,7 @@ export class ClientePage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
   ) { }
 
   clientes:any=[];
@@ -41,5 +43,18 @@ export class ClientePage implements OnInit {
     });
     loading.dismiss();
 }
+
+async new() {
+    const paginaModal = await this.modalCtrl.create({
+        component: ClienteCrearPage,
+        breakpoints : [0, 0.3, 0.5, 0.95],
+        initialBreakpoint: 0.95
+    });
+    await paginaModal.present();
+    paginaModal.onDidDismiss().then((data) => {
+        this.cargarClientes();
+    });
+}
+
 
 }
