@@ -141,6 +141,14 @@ const routes: Routes = [
   {
     path: 'medicamento-crear',
     loadChildren: () => import('./medicamento-crear/medicamento-crear.module').then( m => m.MedicamentoCrearPageModule)
+  },
+  {
+    path: 'cliente-crear',
+    loadChildren: () => import('./cliente-crear/cliente-crear.module').then( m => m.ClienteCrearPageModule)
+  },
+  {
+    path: 'entidad-comercial-crear',
+    loadChildren: () => import('./entidad-comercial-crear/entidad-comercial-crear.module').then( m => m.EntidadComercialCrearPageModule)
   }
 ];
 @NgModule({
