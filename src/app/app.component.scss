@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url("../assets/fonts/Montserrat.ttf"); //change url accordingly
+}
+
+:root {
+    --ion-font-family: 'Montserrat';
+}
+
+ion-menu {
+    --width: 260px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-header {
+    background: #3880ff;
+    color: #fff;
+}
+
+ion-toolbar {
+    --background: transparent;
+    --color: #fff;
+    text-align: center;
+}
+
+ion-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+}
+
+ion-list {
+    margin-top: 10px;
+}
+
+ion-item {
+    --background: transparent;
+    --color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+ion-item:hover {
+    --background: #e0e0e0;
+    cursor: pointer;
+}
+
+ion-item::part(native) {
+    padding-left: 20px;
+}
+
+.ion-color-personalizado {
+    --ion-color-base: #686090 !important;
+    --ion-color-base-rgb: 104,96,144 !important;
+    --ion-color-contrast: #ffffff !important;
+    --ion-color-contrast-rgb: 255,255,255 !important;
+    --ion-color-shade: #5c547f !important;
+    --ion-color-tint: #77709b !important;
+}
+.ion-color-primario {
+    --ion-color-base: #00eba4;
+	--ion-color-base-rgb: 0,235,164;
+	--ion-color-contrast: #000000;
+	--ion-color-contrast-rgb: 0,0,0;
+	--ion-color-shade: #00cf90;
+	--ion-color-tint: #1aedad;
+}

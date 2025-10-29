@@ -149,6 +149,10 @@ const routes: Routes = [
   {
     path: 'entidad-comercial-crear',
     loadChildren: () => import('./entidad-comercial-crear/entidad-comercial-crear.module').then( m => m.EntidadComercialCrearPageModule)
+  },
+  {
+    path: 'compra-crear',
+    loadChildren: () => import('./compra-crear/compra-crear.module').then( m => m.CompraCrearPageModule)
   }
 ];
 @NgModule({

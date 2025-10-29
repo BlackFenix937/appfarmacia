@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
@@ -16,7 +16,9 @@ export class EntidadComercialCrearPage implements OnInit {
     private alert : AlertController,
     private modalCtrl: ModalController,
   ) { }
-
+  
+  private editarDatos = [];
+  @Input() ent_id: number | undefined;  
   public entidadcomercial!: FormGroup;
     baseUrl:string = "http://localhost:8080/entidadcomercials";
     ciudadUrl:string = "http://localhost:8080/ciudad";
@@ -28,6 +30,9 @@ export class EntidadComercialCrearPage implements OnInit {
 
   ngOnInit() {
     this.cargarCiudades();
+    if (this.ent_id !== undefined) {
+            this.getDetalles();
+        }
     this.formulario();
   }
 
@@ -93,6 +98,10 @@ async cargarCiudades() {
 
 async guardarDatos() {
     try {
+
+        const entidadcomercial = this.entidadcomercial?.value;
+            if (this.ent_id === undefined) {
+
     const entidadcomercial = this.entidadcomercial?.value;
     const response = await axios({
         method: 'post',
@@ -111,6 +120,28 @@ async guardarDatos() {
             this.alertGuardado(entidadcomercial.ent_nombre, error?.response?.data[0]?.message, "Error");
         }     
     });
+}
+else{
+
+    const response = await axios({
+                    method: 'put',
+                    url: this.baseUrl + '/' + this.ent_id,
+                    data: entidadcomercial,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer 100-token'
+                    }
+                }).then((response) => {
+                    if (response?.status == 200) {
+                        this.alertGuardado(response.data.ent_nombre, 'La entidad comercial ' + response.data.ent_nombre + ' ha sido actualizada');
+                    }
+                }).catch((error) => {
+                    if (error?.response?.status == 422) {
+                        this.alertGuardado(entidadcomercial.ent_nombre, error?.response?.data[0]?.message, "Error");
+                    }
+                });
+            }
+
     } catch(e){
         console.log(e);
     }
@@ -148,5 +179,26 @@ private async alertGuardado(ent_nombre: String, msg = "",  subMsg= "Guardado") {
     await alert.present();
 }
 
+async getDetalles() {
+        const response = await axios({
+            method: 'get',
+            url: this.baseUrl + "/" + this.ent_id,
+            withCredentials: true,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then((response) => {
+            this.editarDatos = response.data;
+            Object.keys(this.editarDatos).forEach((key: any) => {
+                const control = this.entidadcomercial.get(String(key));
+                if (control !== null) {
+                    control.markAsTouched();
+                    control.patchValue(this.editarDatos[key]);
+                }
+            })
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
 }

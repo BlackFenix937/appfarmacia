@@ -7,25 +7,34 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item button *ngFor="let estado of estados">
-    <ion-avatar slot="start">
+      <ion-avatar slot="start">
         <img src="assets/img/crush.png" alt="Foto">
-    </ion-avatar>
+      </ion-avatar>
 
-    <ion-label class="ion-text-wrap">
+      <ion-label class="ion-text-wrap">
         <h3>{{estado.estd_nombre}}</h3>
-        
-    </ion-label>
 
-    <ion-badge slot="end"></ion-badge>
-        <ion-button [routerLink]="['/estado-detalle', estado.estd_id]">
-      <ion-icon name="person-circle"></ion-icon>
-    </ion-button>
+      </ion-label>
+
+      <ion-badge slot="end"></ion-badge>
+      <ion-button [routerLink]="['/estado-detalle', estado.estd_id]">
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="editar(estado.estd_id)" color="warning">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="alertEliminar(estado.estd_id, estado.estd_nombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
     </ion-item>
-</ion-list>
+  </ion-list>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="center">
-    <ion-fab-button (click)="new()">
-        <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
+  <ion-fab-button (click)="new()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
 </ion-fab>

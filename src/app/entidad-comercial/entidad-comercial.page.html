@@ -5,20 +5,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-item button *ngFor="let entidadcomercial of entidadcomerciales">
+  <ion-item button *ngFor="let entidadcomercial of entidadcomerciales">
     <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
+      <img src="assets/img/crush.png" alt="Foto">
     </ion-avatar>
 
     <ion-label class="ion-text-wrap">
-        <h3>{{entidadcomercial.ent_nombre}}</h3>
-        
+      <h3>{{entidadcomercial.ent_nombre}}</h3>
+
     </ion-label>
     <ion-badge slot="end"></ion-badge>
-<ion-button [routerLink]="['/entidad-comercial-detalle', entidadcomercial.ent_id]">
-  <ion-icon name="person-circle"></ion-icon>
-</ion-button>
-    </ion-item>
+    <ion-button [routerLink]="['/entidad-comercial-detalle', entidadcomercial.ent_id]">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-button>
+
+    <ion-button (click)="editar(entidadcomercial.ent_id)" color="warning">
+      <ion-icon name="pencil"></ion-icon>
+    </ion-button>
+
+    <ion-button (click)="alertEliminar(entidadcomercial.ent_id, entidadcomercial.ent_nombre)" color="danger">
+      <ion-icon name="trash"></ion-icon>
+    </ion-button>
+
+  </ion-item>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="center">

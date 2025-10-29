@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { MedicamentoPageRoutingModule } from './medicamento-routing.module';
 
 import { MedicamentoPage } from './medicamento.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MedicamentoPageRoutingModule
+    MedicamentoPageRoutingModule,
+    ToolbarModule,
+    PaginacionModule,
   ],
   declarations: [MedicamentoPage]
 })

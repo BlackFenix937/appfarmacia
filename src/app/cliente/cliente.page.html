@@ -1,27 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Cliente</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Cliente" color="danger"></app-toolbar>
 
-<ion-content [fullscreen]="true">
-  <ion-item button *ngFor="let cliente of clientes">
-    <ion-avatar slot="start">
-      <img src="assets/img/xdd.jpg" alt="Foto">
-    </ion-avatar>
+<ion-content>
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+  <ion-list>
+    <ion-item button *ngFor="let cliente of clientes">
+      <ion-avatar slot="start">
+        <img src="assets/img/xdd.jpg" alt="Foto">
+      </ion-avatar>
 
-    <ion-label class="ion-text-wrap">
-      <h3>{{cliente.cli_nombre}}</h3>
+      <ion-label class="ion-text-wrap">
+        <h3>{{cliente.cli_nombre}}</h3>
 
-    </ion-label>
-    <ion-badge slot="end"></ion-badge>
-    <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]">
-      <ion-icon name="person-circle"></ion-icon>
-    </ion-button>
-  </ion-item>
+      </ion-label>
+      <ion-badge slot="end"></ion-badge>
+      <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]">
+        <ion-icon name="person-circle"></ion-icon>
+
+      </ion-button>
+      <ion-button (click)="editar(cliente.cli_id)" color="warning">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="alertEliminar(cliente.cli_id, cliente.cli_nombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+
+  </ion-list>
+
 </ion-content>
-
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button (click)="new()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
