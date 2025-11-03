@@ -17,13 +17,22 @@
       <ion-button [routerLink]="['/medicamento-detalle', medicamento.med_id]">
         <ion-icon name="person-circle"></ion-icon>
       </ion-button>
+
+      <ion-button (click)="editar(medicamento.med_id)" color="warning">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="alertEliminar(medicamento.med_id, medicamento.med_nombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
     </ion-item>
     <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
 
   </ion-list>
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button (click)="new()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

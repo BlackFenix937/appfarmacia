@@ -153,6 +153,22 @@ const routes: Routes = [
   {
     path: 'compra-crear',
     loadChildren: () => import('./compra-crear/compra-crear.module').then( m => m.CompraCrearPageModule)
+  },
+  {
+    path: 'entidad-medicamento-crear',
+    loadChildren: () => import('./entidad-medicamento-crear/entidad-medicamento-crear.module').then( m => m.EntidadMedicamentoCrearPageModule)
+  },
+  {
+    path: 'devolucion-crear',
+    loadChildren: () => import('./devolucion-crear/devolucion-crear.module').then( m => m.DevolucionCrearPageModule)
+  },
+  {
+    path: 'factura-crear',
+    loadChildren: () => import('./factura-crear/factura-crear.module').then( m => m.FacturaCrearPageModule)
+  },
+  {
+    path: 'pago-crear',
+    loadChildren: () => import('./pago-crear/pago-crear.module').then( m => m.PagoCrearPageModule)
   }
 ];
 @NgModule({

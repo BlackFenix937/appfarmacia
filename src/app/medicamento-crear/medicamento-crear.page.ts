@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { Medicamento } from '../services/medicamento';
 
 @Component({
   selector: 'app-medicamento-crear',
@@ -15,12 +16,18 @@ export class MedicamentoCrearPage implements OnInit {
     private formBuilder : FormBuilder,
     private alert : AlertController,
     private modalCtrl: ModalController,
+    private medicamentosService: Medicamento,
   ) { }
-
+  
+  private editarDatos = [];
+  @Input() med_id: number | undefined;
   public medicamento!: FormGroup;
   baseUrl:string = "http://localhost:8080/medicamentos";
 
   ngOnInit() {
+    if (this.med_id !== undefined) {
+            this.getDetalles();
+        }
     this.formulario();
   }
 
@@ -76,6 +83,7 @@ private formulario() {
   })
 }
 
+/*
 async guardarDatos() {
     try {
     const ciudad = this.medicamento?.value;
@@ -99,7 +107,54 @@ async guardarDatos() {
     } catch(e){
         console.log(e);
     }
-}
+}*/
+
+async guardarDatos() {
+        try {
+            const medicamento = this.medicamento?.value;
+            if (this.med_id === undefined) {
+                try {
+                    await this.medicamentosService.crear(medicamento).subscribe(
+                        response => {
+                            if (response?.status == 201) {
+                                this.alertGuardado(response.data.med_id, 'El medicamento ' + medicamento.med_nombre + ' ha sido registrado');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(medicamento.med_id, error?.response?.data[0]?.message, "Error");
+                            }
+                            if (error?.response?.status == 500) {
+                                this.alertGuardado(medicamento.med_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                try {
+                    await this.medicamentosService.actualizar(this.med_id, medicamento).subscribe(
+                        response => {
+                            console.log(response)
+                            if (response?.status == 200) {
+                                this.alertGuardado(response.data.med_id, 'El medicamento ' + medicamento.med_nombre + ' ha sido actualizado');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(medicamento.med_id, error?.response?.data[0]?.message, "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 public getError(controlName: string) {
     let errors: any[] = [];
@@ -132,5 +187,27 @@ private async alertGuardado(med_nombre: String, msg = "",  subMsg= "Guardado") {
     });
     await alert.present();
 }
+
+async getDetalles() {
+        const response = await axios({
+            method: 'get',
+            url: this.baseUrl + "/" + this.med_id,
+            withCredentials: true,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then((response) => {
+            this.editarDatos = response.data;
+            Object.keys(this.editarDatos).forEach((key: any) => {
+                const control = this.medicamento.get(String(key));
+                if (control !== null) {
+                    control.markAsTouched();
+                    control.patchValue(this.editarDatos[key]);
+                }
+            })
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
 }

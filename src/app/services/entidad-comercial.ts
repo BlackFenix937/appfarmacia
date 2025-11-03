@@ -6,10 +6,11 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class Medicamento {
-  url: string = `${environment.apiUrl}medicamentos`;
+export class EntidadComercial {
+  url: string = `${environment.apiUrl}entidadcomercials`;
   headers: any = { 'Content-Type': 'application/json', 'Authorization':/* 'Bearer '+localStorage.getItem('token') || aún no se usa */ 'Bearer 100-token' };
-  
+    
+
   //listado
   listado(extra: string = '', busqueda:string=''): Observable<any> {
     let url:string = '';
@@ -34,10 +35,9 @@ export class Medicamento {
     });
 }
 
-//detalle de elemento
-
-detalle(med_id:string | null ='', extra:string =''): Observable<any> {
-    const url = `${this.url}/`+med_id+extra;
+//detalle
+detalle(ent_id:string | null = '', extra:string = '?expand=ciudadNombre'): Observable<any> {
+    const url = `${this.url}/`+ent_id+extra;
     return new Observable(observer => {
         axios.get(url, {
             withCredentials: true,
@@ -54,13 +54,11 @@ detalle(med_id:string | null ='', extra:string =''): Observable<any> {
     });
 }
 
-
-//crear elemento
-
-crear(medicamento: any): Observable<any> {
+//crear
+crear(entidadcomercial: any): Observable<any> {
     const url = `${this.url}`;
     return new Observable(observer => {
-      axios.post(url, medicamento, {
+      axios.post(url, entidadcomercial, {
         withCredentials: true,
         headers: this.headers
       })
@@ -75,12 +73,11 @@ crear(medicamento: any): Observable<any> {
     });
 }
 
-
-//actualizar elemento
-actualizar(med_id:number, medicamento:any): Observable<any> {
-    const url = `${this.url}/${med_id}`;
+//actualizar
+actualizar(ent_id:number, entidadcomercial: any): Observable<any> {
+    const url = `${this.url}/${ent_id}`;
     return new Observable(observer => {
-      axios.put(url, medicamento, {
+      axios.put(url, entidadcomercial, {
         withCredentials: true,
         headers: this.headers
       })
@@ -95,9 +92,9 @@ actualizar(med_id:number, medicamento:any): Observable<any> {
     });
 }
 
-//eliminar elemento
-eliminar(med_id: number, med_nombre:string): Observable<any> {
-    const url = `${this.url}/${med_id}`;
+//eliminar
+eliminar(ent_id: number, ent_nombre:string): Observable<any> {
+    const url = `${this.url}/${ent_id}`;
     return new Observable(observer => {
       axios.delete(url, {
         withCredentials: true,
@@ -114,9 +111,9 @@ eliminar(med_id: number, med_nombre:string): Observable<any> {
     });
 }
 
-//total de elementos
+//total
 total(busqueda:string=''): Observable<any> {
-    const url = `${this.url}/total/`+busqueda; 
+    const url = `${this.url}/total/`+busqueda;
     return new Observable(observer => {
       axios.get(url, {
         withCredentials: true,
@@ -132,5 +129,5 @@ total(busqueda:string=''): Observable<any> {
       });
     });
 }
-
+  
 }

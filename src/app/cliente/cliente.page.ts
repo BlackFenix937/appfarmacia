@@ -39,7 +39,7 @@ export class ClientePage implements OnInit {
     });
     await loading.present();
     try {
-      await this.clienteService.listado('?page=' + this.page + this.busqueda).subscribe(
+      await this.clienteService.listado('?page=' + this.page, this.busqueda).subscribe(
         response => {
           this.clientes = response;
           this.cargarTotal();

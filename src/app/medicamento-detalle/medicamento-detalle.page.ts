@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
+import { Medicamento } from '../services/medicamento';
 
 @Component({
   selector: 'app-medicamento-detalle',
@@ -13,7 +14,8 @@ export class MedicamentoDetallePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private loading: LoadingController
+    private loading: LoadingController,
+    private medicamentosService: Medicamento,
   ) { }
 
   medicamento:any=null;
@@ -22,6 +24,7 @@ export class MedicamentoDetallePage implements OnInit {
     this.cargarMedicamento();
   }
 
+  /*
   async cargarMedicamento() {
   const med_id = this.route.snapshot.paramMap.get('med_id');
   const loading = await this.loading.create({
@@ -42,6 +45,28 @@ export class MedicamentoDetallePage implements OnInit {
     console.log(error);
   });
   loading.dismiss();
-}
+}*/
+
+async cargarMedicamento() {
+    const med_id = this.route.snapshot.paramMap.get('med_id');
+    const loading = await this.loading.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.medicamentosService.detalle(med_id).subscribe(
+        response => {
+          this.medicamento = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
 
 }

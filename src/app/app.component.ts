@@ -12,8 +12,8 @@ export class AppComponent {
   enlaces:any = [
     { ruta: '/cliente', texto: 'Clientes' },
     { ruta: '/medicamento', texto: 'Medicamentos' },
-    { ruta: '/tabs/tab3', texto: 'Tab 3' },
-    { ruta: '/tabs/nueva', texto: 'Nueva' },
+    { ruta: '/entidad-comercial', texto: 'Entidad comercial' },
+    { ruta: '/entidad-medicamento', texto: 'Entidad medicamento' },
     { ruta: '/tabs/tab1/siguiente', texto: 'Siguiente' }
 ];
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { EntidadComercial } from '../services/entidad-comercial';
 
 @Component({
   selector: 'app-entidad-comercial-crear',
@@ -15,6 +16,7 @@ export class EntidadComercialCrearPage implements OnInit {
     private formBuilder : FormBuilder,
     private alert : AlertController,
     private modalCtrl: ModalController,
+    private EntidadComercialService: EntidadComercial
   ) { }
   
   private editarDatos = [];
@@ -96,7 +98,7 @@ async cargarCiudades() {
     });
 }
 
-async guardarDatos() {
+/*async guardarDatos() {
     try {
 
         const entidadcomercial = this.entidadcomercial?.value;
@@ -145,7 +147,56 @@ else{
     } catch(e){
         console.log(e);
     }
-}
+}*/
+
+async guardarDatos() {
+        try {
+            const entidadcomercial = this.entidadcomercial?.value;
+            if (this.ent_id === undefined) {
+                try {
+                    await this.EntidadComercialService.crear(entidadcomercial).subscribe(
+                        response => {
+                            if (response?.status == 201) {
+                                this.alertGuardado(response.data.ent_id, 'El la entidad comercial ' + entidadcomercial.ent_nombre + ' ha sido registrada');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(entidadcomercial.ent_id, error?.response?.data[0]?.message, "Error");
+                            }
+                            if (error?.response?.status == 500) {
+                                this.alertGuardado(entidadcomercial.ent_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                try {
+                    await this.EntidadComercialService.actualizar(this.ent_id, entidadcomercial).subscribe(
+                        response => {
+                            console.log(response)
+                            if (response?.status == 200) {
+                                this.alertGuardado(response.data.ent_id, 'La entidad comercial ' + entidadcomercial.med_nombre + ' ha sido actualizada');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(entidadcomercial.ent_id, error?.response?.data[0]?.message, "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
 
 public getError(controlName: string) {
     let errors: any[] = [];
