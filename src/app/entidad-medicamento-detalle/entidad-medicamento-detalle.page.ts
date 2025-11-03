@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
+import { EntidadMedicamento } from '../services/entidad-medicamento';
 
 @Component({
   selector: 'app-entidad-medicamento-detalle',
@@ -13,7 +14,9 @@ export class EntidadMedicamentoDetallePage implements OnInit {
 
   constructor(
   private route: ActivatedRoute,
-  private loading: LoadingController
+  private loading: LoadingController,
+  private EntidadMedicamentoService: EntidadMedicamento,
+  
   ) { }
 
   entidadmedicamento:any=null;
@@ -22,7 +25,7 @@ export class EntidadMedicamentoDetallePage implements OnInit {
     this.cargarEntidadMedicamento();
   }
 
-  async cargarEntidadMedicamento() {
+ /* async cargarEntidadMedicamento() {
   const entmed_id = this.route.snapshot.paramMap.get('entmed_id');
   const loading = await this.loading.create({
     message: 'Cargando',
@@ -42,6 +45,28 @@ export class EntidadMedicamentoDetallePage implements OnInit {
     console.log(error);
   });
   loading.dismiss();
-}
+}*/
+
+async cargarEntidadMedicamento() {
+    const entmed_id = this.route.snapshot.paramMap.get('entmed_id');
+    const loading = await this.loading.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.EntidadMedicamentoService.detalle(entmed_id,'?expand=nombreEntidad, estadoEntrega, medicamentoNombre').subscribe(
+        response => {
+          this.entidadmedicamento = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
 
 }

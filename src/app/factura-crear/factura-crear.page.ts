@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-factura-crear',
   templateUrl: './factura-crear.page.html',
   styleUrls: ['./factura-crear.page.scss'],
+  standalone:false,
 })
 export class FacturaCrearPage implements OnInit {
 

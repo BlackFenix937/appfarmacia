@@ -1,24 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Entidad Medicamento</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Entidad Medicamento" color="primario"></app-toolbar>
 
 <ion-content>
-<ion-list>
-    <ion-item button *ngFor="let entidadmedicamento of entidadmedicamentos">
-    <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
-    </ion-avatar>
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
 
-    <ion-label class="ion-text-wrap">
+  <ion-list>
+    <ion-item button *ngFor="let entidadmedicamento of entidadmedicamentos">
+      <ion-avatar slot="start">
+        <img src="assets/img/crush.png" alt="Foto">
+      </ion-avatar>
+
+      <ion-label class="ion-text-wrap">
         <h3>{{entidadmedicamento.medicamentoNombre}}</h3>
-        
-    </ion-label>
-    <ion-badge slot="end"></ion-badge>
-    <ion-button [routerLink]="['/entidad-medicamento-detalle', entidadmedicamento.entmed_id]">
-      <ion-icon name="person-circle"></ion-icon>
-    </ion-button>
-  </ion-item>
-</ion-list>
+
+      </ion-label>
+      <ion-badge slot="end">Registro {{entidadmedicamento.entmed_id}}</ion-badge>
+      <ion-button [routerLink]="['/entidad-medicamento-detalle', entidadmedicamento.entmed_id]">
+        <ion-icon name="person-circle"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="editar(entidadmedicamento.entmed_id)" color="warning">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="alertEliminar(entidadmedicamento.entmed_id, entidadmedicamento.medicamento_nombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+  </ion-list>
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="new()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>

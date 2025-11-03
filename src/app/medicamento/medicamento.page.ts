@@ -157,12 +157,12 @@ export class MedicamentoPage implements OnInit {
     try {
       await this.medicamentosService.eliminar(med_id, med_nombre).subscribe(
         response => {
-          this.alertEliminado(med_id, 'El cliente ' + med_nombre + ' sido eliminado');
+          this.alertEliminado(med_id, 'El medicamento ' + med_nombre + ' sido eliminado');
         },
         error => {
           console.error('Error:', error);
           if (error.response?.status == 204) {
-            this.alertEliminado(med_id, 'El cliente ha sido eliminado');
+            this.alertEliminado(med_id, 'El medicamento ha sido eliminado');
           }
           if (error.response?.status == 500) {
             this.alertEliminado(med_id, 'No puedes eliminar porque tiene relaciones con otra tabla');

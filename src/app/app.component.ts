@@ -14,7 +14,13 @@ export class AppComponent {
     { ruta: '/medicamento', texto: 'Medicamentos' },
     { ruta: '/entidad-comercial', texto: 'Entidad comercial' },
     { ruta: '/entidad-medicamento', texto: 'Entidad medicamento' },
-    { ruta: '/tabs/tab1/siguiente', texto: 'Siguiente' }
+    { ruta: '/ciudad', texto: 'Ciudad' },
+    { ruta: '/devolucion', texto: 'Devolucion' },
+    { ruta: '/estado', texto: 'Estado' },
+    { ruta: '/factura', texto: 'Factura' },
+    { ruta: '/municipio', texto: 'Municipio' },
+    { ruta: '/pago', texto: 'Pago' },
+    { ruta: '/pais', texto: 'País' }
 ];
 
 }

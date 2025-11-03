@@ -157,7 +157,7 @@ async guardarDatos() {
                     await this.EntidadComercialService.crear(entidadcomercial).subscribe(
                         response => {
                             if (response?.status == 201) {
-                                this.alertGuardado(response.data.ent_id, 'El la entidad comercial ' + entidadcomercial.ent_nombre + ' ha sido registrada');
+                                this.alertGuardado(response.data.ent_id, 'La entidad comercial ' + entidadcomercial.ent_nombre + ' ha sido registrada');
                             }
                         },
                         error => {
