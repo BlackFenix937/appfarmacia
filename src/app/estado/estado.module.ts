@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { EstadoPageRoutingModule } from './estado-routing.module';
 
 import { EstadoPage } from './estado.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import { EstadoPage } from './estado.page';
     FormsModule,
     IonicModule,
     EstadoPageRoutingModule,
+    ToolbarModule,
+    PaginacionModule,
     
   ],
   declarations: [EstadoPage]

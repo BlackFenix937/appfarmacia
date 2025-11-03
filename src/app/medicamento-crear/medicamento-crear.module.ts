@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MedicamentoCrearPageRoutingModule } from './medicamento-crear-routing.module';
 
 import { MedicamentoCrearPage } from './medicamento-crear.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MedicamentoCrearPage } from './medicamento-crear.page';
     FormsModule,
     IonicModule,
     MedicamentoCrearPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToolbarModule
   ],
   declarations: [MedicamentoCrearPage]
 })

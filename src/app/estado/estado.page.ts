@@ -3,6 +3,7 @@ import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalCon
 import axios from 'axios';
 import { EstadoCrearPage } from '../estado-crear/estado-crear.page';
 import { Router } from '@angular/router';
+import { Estado } from '../services/estado';
 
 @Component({
   selector: 'app-estado',
@@ -17,17 +18,22 @@ export class EstadoPage implements OnInit {
       private modalCtrl: ModalController,
       private alertCtrl: AlertController,
       private router: Router,
+      private EstadosService: Estado
 
   ) { }
 
   baseUrl: string='http://localhost:8080/estados';
   estados: any=[];
+    total: number = 0;
+  page: string = "1";
+  busqueda: string = '';
 
   ngOnInit() {
     this.cargarEstados();
+    this.cargarTotal();
   }
 
-   async cargarEstados (event?: InfiniteScrollCustomEvent) {
+   /*async cargarEstados (event?: InfiniteScrollCustomEvent) {
     const loading = await this.loadingCtrl.create({
         message: 'Cargando',
         spinner: 'bubbles',
@@ -47,7 +53,29 @@ export class EstadoPage implements OnInit {
         console.log(error);     
     });
     loading.dismiss();
-}
+}*/
+
+  async cargarEstados() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.EstadosService.listado('?page=' + this.page, this.busqueda).subscribe(
+        response => {
+          this.estados = response;
+          this.cargarTotal();
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
 
 async new() {
     const paginaModal = await this.modalCtrl.create({
@@ -99,7 +127,7 @@ async alertEliminar(estd_id: number, estd_nombre:string) {
     await alert.present();
 }
 
-async eliminar(estd_id: number, estd_nombre:string) {
+/*async eliminar(estd_id: number, estd_nombre:string) {
     const response = await axios({
       method: 'delete',
       url: this.baseUrl + '/' + estd_id,
@@ -118,7 +146,28 @@ async eliminar(estd_id: number, estd_nombre:string) {
       }
       console.log(error);
     });
-}
+}*/
+
+  async eliminar(estd_id: number, estd_nombre: string) {
+    try {
+      await this.EstadosService.eliminar(estd_id, estd_nombre).subscribe(
+        response => {
+          this.alertEliminado(estd_id, 'El estado ' + estd_nombre + ' sido eliminado');
+        },
+        error => {
+          console.error('Error:', error);
+          if (error.response?.status == 204) {
+            this.alertEliminado(estd_id, 'El estado ha sido eliminado');
+          }
+          if (error.response?.status == 500) {
+            this.alertEliminado(estd_id, 'No puedes eliminar porque tiene relaciones con otra tabla');
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 async alertEliminado(estd_id: number, msg = "") {
     const alert = await this.alertCtrl.create({
@@ -146,5 +195,30 @@ private regresar() {
       window.location.reload();
     });
 }
+
+  async cargarTotal() {
+    try {
+      await this.EstadosService.total(this.busqueda).subscribe(
+        response => {
+          this.total = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  pagina(event: any) {
+    this.page = event.target.innerText;
+    this.cargarEstados();
+  }
+
+  handleInput(event: any) {
+    this.busqueda = event.target.value.toLowerCase();
+    this.cargarEstados();
+  }
 
 }

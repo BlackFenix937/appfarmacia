@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { Estado } from '../services/estado';
 
 @Component({
     selector: 'app-estado-crear',
@@ -14,7 +15,8 @@ export class EstadoCrearPage implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private alert: AlertController,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
+        private EstadosService: Estado,
     ) { }
 
     private editarDatos = [];
@@ -66,50 +68,97 @@ export class EstadoCrearPage implements OnInit {
         });
     }
 
+    /*    async guardarDatos() {
+            try {
+    
+                const estado = this.estados?.value;
+                if (this.estd_id === undefined) {
+    
+                    const estados = this.estados?.value;
+                    const response = await axios({
+                        method: 'post',
+                        url: this.baseUrl,
+                        data: estados,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer 100-token'
+                        }
+                    }).then((response) => {
+                        if (response?.status == 201) {
+                            this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido registrado');
+                        }
+                    }).catch((error) => {
+                        if (error?.response?.status == 422) {
+                            this.alertGuardado(estados.estd_nombre, error?.response?.data[0]?.message, "Error");
+                        }
+                    });
+                } else {
+                    const response = await axios({
+                        method: 'put',
+                        url: this.baseUrl + '/' + this.estd_id,
+                        data: estado,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer 100-token'
+                        }
+                    }).then((response) => {
+                        if (response?.status == 200) {
+                            this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido actualizado.');
+                        }
+                    }).catch((error) => {
+                        if (error?.response?.status == 422) {
+                            this.alertGuardado(estado.estd_nombre, error?.response?.data[0]?.message, "Error");
+                        }
+                    });
+                }
+    
+            } catch (e) {
+                console.log(e);
+            }
+        }*/
+
     async guardarDatos() {
         try {
-
             const estado = this.estados?.value;
             if (this.estd_id === undefined) {
-
-                const estados = this.estados?.value;
-                const response = await axios({
-                    method: 'post',
-                    url: this.baseUrl,
-                    data: estados,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 100-token'
-                    }
-                }).then((response) => {
-                    if (response?.status == 201) {
-                        this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido registrado');
-                    }
-                }).catch((error) => {
-                    if (error?.response?.status == 422) {
-                        this.alertGuardado(estados.estd_nombre, error?.response?.data[0]?.message, "Error");
-                    }
-                });
+                try {
+                    await this.EstadosService.crear(estado).subscribe(
+                        response => {
+                            if (response?.status == 201) {
+                                this.alertGuardado(response.data.estd_id, 'El estado ' + estado.estd_nombre + ' ha sido registrado');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(estado.estd_id, error?.response?.data[0]?.message, "Error");
+                            }
+                            if (error?.response?.status == 500) {
+                                this.alertGuardado(estado.estd_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
-                const response = await axios({
-                    method: 'put',
-                    url: this.baseUrl + '/' + this.estd_id,
-                    data: estado,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 100-token'
-                    }
-                }).then((response) => {
-                    if (response?.status == 200) {
-                        this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido actualizado.');
-                    }
-                }).catch((error) => {
-                    if (error?.response?.status == 422) {
-                        this.alertGuardado(estado.estd_nombre, error?.response?.data[0]?.message, "Error");
-                    }
-                });
+                try {
+                    await this.EstadosService.actualizar(this.estd_id, estado).subscribe(
+                        response => {
+                            console.log(response)
+                            if (response?.status == 200) {
+                                this.alertGuardado(response.data.ciu_id, 'El estado ' + estado.estd_nombre + ' ha sido actualizado');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(estado.estd_id, error?.response?.data[0]?.message, "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
             }
-
         } catch (e) {
             console.log(e);
         }

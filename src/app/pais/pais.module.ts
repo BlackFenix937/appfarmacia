@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { PaisPageRoutingModule } from './pais-routing.module';
 
 import { PaisPage } from './pais.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PaisPageRoutingModule
+    PaisPageRoutingModule,
+    ToolbarModule,
+    PaginacionModule,
   ],
   declarations: [PaisPage]
 })

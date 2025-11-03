@@ -1,10 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Estados</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Estados" color="primario"></app-toolbar>
 
-<ion-content [fullscreen]="true">
+
+<ion-content>
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+
   <ion-list>
     <ion-item button *ngFor="let estado of estados">
       <ion-avatar slot="start">
@@ -30,10 +29,12 @@
       </ion-button>
 
     </ion-item>
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+
   </ion-list>
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button (click)="new()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

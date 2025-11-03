@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
+import { Ciudad } from '../services/ciudad';
 
 @Component({
   selector: 'app-ciudad-detalle',
@@ -13,7 +14,8 @@ export class CiudadDetallePage implements OnInit {
 
   constructor(
   private route: ActivatedRoute,
-  private loading: LoadingController
+  private loading: LoadingController,
+  private CiudadService: Ciudad
   ) { }
 
   ciudad:any=null;
@@ -22,7 +24,7 @@ export class CiudadDetallePage implements OnInit {
     this.cargarCiudad();
   }
 
-  async cargarCiudad() {
+/*  async cargarCiudad() {
   const ciu_id = this.route.snapshot.paramMap.get('ciu_id');
   const loading = await this.loading.create({
     message: 'Cargando',
@@ -42,6 +44,28 @@ export class CiudadDetallePage implements OnInit {
     console.log(error);
   });
   loading.dismiss();
-}
+}*/
+
+async cargarCiudad() {
+    const ciu_id = this.route.snapshot.paramMap.get('ciu_id');
+    const loading = await this.loading.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.CiudadService.detalle(ciu_id).subscribe(
+        response => {
+          this.ciudad = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
 
 }

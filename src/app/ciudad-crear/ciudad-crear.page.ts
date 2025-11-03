@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { Ciudad } from '../services/ciudad';
 
 @Component({
     selector: 'app-ciudad-crear',
@@ -15,6 +16,7 @@ export class CiudadCrearPage implements OnInit {
         private formBuilder: FormBuilder,
         private alert: AlertController,
         private modalCtrl: ModalController,
+        private CiudadService: Ciudad
     ) { }
 
     private editarDatos = [];
@@ -67,52 +69,99 @@ export class CiudadCrearPage implements OnInit {
         });
     }
 
+    /*    async guardarDatos() {
+            try {
+    
+                const ciudad = this.ciudades?.value;
+                if (this.ciu_id === undefined) {
+    
+                    const ciudad = this.ciudades?.value;
+                    const response = await axios({
+                        method: 'post',
+                        url: this.baseUrl,
+                        data: ciudad,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer 100-token'
+                        }
+                    }).then((response) => {
+                        if (response?.status == 201) {
+                            this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido registrada.');
+                        }
+                    }).catch((error) => {
+                        if (error?.response?.status == 422) {
+                            this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
+                        }
+                    });
+    
+                } else {
+    
+                    const response = await axios({
+                        method: 'put',
+                        url: this.baseUrl + '/' + this.ciu_id,
+                        data: ciudad,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer 100-token'
+                        }
+                    }).then((response) => {
+                        if (response?.status == 200) {
+                            this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido actualizada');
+                        }
+                    }).catch((error) => {
+                        if (error?.response?.status == 422) {
+                            this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
+                        }
+                    });
+                }
+    
+            } catch (e) {
+                console.log(e);
+            }
+        }*/
+
     async guardarDatos() {
         try {
-
             const ciudad = this.ciudades?.value;
             if (this.ciu_id === undefined) {
-
-                const ciudad = this.ciudades?.value;
-                const response = await axios({
-                    method: 'post',
-                    url: this.baseUrl,
-                    data: ciudad,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 100-token'
-                    }
-                }).then((response) => {
-                    if (response?.status == 201) {
-                        this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido registrada.');
-                    }
-                }).catch((error) => {
-                    if (error?.response?.status == 422) {
-                        this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
-                    }
-                });
-
+                try {
+                    await this.CiudadService.crear(ciudad).subscribe(
+                        response => {
+                            if (response?.status == 201) {
+                                this.alertGuardado(response.data.ciu_id, 'La ciudad ' + ciudad.ciu_nombre + ' ha sido registrada');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(ciudad.ciu_id, error?.response?.data[0]?.message, "Error");
+                            }
+                            if (error?.response?.status == 500) {
+                                this.alertGuardado(ciudad.ciu_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
-
-                const response = await axios({
-                    method: 'put',
-                    url: this.baseUrl + '/' + this.ciu_id,
-                    data: ciudad,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 100-token'
-                    }
-                }).then((response) => {
-                    if (response?.status == 200) {
-                        this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido actualizada');
-                    }
-                }).catch((error) => {
-                    if (error?.response?.status == 422) {
-                        this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
-                    }
-                });
+                try {
+                    await this.CiudadService.actualizar(this.ciu_id, ciudad).subscribe(
+                        response => {
+                            console.log(response)
+                            if (response?.status == 200) {
+                                this.alertGuardado(response.data.ciu_id, 'La ciudad ' + ciudad.ciu_nombre + ' ha sido actualizada');
+                            }
+                        },
+                        error => {
+                            if (error?.response?.status == 422) {
+                                this.alertGuardado(ciudad.ciu_id, error?.response?.data[0]?.message, "Error");
+                            }
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
             }
-
         } catch (e) {
             console.log(e);
         }

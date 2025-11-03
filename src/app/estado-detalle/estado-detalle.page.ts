@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
+import { Estado } from '../services/estado';
 
 @Component({
   selector: 'app-estado-detalle',
@@ -13,7 +14,8 @@ export class EstadoDetallePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private loading: LoadingController
+    private loading: LoadingController,
+    private EstadosServices: Estado,
   ) { }
 
   estado:any=false;
@@ -22,7 +24,7 @@ export class EstadoDetallePage implements OnInit {
     this.cargarEstado();
   }
 
-  async cargarEstado() {
+/*    async cargarEstado() {
   const estd_id = this.route.snapshot.paramMap.get('estd_id');
   const loading = await this.loading.create({
     message: 'Cargando',
@@ -42,6 +44,28 @@ export class EstadoDetallePage implements OnInit {
     console.log(error);
   });
   loading.dismiss();
-}
+}*/
+
+async cargarEstado() {
+    const estd_id = this.route.snapshot.paramMap.get('estd_id');
+    const loading = await this.loading.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.EstadosServices.detalle(estd_id).subscribe(
+        response => {
+          this.estado = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
 
 }

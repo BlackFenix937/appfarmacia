@@ -71,10 +71,6 @@ const routes: Routes = [
     loadChildren: () => import('./categoria-medicamento/categoria-medicamento.module').then( m => m.CategoriaMedicamentoPageModule)
   },
   {
-    path: 'pais-detalle',
-    loadChildren: () => import('./pais-detalle/pais-detalle.module').then( m => m.PaisDetallePageModule)
-  },
-  {
     path: 'entidad-comercial-detalle/:ent_id',
     loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then( m => m.EntidadComercialDetallePageModule)
   },

@@ -28,7 +28,7 @@
               </ion-select-option>
             </ion-select>
           </ion-item>
-          <div id="note" *ngFor="let validation of mensajes_validacion.mun_fkestd_id">
+          <div id="note" *ngFor="let validation of mensajes_validacion.estd_fkpai_id">
             <ion-note color="danger" *ngIf="getError('estd_fkpai_id')[(validation.type)]">
               <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
             </ion-note>

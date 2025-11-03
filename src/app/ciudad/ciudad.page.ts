@@ -4,66 +4,95 @@ import axios from 'axios';
 import { CiudadCrearPage } from '../ciudad-crear/ciudad-crear.page';
 import { Router } from '@angular/router';
 import { CiudadCrearPageModule } from '../ciudad-crear/ciudad-crear.module';
+import { Ciudad } from '../services/ciudad';
 
 @Component({
   selector: 'app-ciudad',
   templateUrl: './ciudad.page.html',
   styleUrls: ['./ciudad.page.scss'],
-  standalone:false
+  standalone: false
 
 })
 export class CiudadPage implements OnInit {
 
   constructor(
-      private loadingCtrl: LoadingController,
-      private modalCtrl: ModalController,
-      private alertCtrl: AlertController,
-      private router: Router,
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private router: Router,
+    private CiudadService: Ciudad,
 
   ) { }
-baseUrl: string='http://localhost:8080/ciudads';
-ciudades: any=[]
-  
+  baseUrl: string = 'http://localhost:8080/ciudads';
+  ciudades: any = []
+  total: number = 0;
+  page: string = "1";
+  busqueda: string = '';
 
-ngOnInit() {
+
+  ngOnInit() {
     this.cargarCiudades();
+    this.cargarTotal();
+
   }
 
-  async cargarCiudades (event?: InfiniteScrollCustomEvent) {
-    const loading = await this.loadingCtrl.create({
+  /*  async cargarCiudades(event?: InfiniteScrollCustomEvent) {
+      const loading = await this.loadingCtrl.create({
         message: 'Cargando',
         spinner: 'bubbles',
-    });
-    await loading.present();
-    const response = await axios({
+      });
+      await loading.present();
+      const response = await axios({
         method: 'get',
         url: "http://localhost:8080/ciudads?expand=municipioNombre",
         withCredentials: true,
         headers: {
-            'Accept': 'application/json'
+          'Accept': 'application/json'
         }
-    }).then((response) => {
+      }).then((response) => {
         this.ciudades = response.data;
         event?.target.complete();
-    }).catch(function (error) {
-        console.log(error);     
-    });
-    loading.dismiss();
-}
+      }).catch(function (error) {
+        console.log(error);
+      });
+      loading.dismiss();
+    }*/
 
-async new() {
+  async cargarCiudades() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.CiudadService.listado('?page=' + this.page, this.busqueda).subscribe(
+        response => {
+          this.ciudades = response;
+          this.cargarTotal();
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    loading.dismiss();
+  }
+
+  async new() {
     const paginaModal = await this.modalCtrl.create({
-        component: CiudadCrearPage,
-        breakpoints : [0, 0.3, 0.5, 0.95],
-        initialBreakpoint: 0.95
+      component: CiudadCrearPage,
+      breakpoints: [0, 0.3, 0.5, 0.95],
+      initialBreakpoint: 0.95
     });
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
-        this.cargarCiudades();
+      this.cargarCiudades();
     });
-}
+  }
 
-async editar(ciu_id: number) {
+  async editar(ciu_id: number) {
     const paginaModal = await this.modalCtrl.create({
       component: CiudadCrearPage,
       componentProps: {
@@ -74,11 +103,11 @@ async editar(ciu_id: number) {
     });
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
-        this.cargarCiudades();
+      this.cargarCiudades();
     });
-}
+  }
 
-async alertEliminar(ciu_id: number, ciu_nombre:string) {
+  async alertEliminar(ciu_id: number, ciu_nombre: string) {
     const alert = await this.alertCtrl.create({
       header: 'Ciudad',
       subHeader: 'Eliminar',
@@ -99,37 +128,58 @@ async alertEliminar(ciu_id: number, ciu_nombre:string) {
       ]
     });
     await alert.present();
-}
+  }
 
-async eliminar(ciu_id: number, ciu_nombre:string) {
-    const response = await axios({
-      method: 'delete',
-      url: this.baseUrl + '/' + ciu_id,
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 100-token'
-      }
-    }).then((response) => {
-      if (response?.status == 204) {
-        this.alertEliminado(ciu_id, 'La ciudad ' +ciu_nombre+ ' ha sido eliminada.');
-      }
-    }).catch((error)=> {
-      if (error?.response.status == 500) {
-        this.alertEliminado(ciu_id, 'La ciudad ' +ciu_nombre+ ' no se puede eliminar porque esta asociada');
-      }
+  /*  async eliminar(ciu_id: number, ciu_nombre: string) {
+      const response = await axios({
+        method: 'delete',
+        url: this.baseUrl + '/' + ciu_id,
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 100-token'
+        }
+      }).then((response) => {
+        if (response?.status == 204) {
+          this.alertEliminado(ciu_id, 'La ciudad ' + ciu_nombre + ' ha sido eliminada.');
+        }
+      }).catch((error) => {
+        if (error?.response.status == 500) {
+          this.alertEliminado(ciu_id, 'La ciudad ' + ciu_nombre + ' no se puede eliminar porque esta asociada');
+        }
+        console.log(error);
+      });
+    }*/
+
+  async eliminar(ciu_id: number, ciu_nombre: string) {
+    try {
+      await this.CiudadService.eliminar(ciu_id, ciu_nombre).subscribe(
+        response => {
+          this.alertEliminado(ciu_id, 'La ciudad ' + ciu_nombre + ' sido eliminada');
+        },
+        error => {
+          console.error('Error:', error);
+          if (error.response?.status == 204) {
+            this.alertEliminado(ciu_id, 'La ciudad ha sido eliminada');
+          }
+          if (error.response?.status == 500) {
+            this.alertEliminado(ciu_id, 'No puedes eliminar porque tiene relaciones con otra tabla');
+          }
+        }
+      );
+    } catch (error) {
       console.log(error);
-    });
-}
+    }
+  }
 
-async alertEliminado(ciu_id: number, msg = "") {
+  async alertEliminado(ciu_id: number, msg = "") {
     const alert = await this.alertCtrl.create({
       header: 'Ciudad',
       subHeader: msg.includes('no se puede eliminar') ? 'Error al eliminar' : 'Eliminado',
       message: msg,
       cssClass: 'alert-center',
       buttons: [
- 
+
         {
           text: 'Salir',
           role: 'confirm',
@@ -141,12 +191,37 @@ async alertEliminado(ciu_id: number, msg = "") {
     });
 
     await alert.present();
-}
+  }
 
-private regresar() {
+  private regresar() {
     this.router.navigate(['/ciudad']).then(() => {
       window.location.reload();
     });
-}
+  }
+
+  async cargarTotal() {
+    try {
+      await this.CiudadService.total(this.busqueda).subscribe(
+        response => {
+          this.total = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  pagina(event: any) {
+    this.page = event.target.innerText;
+    this.cargarCiudades();
+  }
+
+  handleInput(event: any) {
+    this.busqueda = event.target.value.toLowerCase();
+    this.cargarCiudades();
+  }
 
 }
