@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Inicio de Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="login" (ngSubmit)="submitLogin()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Nombre de usuario</ion-label>
+            <ion-input type="text" formControlName="username" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of validation_messages.username">
+            <ion-note color="danger" *ngIf="getError('username')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="primary">Contraseña</ion-label>
+              <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password" clearOnEdit="false" class="form-control">
+            </ion-input>
+            <button slot="end" class="btn_eye_icon" (click)="togglePasswordMode()">
+              <ion-icon [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
+            </button>
+          </ion-item>
+          <div id="note" *ngFor="let validation of validation_messages.password">
+            <ion-note color="danger" *ngIf="getError('password')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <p class="ion-text-center">
+            <ion-button type="submit" [disabled]="!login.valid">Enviar</ion-button>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" (click)="registrar()">
+    <ion-icon name="open-outline" slot="start"></ion-icon>
+    Registrarme
+  </ion-button>
+</ion-footer>

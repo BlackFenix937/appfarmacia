@@ -165,6 +165,14 @@ const routes: Routes = [
   {
     path: 'pago-crear',
     loadChildren: () => import('./pago-crear/pago-crear.module').then( m => m.PagoCrearPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   }
 ];
 @NgModule({

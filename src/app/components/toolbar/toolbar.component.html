@@ -4,5 +4,8 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ nombre }}</ion-title>
+    <ion-button slot="end" (click)="cerrarSesion()" color="danger">
+      <ion-icon name="log-out-sharp"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
