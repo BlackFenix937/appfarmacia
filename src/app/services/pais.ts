@@ -35,9 +35,9 @@ export class Pais {
     });
   }
 
-  //detalle de elemento, No se ocupa, es innecesario al notener ningun detalle
+  //detalle de elemento
 
-/*  detalle(pai_id: string | null = '', extra: string = ''): Observable<any> {
+  detalle(pai_id: string |number| null = '', extra: string = ''): Observable<any> {
     const url = `${this.url}/` + pai_id + extra;
     return new Observable(observer => {
       axios.get(url, {
@@ -53,7 +53,7 @@ export class Pais {
           observer.complete();
         });
     });
-  }*/
+  }
 
 
   //crear elemento

@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { permisoGuard } from './guard/permiso-guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'pais',
-    loadChildren: () => import('./pais/pais.module').then( m => m.PaisPageModule)
+    loadChildren: () => import('./pais/pais.module').then( m => m.PaisPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'ciudad',
-    loadChildren: () => import('./ciudad/ciudad.module').then( m => m.CiudadPageModule)
+    loadChildren: () => import('./ciudad/ciudad.module').then( m => m.CiudadPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'municipio',
-    loadChildren: () => import('./municipio/municipio.module').then( m => m.MunicipioPageModule)
+    loadChildren: () => import('./municipio/municipio.module').then( m => m.MunicipioPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'estado',
-    loadChildren: () => import('./estado/estado.module').then( m => m.EstadoPageModule)
+    loadChildren: () => import('./estado/estado.module').then( m => m.EstadoPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'tipo-estado',
@@ -32,7 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'medicamento',
-    loadChildren: () => import('./medicamento/medicamento.module').then( m => m.MedicamentoPageModule)
+    loadChildren: () => import('./medicamento/medicamento.module').then( m => m.MedicamentoPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'medicamento-componente',
@@ -44,11 +50,13 @@ const routes: Routes = [
   },
   {
     path: 'entidad-medicamento',
-    loadChildren: () => import('./entidad-medicamento/entidad-medicamento.module').then( m => m.EntidadMedicamentoPageModule)
+    loadChildren: () => import('./entidad-medicamento/entidad-medicamento.module').then( m => m.EntidadMedicamentoPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'entidad-comercial',
-    loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then( m => m.EntidadComercialPageModule)
+    loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then( m => m.EntidadComercialPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'devolucion',
@@ -64,7 +72,8 @@ const routes: Routes = [
   },
   {
     path: 'cliente',
-    loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule)
+    loadChildren: () => import('./cliente/cliente.module').then( m => m.ClientePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'categoria-medicamento',
@@ -72,15 +81,18 @@ const routes: Routes = [
   },
   {
     path: 'entidad-comercial-detalle/:ent_id',
-    loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then( m => m.EntidadComercialDetallePageModule)
+    loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then( m => m.EntidadComercialDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'ciudad-detalle/:ciu_id',
-    loadChildren: () => import('./ciudad-detalle/ciudad-detalle.module').then( m => m.CiudadDetallePageModule)
+    loadChildren: () => import('./ciudad-detalle/ciudad-detalle.module').then( m => m.CiudadDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'entidad-medicamento-detalle/:entmed_id',
-    loadChildren: () => import('./entidad-medicamento-detalle/entidad-medicamento-detalle.module').then( m => m.EntidadMedicamentoDetallePageModule)
+    loadChildren: () => import('./entidad-medicamento-detalle/entidad-medicamento-detalle.module').then( m => m.EntidadMedicamentoDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'pago-detalle/:pag_id',
@@ -100,11 +112,13 @@ const routes: Routes = [
   },
   {
     path: 'cliente-detalle/:cli_id',
-    loadChildren: () => import('./cliente-detalle/cliente-detalle.module').then( m => m.ClienteDetallePageModule)
+    loadChildren: () => import('./cliente-detalle/cliente-detalle.module').then( m => m.ClienteDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'medicamento-detalle/:med_id',
-    loadChildren: () => import('./medicamento-detalle/medicamento-detalle.module').then( m => m.MedicamentoDetallePageModule)
+    loadChildren: () => import('./medicamento-detalle/medicamento-detalle.module').then( m => m.MedicamentoDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'compra-detalle/:comp_id',
@@ -112,39 +126,48 @@ const routes: Routes = [
   },
   {
     path: 'municipio-crear',
-    loadChildren: () => import('./municipio-crear/municipio-crear.module').then( m => m.MunicipioCrearPageModule)
+    loadChildren: () => import('./municipio-crear/municipio-crear.module').then( m => m.MunicipioCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'estado-crear',
-    loadChildren: () => import('./estado-crear/estado-crear.module').then( m => m.EstadoCrearPageModule)
+    loadChildren: () => import('./estado-crear/estado-crear.module').then( m => m.EstadoCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'estado-detalle/:estd_id',
-    loadChildren: () => import('./estado-detalle/estado-detalle.module').then( m => m.EstadoDetallePageModule)
+    loadChildren: () => import('./estado-detalle/estado-detalle.module').then( m => m.EstadoDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'municipio-detalle/:mun_id',
-    loadChildren: () => import('./municipio-detalle/municipio-detalle.module').then( m => m.MunicipioDetallePageModule)
+    loadChildren: () => import('./municipio-detalle/municipio-detalle.module').then( m => m.MunicipioDetallePageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'pais-crear',
-    loadChildren: () => import('./pais-crear/pais-crear.module').then( m => m.PaisCrearPageModule)
+    loadChildren: () => import('./pais-crear/pais-crear.module').then( m => m.PaisCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'ciudad-crear',
-    loadChildren: () => import('./ciudad-crear/ciudad-crear.module').then( m => m.CiudadCrearPageModule)
+    loadChildren: () => import('./ciudad-crear/ciudad-crear.module').then( m => m.CiudadCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'medicamento-crear',
-    loadChildren: () => import('./medicamento-crear/medicamento-crear.module').then( m => m.MedicamentoCrearPageModule)
+    loadChildren: () => import('./medicamento-crear/medicamento-crear.module').then( m => m.MedicamentoCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'cliente-crear',
-    loadChildren: () => import('./cliente-crear/cliente-crear.module').then( m => m.ClienteCrearPageModule)
+    loadChildren: () => import('./cliente-crear/cliente-crear.module').then( m => m.ClienteCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'entidad-comercial-crear',
-    loadChildren: () => import('./entidad-comercial-crear/entidad-comercial-crear.module').then( m => m.EntidadComercialCrearPageModule)
+    loadChildren: () => import('./entidad-comercial-crear/entidad-comercial-crear.module').then( m => m.EntidadComercialCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'compra-crear',
@@ -152,7 +175,8 @@ const routes: Routes = [
   },
   {
     path: 'entidad-medicamento-crear',
-    loadChildren: () => import('./entidad-medicamento-crear/entidad-medicamento-crear.module').then( m => m.EntidadMedicamentoCrearPageModule)
+    loadChildren: () => import('./entidad-medicamento-crear/entidad-medicamento-crear.module').then( m => m.EntidadMedicamentoCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'devolucion-crear',

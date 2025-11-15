@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import axios from 'axios';
 import { Estado } from '../services/estado';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-estado-detalle',
   templateUrl: './estado-detalle.page.html',
   styleUrls: ['./estado-detalle.page.scss'],
-  standalone:false,
+  standalone: false,
 })
 export class EstadoDetallePage implements OnInit {
 
@@ -16,37 +16,17 @@ export class EstadoDetallePage implements OnInit {
     private route: ActivatedRoute,
     private loading: LoadingController,
     private EstadosServices: Estado,
+    private location: Location
+
   ) { }
 
-  estado:any=false;
+  estado: any = false;
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.cargarEstado();
   }
 
-/*    async cargarEstado() {
-  const estd_id = this.route.snapshot.paramMap.get('estd_id');
-  const loading = await this.loading.create({
-    message: 'Cargando',
-    spinner: 'bubbles',
-  });
-  await loading.present();
-  const response = await axios({
-    method: 'get',
-    url: "http://localhost:8080/estados/"+estd_id+"?expand=paisNombre",
-    withCredentials: true,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }).then((response) => {
-    this.estado = response.data;
-  }).catch(function (error) {
-    console.log(error);
-  });
-  loading.dismiss();
-}*/
-
-async cargarEstado() {
+  async cargarEstado() {
     const estd_id = this.route.snapshot.paramMap.get('estd_id');
     const loading = await this.loading.create({
       message: 'Cargando',
@@ -66,6 +46,10 @@ async cargarEstado() {
       console.log(error);
     }
     loading.dismiss();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../services/cliente';
 import { Login } from '../services/login';
 import axios from 'axios';
+import { Permiso } from '../services/permiso';
 
 @Component({
   selector: 'app-registro',
@@ -19,15 +20,16 @@ export class RegistroPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: Login,
+    private permisoService: Permiso
 
   ) { }
 
-      ciudadUrl: string = "http://localhost:8080/ciudad";
-    ciudad: any = [];
+  ciudadUrl: string = "http://localhost:8080/ciudad";
+  ciudad: any = [];
 
   ngOnInit() {
-  this.buildForm();
-  this.cargarCiudades();
+    this.buildForm();
+    this.cargarCiudades();
   }
 
   public registro!: FormGroup;
@@ -134,7 +136,21 @@ export class RegistroPage implements OnInit {
             await localStorage.setItem('token', response?.data);
             localStorage.setItem('sesion', 'login');
             localStorage.setItem('username', registrarData.username);
-            this.router.navigate(['/login']);
+
+            this.permisoService.permisos().subscribe(
+              async permisosResponse => {
+                if (permisosResponse?.data) {
+                  await localStorage.setItem('permisos', JSON.stringify(permisosResponse.data));
+                }
+                this.router.navigate(['/login']);
+              },
+              error => {
+                console.error('Error obteniendo permisos:', error);
+                this.alertError();
+              }
+            );
+
+
           } else if (response?.data === '') {
             this.alertError();
           }
@@ -197,20 +213,20 @@ export class RegistroPage implements OnInit {
     }, 1);
   }
 
-      async cargarCiudades() {
-        const response = await axios({
-            method: 'get',
-            url: this.ciudadUrl,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then((response) => {
-            this.ciudad = response.data;
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
+  async cargarCiudades() {
+    const response = await axios({
+      method: 'get',
+      url: this.ciudadUrl,
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then((response) => {
+      this.ciudad = response.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
 
 
 }

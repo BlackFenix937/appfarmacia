@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 export class Cliente {
 
   url: string = `${environment.apiUrl}clientes`;
-  headers: any = { 'Content-Type': 'application/json', 'Authorization':/* 'Bearer '+localStorage.getItem('token') || aún no se usa */ 'Bearer 100-token' };
+  headers: any = { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+localStorage.getItem('token') /*||  'Bearer 100-token' */};
 
   listado(extra: string = '', busqueda: string = ''): Observable<any> {
     let url: string = '';
@@ -35,7 +35,7 @@ export class Cliente {
   }
 
 
-  detalle(cli_id: string | null = '', extra: string = ''): Observable<any> {
+  detalle(cli_id: number |string| null = null, extra: string = ''): Observable<any> {
     const url = `${this.url}/` + cli_id + extra;
     return new Observable(observer => {
       axios.get(url, {

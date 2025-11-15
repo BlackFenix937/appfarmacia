@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { Pais } from '../services/pais';
 
 @Component({
@@ -22,9 +21,6 @@ export class PaisCrearPage implements OnInit {
     private editarDatos = [];
     @Input() pai_id: number | undefined;
     public paises!: FormGroup;
-    baseUrl: string = "http://localhost:8080/pais";
-
-
 
     ngOnInit() {
         if (this.pai_id !== undefined) {
@@ -46,31 +42,6 @@ export class PaisCrearPage implements OnInit {
         })
     }
 
-    /*    async guardarDatos() {
-            try {
-                const pais = this.paises?.value;
-                const response = await axios({
-                    method: 'post',
-                    url: this.baseUrl,
-                    data: pais,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 100-token'
-                    }
-                }).then((response) => {
-                    if (response?.status == 201) {
-                        this.alertGuardado(response.data.pai_nombre, 'El pais ' + response.data.pai_nombre + ' ha sido registrado');
-                    }
-                }).catch((error) => {
-                    if (error?.response?.status == 422) {
-                        this.alertGuardado(pais.estd_nombre, error?.response?.data[0]?.message, "Error");
-                    }
-                });
-            } catch (e) {
-                console.log(e);
-            }
-        }*/
-
     async guardarDatos() {
         try {
             const pais = this.paises?.value;
@@ -83,6 +54,10 @@ export class PaisCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+
+                                this.alertGuardado(pais.pai_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(pais.pai_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -104,6 +79,9 @@ export class PaisCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(pais.pai_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(pais.pai_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -117,7 +95,6 @@ export class PaisCrearPage implements OnInit {
             console.log(e);
         }
     }
-
 
     public getError(controlName: string) {
         let errors: any[] = [];
@@ -151,25 +128,21 @@ export class PaisCrearPage implements OnInit {
         await alert.present();
     }
 
-    async getDetalles() {
-        const response = await axios({
-            method: 'get',
-            url: this.baseUrl + "/" + this.pai_id,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
+    getDetalles() {
+        this.PaisService.detalle(this.pai_id).subscribe({
+            next: (data) => {
+                this.editarDatos = data;
+                Object.keys(this.editarDatos).forEach((key: any) => {
+                    const control = this.paises.get(String(key));
+                    if (control !== null) {
+                        control.markAsTouched();
+                        control.patchValue(this.editarDatos[key]);
+                    }
+                });
+            },
+            error: (error) => {
+                console.error('Error al obtener detalles del pais:', error);
             }
-        }).then((response) => {
-            this.editarDatos = response.data;
-            Object.keys(this.editarDatos).forEach((key: any) => {
-                const control = this.paises.get(String(key));
-                if (control !== null) {
-                    control.markAsTouched();
-                    control.patchValue(this.editarDatos[key]);
-                }
-            })
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 

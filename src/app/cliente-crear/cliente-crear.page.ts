@@ -1,8 +1,8 @@
 import { Component, Input, input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Cliente } from '../services/cliente';
+import { Ciudad } from '../services/ciudad';
 
 @Component({
     selector: 'app-cliente-crear',
@@ -14,6 +14,8 @@ export class ClienteCrearPage implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private loadingCtrl: LoadingController,
+        private CiudadService: Ciudad,
         private alert: AlertController,
         private modalCtrl: ModalController,
         private clientesService: Cliente,
@@ -22,8 +24,6 @@ export class ClienteCrearPage implements OnInit {
     private editarDatos = [];
     @Input() cli_id: number | undefined;
     public cliente!: FormGroup;
-    baseUrl: string = "http://localhost:8080/clientes";
-    ciudadUrl: string = "http://localhost:8080/ciudad";
     ciudad: any = [];
 
     ngOnInit() {
@@ -32,7 +32,6 @@ export class ClienteCrearPage implements OnInit {
             this.getDetalles();
         }
         this.formulario();
-
     }
 
     mensajes_validacion: any = {
@@ -91,72 +90,25 @@ export class ClienteCrearPage implements OnInit {
     }
 
     async cargarCiudades() {
-        const response = await axios({
-            method: 'get',
-            url: this.ciudadUrl,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then((response) => {
-            this.ciudad = response.data;
-        }).catch(function (error) {
-            console.log(error);
+        const loading = await this.loadingCtrl.create({
+            message: 'Cargando',
+            spinner: 'bubbles',
         });
-    }
-
-    /*
-    async guardarDatos() {
+        await loading.present();
         try {
-
-            const cliente = this.cliente?.value;
-            if (this.cli_id===undefined){
-
-            
-            const response = await axios({
-                method: 'post',
-                url: this.baseUrl,
-                data: cliente,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 100-token'
+            await this.CiudadService.listado().subscribe(
+                response => {
+                    this.ciudad = response;
+                },
+                error => {
+                    console.error('Error:', error);
                 }
-            }).then((response) => {
-                if (response?.status == 201) {
-                    this.alertGuardado(response.data.cli_nombre, 'El cliente ' + response.data.cli_nombre + ' ha sido registrado.');
-                }
-            }).catch((error) => {
-                if (error?.response?.status == 422) {
-                    this.alertGuardado(cliente.cli_nombre, error?.response?.data[0]?.message, "Error");
-                }
-            });
+            );
+        } catch (error) {
+            console.log(error);
         }
-        else{
-
-             const response = await axios({
-              method: 'put',
-              url: this.baseUrl + '/' + this.cli_id,
-              data: cliente,
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer 100-token'
-              }
-            }).then((response) => {
-                if (response?.status == 200) {
-                    this.alertGuardado(response.data.cli_nombre, 'El cliente ' + response.data.cli_nombre + ' ha sido actualizado');
-                }
-            }).catch((error) => {
-                if (error?.response?.status == 422) {
-                    this.alertGuardado(cliente.cli_nombre, error?.response?.data[0]?.message, "Error");
-                }
-            });
-
-        }
-            
-        } catch (e) {
-            console.log(e);
-        }
-    }*/
+        loading.dismiss();
+    }
 
     async guardarDatos() {
         try {
@@ -176,6 +128,9 @@ export class ClienteCrearPage implements OnInit {
                             if (error?.response?.status == 500) {
                                 this.alertGuardado(cliente.cli_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
                             }
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(cliente.cli_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                         }
                     );
                 } catch (error) {
@@ -191,6 +146,9 @@ export class ClienteCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(cliente.cli_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(cliente.cli_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -237,27 +195,22 @@ export class ClienteCrearPage implements OnInit {
         await alert.present();
     }
 
-    async getDetalles() {
-        const response = await axios({
-            method: 'get',
-            url: this.baseUrl + "/" + this.cli_id,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
+    getDetalles() {
+        this.clientesService.detalle(this.cli_id).subscribe({
+            next: (data) => {
+                this.editarDatos = data;
+                Object.keys(this.editarDatos).forEach((key: any) => {
+                    const control = this.cliente.get(String(key));
+                    if (control !== null) {
+                        control.markAsTouched();
+                        control.patchValue(this.editarDatos[key]);
+                    }
+                });
+            },
+            error: (error) => {
+                console.error('Error al obtener detalles del cliente:', error);
             }
-        }).then((response) => {
-            this.editarDatos = response.data;
-            Object.keys(this.editarDatos).forEach((key: any) => {
-                const control = this.cliente.get(String(key));
-                if (control !== null) {
-                    control.markAsTouched();
-                    control.patchValue(this.editarDatos[key]);
-                }
-            })
-        }).catch(function (error) {
-            console.log(error);
         });
     }
-
 
 }

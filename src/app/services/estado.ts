@@ -37,7 +37,7 @@ export class Estado {
 
 //detalle de elemento
 
-detalle(estd_id:string | null ='', extra:string ='?expand=paisNombre'): Observable<any> {
+detalle(estd_id:string |number| null ='', extra:string ='?expand=paisNombre'): Observable<any> {
     const url = `${this.url}/`+estd_id+extra;
     return new Observable(observer => {
         axios.get(url, {

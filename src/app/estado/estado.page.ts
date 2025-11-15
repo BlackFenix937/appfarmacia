@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { EstadoCrearPage } from '../estado-crear/estado-crear.page';
 import { Router } from '@angular/router';
 import { Estado } from '../services/estado';
@@ -14,17 +13,16 @@ import { Estado } from '../services/estado';
 export class EstadoPage implements OnInit {
 
   constructor(
-      private loadingCtrl: LoadingController,
-      private modalCtrl: ModalController,
-      private alertCtrl: AlertController,
-      private router: Router,
-      private EstadosService: Estado
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private router: Router,
+    private EstadosService: Estado
 
   ) { }
 
-  baseUrl: string='http://localhost:8080/estados';
-  estados: any=[];
-    total: number = 0;
+  estados: any = [];
+  total: number = 0;
   page: string = "1";
   busqueda: string = '';
 
@@ -33,27 +31,6 @@ export class EstadoPage implements OnInit {
     this.cargarTotal();
   }
 
-   /*async cargarEstados (event?: InfiniteScrollCustomEvent) {
-    const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
-    });
-    await loading.present();
-    const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/estados?expand=paisNombre",
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then((response) => {
-        this.estados = response.data;
-        event?.target.complete();
-    }).catch(function (error) {
-        console.log(error);     
-    });
-    loading.dismiss();
-}*/
 
   async cargarEstados() {
     const loading = await this.loadingCtrl.create({
@@ -77,19 +54,19 @@ export class EstadoPage implements OnInit {
     loading.dismiss();
   }
 
-async new() {
+  async new() {
     const paginaModal = await this.modalCtrl.create({
-        component: EstadoCrearPage,
-        breakpoints : [0, 0.3, 0.5, 0.95],
-        initialBreakpoint: 0.95
+      component: EstadoCrearPage,
+      breakpoints: [0, 0.3, 0.5, 0.95],
+      initialBreakpoint: 0.95
     });
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
-        this.cargarEstados();
+      this.cargarEstados();
     });
-}
+  }
 
-async editar(estd_id: number) {
+  async editar(estd_id: number) {
     const paginaModal = await this.modalCtrl.create({
       component: EstadoCrearPage,
       componentProps: {
@@ -100,11 +77,11 @@ async editar(estd_id: number) {
     });
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
-        this.cargarEstados();
+      this.cargarEstados();
     });
-}
+  }
 
-async alertEliminar(estd_id: number, estd_nombre:string) {
+  async alertEliminar(estd_id: number, estd_nombre: string) {
     const alert = await this.alertCtrl.create({
       header: 'Estado',
       subHeader: 'Eliminar',
@@ -125,28 +102,7 @@ async alertEliminar(estd_id: number, estd_nombre:string) {
       ]
     });
     await alert.present();
-}
-
-/*async eliminar(estd_id: number, estd_nombre:string) {
-    const response = await axios({
-      method: 'delete',
-      url: this.baseUrl + '/' + estd_id,
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 100-token'
-      }
-    }).then((response) => {
-      if (response?.status == 204) {
-        this.alertEliminado(estd_id, 'El estado ' +estd_nombre+ ' ha sido eliminado.');
-      }
-    }).catch((error)=> {
-      if (error?.response.status == 500) {
-        this.alertEliminado(estd_id, 'El estado ' +estd_nombre+ ' no se puede eliminar porque esta asociado.');
-      }
-      console.log(error);
-    });
-}*/
+  }
 
   async eliminar(estd_id: number, estd_nombre: string) {
     try {
@@ -169,14 +125,14 @@ async alertEliminar(estd_id: number, estd_nombre:string) {
     }
   }
 
-async alertEliminado(estd_id: number, msg = "") {
+  async alertEliminado(estd_id: number, msg = "") {
     const alert = await this.alertCtrl.create({
       header: 'Estado',
       subHeader: msg.includes('no se puede eliminar') ? 'Error al eliminar' : 'Eliminado',
       message: msg,
       cssClass: 'alert-center',
       buttons: [
- 
+
         {
           text: 'Salir',
           role: 'confirm',
@@ -188,13 +144,13 @@ async alertEliminado(estd_id: number, msg = "") {
     });
 
     await alert.present();
-}
+  }
 
-private regresar() {
+  private regresar() {
     this.router.navigate(['/estado']).then(() => {
       window.location.reload();
     });
-}
+  }
 
   async cargarTotal() {
     try {

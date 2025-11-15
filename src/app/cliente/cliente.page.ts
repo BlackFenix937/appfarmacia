@@ -21,7 +21,6 @@ export class ClientePage implements OnInit {
     private clienteService: Cliente,
   ) { }
 
-  baseUrl: string = "http://localhost:8080/cliente";
   clientes: any = [];
   total: number = 0;
   page: string = "1";
@@ -103,27 +102,6 @@ export class ClientePage implements OnInit {
     });
     await alert.present();
   }
-  /*
-  async eliminar(cli_id: number, cli_nombre:string) {
-      const response = await axios({
-        method: 'delete',
-        url: this.baseUrl + 's/' + cli_id,
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer 100-token'
-        }
-      }).then((response) => {
-        if (response?.status == 204) {
-          this.alertEliminado(cli_id, 'El cliente ' +cli_nombre+ ' ha sido eliminado');
-        }
-      }).catch((error)=> {
-        if (error?.response.status == 500) {
-          this.alertEliminado(cli_id, 'El cliente ' +cli_nombre+ ' no se puede eliminar pq hay una relación sexual');
-        }
-        console.log(error);
-      });
-  }*/
 
   async eliminar(cli_id: number, cli_nombre: string) {
     try {

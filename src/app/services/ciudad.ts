@@ -37,7 +37,7 @@ export class Ciudad {
 
 //detalle de elemento
 
-detalle(ciu_id:string | null ='', extra:string ='?expand=municipioNombre'): Observable<any> {
+detalle(ciu_id:string | number| null ='', extra:string ='?expand=municipioNombre'): Observable<any> {
     const url = `${this.url}/`+ciu_id+extra;
     return new Observable(observer => {
         axios.get(url, {

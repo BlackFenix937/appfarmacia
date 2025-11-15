@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { EntidadMedicamento } from '../services/entidad-medicamento';
 import { EntidadMedicamentoCrearPage } from '../entidad-medicamento-crear/entidad-medicamento-crear.page';
 
@@ -9,7 +8,7 @@ import { EntidadMedicamentoCrearPage } from '../entidad-medicamento-crear/entida
   selector: 'app-entidad-medicamento',
   templateUrl: './entidad-medicamento.page.html',
   styleUrls: ['./entidad-medicamento.page.scss'],
-  standalone:false
+  standalone: false
 })
 export class EntidadMedicamentoPage implements OnInit {
 
@@ -21,8 +20,7 @@ export class EntidadMedicamentoPage implements OnInit {
     private EntidadMedicamentoService: EntidadMedicamento,
   ) { }
 
-  baseUrl: string = "http://localhost:8080/entidadmedicamento";
-  entidadmedicamentos:any=[];
+  entidadmedicamentos: any = [];
   total: number = 0;
   page: string = "1";
   busqueda: string = '';
@@ -30,39 +28,16 @@ export class EntidadMedicamentoPage implements OnInit {
   ngOnInit() {
     this.cargarEntidadMedicamentos();
     this.cargarTotal();
-
   }
 
-/*  async cargarEntidadMedicamentos (event?: InfiniteScrollCustomEvent) {
-    const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
-    });
-    await loading.present();
-    const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/entidadmedicamentos?expand=nombreEntidad, estadoEntrega, medicamentoNombre",
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then((response) => {
-        this.entidadmedicamentos = response.data;
-        event?.target.complete();
-    }).catch(function (error) {
-        console.log(error);     
-    });
-    loading.dismiss();
-}*/
-
-async cargarEntidadMedicamentos() {
+  async cargarEntidadMedicamentos() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando',
       spinner: 'bubbles',
     });
     await loading.present();
     try {
-      await this.EntidadMedicamentoService.listado('?page='+this.page+"&expand=medicamentoNombre", this.busqueda).subscribe(
+      await this.EntidadMedicamentoService.listado('?page=' + this.page + "&expand=medicamentoNombre", this.busqueda).subscribe(
         response => {
           this.entidadmedicamentos = response;
           this.cargarTotal();
@@ -75,9 +50,9 @@ async cargarEntidadMedicamentos() {
       console.log(error);
     }
     loading.dismiss();
-}
+  }
 
-async editar(entmed_id: number) {
+  async editar(entmed_id: number) {
     const paginaModal = await this.modalCtrl.create({
       component: EntidadMedicamentoCrearPage,
       componentProps: {
@@ -127,7 +102,7 @@ async editar(entmed_id: number) {
     await alert.present();
   }
 
-    async eliminar(entmed_id: number, medicamento_nombre: string) {
+  async eliminar(entmed_id: number, medicamento_nombre: string) {
     try {
       await this.EntidadMedicamentoService.eliminar(entmed_id, medicamento_nombre).subscribe(
         response => {

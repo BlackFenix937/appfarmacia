@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import axios from 'axios';
 import { Cliente } from '../services/cliente';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cliente-detalle',
@@ -16,6 +16,7 @@ export class ClienteDetallePage implements OnInit {
     private route: ActivatedRoute,
     private loading: LoadingController,
     private clientesService: Cliente,
+    private location: Location
   ) { }
 
   cliente: any = null;
@@ -23,29 +24,6 @@ export class ClienteDetallePage implements OnInit {
   ngOnInit(): void {
     this.cargarCliente();
   }
-
-  /*
-  async cargarCliente() {
-  const cli_id = this.route.snapshot.paramMap.get('cli_id');
-  const loading = await this.loading.create({
-    message: 'Cargando',
-    spinner: 'bubbles',
-  });
-  await loading.present();
-  const response = await axios({
-    method: 'get',
-    url: "http://localhost:8080/clientes/"+cli_id+"?expand=ciudadNombre,municipioNombre, estadoNombre",
-    withCredentials: true,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }).then((response) => {
-    this.cliente = response.data;
-  }).catch(function (error) {
-    console.log(error);
-  });
-  loading.dismiss();
-}*/
 
   async cargarCliente() {
     const cli_id = this.route.snapshot.paramMap.get('cli_id');
@@ -67,6 +45,10 @@ export class ClienteDetallePage implements OnInit {
       console.log(error);
     }
     loading.dismiss();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

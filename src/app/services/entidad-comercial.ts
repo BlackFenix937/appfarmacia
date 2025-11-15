@@ -36,7 +36,7 @@ export class EntidadComercial {
 }
 
 //detalle
-detalle(ent_id:string | null = '', extra:string = '?expand=ciudadNombre'): Observable<any> {
+detalle(ent_id:string |number| null = '', extra:string = '?expand=ciudadNombre'): Observable<any> {
     const url = `${this.url}/`+ent_id+extra;
     return new Observable(observer => {
         axios.get(url, {

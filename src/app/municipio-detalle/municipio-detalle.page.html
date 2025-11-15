@@ -1,27 +1,34 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Detalles del municipio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card *ngIf="municipio as municipio">
-  <div class="center">
-    <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
-  </div>
-  <ion-card-header class="center">
-    <ion-card-title>
-      <h3>{{municipio.mun_nombre}}</h3>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <p>Estado donde se encuentra</p>
-          <h2> {{municipio.estadoNombre}}</h2>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    <div class="center">
+      <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
+    </div>
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3>{{municipio.mun_nombre}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Estado donde se encuentra</p>
+            <h2> {{municipio.estadoNombre}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
 
-  </ion-card-content>
+      <div class="back-button">
+        <ion-button (click)="goBack()" color="secundario">
+          <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+          Volver
+        </ion-button>
+      </div>
+
+    </ion-card-content>

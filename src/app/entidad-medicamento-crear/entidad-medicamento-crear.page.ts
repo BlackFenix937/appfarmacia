@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EntidadMedicamento } from '../services/entidad-medicamento';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { Medicamento } from '../services/medicamento';
+import { EntidadComercial } from '../services/entidad-comercial';
 
 @Component({
     selector: 'app-entidad-medicamento-crear',
@@ -15,18 +16,19 @@ export class EntidadMedicamentoCrearPage implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private alert: AlertController,
+        private loadingCtrl: LoadingController,
         private modalCtrl: ModalController,
-        private EntidadMedicamentoService: EntidadMedicamento
+        private EntidadMedicamentoService: EntidadMedicamento,
+        private medicamentosService: Medicamento,
+        private EntidadComercialService: EntidadComercial,
+
     ) { }
 
     private editarDatos = [];
     @Input() entmed_id: number | undefined;
     public entidadmedicamento!: FormGroup;
-    baseUrl: string = "http://localhost:8080/entidadmedicamentos";
-    medicamentoUrl: string ="http://localhost:8080/medicamentos";
-    entidadcomercialUrl: string ="http://localhost:8080/entidadcomercials";
-    medicamento:any=[];
-    entidadcomercial:any=[];
+    medicamento: any = [];
+    entidadcomercial: any = [];
     estados = [
         { 'entmed_fkestado_id': "1", 'entidadmed': 'Comprado' },
         { 'entmed_fkestado_id': "2", 'entidadmed': 'Devuelto' },
@@ -48,24 +50,18 @@ export class EntidadMedicamentoCrearPage implements OnInit {
     mensajes_validacion: any = {
         'ent_id': [
             { type: 'required', message: 'El nombre de la entidad comercial es obligatorio' },
-
         ],
-
         'med_id': [
             { type: 'required', message: 'El nombre del medicamento es obligatorio' },
-
         ],
         'entmed_precio': [
             { type: 'required', message: 'El precio de venta es obligatorio.' },
-
         ],
         'entmed_tiempo_entrega': [
             { type: 'required', message: 'El tiempo de entrega es obligatorio.' },
-
         ],
         'entmed_fkestado_id': [
             { type: 'required', message: 'El tipo de estado es obligatorio.' },
-
         ],
     }
 
@@ -80,34 +76,46 @@ export class EntidadMedicamentoCrearPage implements OnInit {
     }
 
     async cargarMedicamentos() {
-    const response = await axios({
-        method: 'get',
-        url : this.medicamentoUrl,
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
+        const loading = await this.loadingCtrl.create({
+            message: 'Cargando',
+            spinner: 'bubbles',
+        });
+        await loading.present();
+        try {
+            await this.medicamentosService.listado().subscribe(
+                response => {
+                    this.medicamento = response;
+                },
+                error => {
+                    console.error('Error:', error);
+                }
+            );
+        } catch (error) {
+            console.log(error);
         }
-    }).then( (response) => {
-        this.medicamento = response.data;
-    }).catch(function (error) {
-        console.log(error);     
-    });
-}
+        loading.dismiss();
+    }
 
-async cargarEntidadComercial() {
-    const response = await axios({
-        method: 'get',
-        url : this.entidadcomercialUrl,
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
+    async cargarEntidadComercial() {
+        const loading = await this.loadingCtrl.create({
+            message: 'Cargando',
+            spinner: 'bubbles',
+        });
+        await loading.present();
+        try {
+            await this.EntidadComercialService.listado().subscribe(
+                response => {
+                    this.entidadcomercial = response;
+                },
+                error => {
+                    console.error('Error:', error);
+                }
+            );
+        } catch (error) {
+            console.log(error);
         }
-    }).then( (response) => {
-        this.entidadcomercial = response.data;
-    }).catch(function (error) {
-        console.log(error);     
-    });
-}
+        loading.dismiss();
+    }
 
     async guardarDatos() {
         try {
@@ -127,6 +135,9 @@ async cargarEntidadComercial() {
                             if (error?.response?.status == 500) {
                                 this.alertGuardado(entidadmedicamento.entmed_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
                             }
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(entidadmedicamento.entmed_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                         }
                     );
                 } catch (error) {
@@ -142,6 +153,9 @@ async cargarEntidadComercial() {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(entidadmedicamento.entmed_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(entidadmedicamento.entmed_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -188,25 +202,21 @@ async cargarEntidadComercial() {
         await alert.present();
     }
 
-    async getDetalles() {
-        const response = await axios({
-            method: 'get',
-            url: this.baseUrl + "/" + this.entmed_id,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
+    getDetalles() {
+        this.EntidadMedicamentoService.detalle(this.entmed_id).subscribe({
+            next: (data) => {
+                this.editarDatos = data;
+                Object.keys(this.editarDatos).forEach((key: any) => {
+                    const control = this.entidadmedicamento.get(String(key));
+                    if (control !== null) {
+                        control.markAsTouched();
+                        control.patchValue(this.editarDatos[key]);
+                    }
+                });
+            },
+            error: (error) => {
+                console.error('Error al obtener detalles del pedido:', error);
             }
-        }).then((response) => {
-            this.editarDatos = response.data;
-            Object.keys(this.editarDatos).forEach((key: any) => {
-                const control = this.entidadmedicamento.get(String(key));
-                if (control !== null) {
-                    control.markAsTouched();
-                    control.patchValue(this.editarDatos[key]);
-                }
-            })
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 

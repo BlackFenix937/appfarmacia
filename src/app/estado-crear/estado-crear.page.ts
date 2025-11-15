@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Estado } from '../services/estado';
+import { Pais } from '../services/pais';
 
 @Component({
     selector: 'app-estado-crear',
@@ -17,15 +17,15 @@ export class EstadoCrearPage implements OnInit {
         private alert: AlertController,
         private modalCtrl: ModalController,
         private EstadosService: Estado,
+        private PaisService: Pais,
+        private loadingCtrl: LoadingController,
+
     ) { }
 
     private editarDatos = [];
     @Input() estd_id: number | undefined;
     public estados!: FormGroup;
     pais: any = [];
-    paisUrl: string = "http://localhost:8080/pais";
-    baseUrl: string = "http://localhost:8080/estados";
-
 
     ngOnInit() {
         this.cargarPais();
@@ -54,68 +54,25 @@ export class EstadoCrearPage implements OnInit {
     }
 
     async cargarPais() {
-        const response = await axios({
-            method: 'get',
-            url: this.paisUrl,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then((response) => {
-            this.pais = response.data;
-        }).catch(function (error) {
-            console.log(error);
+        const loading = await this.loadingCtrl.create({
+            message: 'Cargando',
+            spinner: 'bubbles',
         });
-    }
-
-    /*    async guardarDatos() {
-            try {
-    
-                const estado = this.estados?.value;
-                if (this.estd_id === undefined) {
-    
-                    const estados = this.estados?.value;
-                    const response = await axios({
-                        method: 'post',
-                        url: this.baseUrl,
-                        data: estados,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer 100-token'
-                        }
-                    }).then((response) => {
-                        if (response?.status == 201) {
-                            this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido registrado');
-                        }
-                    }).catch((error) => {
-                        if (error?.response?.status == 422) {
-                            this.alertGuardado(estados.estd_nombre, error?.response?.data[0]?.message, "Error");
-                        }
-                    });
-                } else {
-                    const response = await axios({
-                        method: 'put',
-                        url: this.baseUrl + '/' + this.estd_id,
-                        data: estado,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer 100-token'
-                        }
-                    }).then((response) => {
-                        if (response?.status == 200) {
-                            this.alertGuardado(response.data.estd_nombre, 'El estado ' + response.data.estd_nombre + ' ha sido actualizado.');
-                        }
-                    }).catch((error) => {
-                        if (error?.response?.status == 422) {
-                            this.alertGuardado(estado.estd_nombre, error?.response?.data[0]?.message, "Error");
-                        }
-                    });
+        await loading.present();
+        try {
+            await this.PaisService.listado().subscribe(
+                response => {
+                    this.pais = response;
+                },
+                error => {
+                    console.error('Error:', error);
                 }
-    
-            } catch (e) {
-                console.log(e);
-            }
-        }*/
+            );
+        } catch (error) {
+            console.log(error);
+        }
+        loading.dismiss();
+    }
 
     async guardarDatos() {
         try {
@@ -129,6 +86,9 @@ export class EstadoCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(estado.estd_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(estado.estd_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -150,6 +110,9 @@ export class EstadoCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(estado.estd_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(estado.estd_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -196,25 +159,21 @@ export class EstadoCrearPage implements OnInit {
         await alert.present();
     }
 
-    async getDetalles() {
-        const response = await axios({
-            method: 'get',
-            url: this.baseUrl + "/" + this.estd_id,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
+    getDetalles() {
+        this.EstadosService.detalle(this.estd_id).subscribe({
+            next: (data) => {
+                this.editarDatos = data;
+                Object.keys(this.editarDatos).forEach((key: any) => {
+                    const control = this.estados.get(String(key));
+                    if (control !== null) {
+                        control.markAsTouched();
+                        control.patchValue(this.editarDatos[key]);
+                    }
+                });
+            },
+            error: (error) => {
+                console.error('Error al obtener detalles del estado:', error);
             }
-        }).then((response) => {
-            this.editarDatos = response.data;
-            Object.keys(this.editarDatos).forEach((key: any) => {
-                const control = this.estados.get(String(key));
-                if (control !== null) {
-                    control.markAsTouched();
-                    control.patchValue(this.editarDatos[key]);
-                }
-            })
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 

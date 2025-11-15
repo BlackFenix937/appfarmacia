@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { CiudadCrearPage } from '../ciudad-crear/ciudad-crear.page';
 import { Router } from '@angular/router';
-import { CiudadCrearPageModule } from '../ciudad-crear/ciudad-crear.module';
 import { Ciudad } from '../services/ciudad';
+import { permisoGuard } from '../guard/permiso-guard';
 
 @Component({
   selector: 'app-ciudad',
@@ -21,9 +20,8 @@ export class CiudadPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private CiudadService: Ciudad,
-
   ) { }
-  baseUrl: string = 'http://localhost:8080/ciudads';
+
   ciudades: any = []
   total: number = 0;
   page: string = "1";
@@ -33,30 +31,7 @@ export class CiudadPage implements OnInit {
   ngOnInit() {
     this.cargarCiudades();
     this.cargarTotal();
-
   }
-
-  /*  async cargarCiudades(event?: InfiniteScrollCustomEvent) {
-      const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
-      });
-      await loading.present();
-      const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/ciudads?expand=municipioNombre",
-        withCredentials: true,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then((response) => {
-        this.ciudades = response.data;
-        event?.target.complete();
-      }).catch(function (error) {
-        console.log(error);
-      });
-      loading.dismiss();
-    }*/
 
   async cargarCiudades() {
     const loading = await this.loadingCtrl.create({
@@ -89,7 +64,9 @@ export class CiudadPage implements OnInit {
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
       this.cargarCiudades();
+
     });
+    canActivate: [permisoGuard]
   }
 
   async editar(ciu_id: number) {
@@ -129,27 +106,6 @@ export class CiudadPage implements OnInit {
     });
     await alert.present();
   }
-
-  /*  async eliminar(ciu_id: number, ciu_nombre: string) {
-      const response = await axios({
-        method: 'delete',
-        url: this.baseUrl + '/' + ciu_id,
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer 100-token'
-        }
-      }).then((response) => {
-        if (response?.status == 204) {
-          this.alertEliminado(ciu_id, 'La ciudad ' + ciu_nombre + ' ha sido eliminada.');
-        }
-      }).catch((error) => {
-        if (error?.response.status == 500) {
-          this.alertEliminado(ciu_id, 'La ciudad ' + ciu_nombre + ' no se puede eliminar porque esta asociada');
-        }
-        console.log(error);
-      });
-    }*/
 
   async eliminar(ciu_id: number, ciu_nombre: string) {
     try {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { MunicipioCrearPage } from '../municipio-crear/municipio-crear.page';
 import { Router } from '@angular/router';
 import { Municipio } from '../services/municipio';
@@ -21,7 +20,6 @@ export class MunicipioPage implements OnInit {
         private MunicipioService: Municipio,
     ) { }
 
-    baseUrl: string = 'http://localhost:8080/municipios';
     municipios: any = [];
     total: number = 0;
     page: string = "1";
@@ -30,31 +28,7 @@ export class MunicipioPage implements OnInit {
     ngOnInit() {
         this.cargarMunicipios();
         this.cargarTotal();
-
     }
-
-
-    /*    async cargarMunicipios(event?: InfiniteScrollCustomEvent) {
-            const loading = await this.loadingCtrl.create({
-                message: 'Cargando',
-                spinner: 'bubbles',
-            });
-            await loading.present();
-            const response = await axios({
-                method: 'get',
-                url: "http://localhost:8080/municipios",
-                withCredentials: true,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then((response) => {
-                this.municipios = response.data;
-                event?.target.complete();
-            }).catch(function (error) {
-                console.log(error);
-            });
-            loading.dismiss();
-        }*/
 
     async cargarMunicipios() {
         const loading = await this.loadingCtrl.create({

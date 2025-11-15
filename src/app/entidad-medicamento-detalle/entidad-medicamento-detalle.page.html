@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Detalles del envio del medicamento</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -50,6 +50,15 @@
       </ion-item>
     </ion-list>
   </ion-card-content>
+
+
+   <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
 </ion-card>
 
 </ion-content>

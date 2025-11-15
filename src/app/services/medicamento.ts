@@ -36,7 +36,7 @@ export class Medicamento {
 
 //detalle de elemento
 
-detalle(med_id:string | null ='', extra:string =''): Observable<any> {
+detalle(med_id:string |number| null ='', extra:string =''): Observable<any> {
     const url = `${this.url}/`+med_id+extra;
     return new Observable(observer => {
         axios.get(url, {

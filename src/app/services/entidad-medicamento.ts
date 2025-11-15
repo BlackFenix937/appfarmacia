@@ -36,7 +36,7 @@ export class EntidadMedicamento {
 
 //detalle de elemento
 
-detalle(entmed_id:string | null ='', extra:string =''): Observable<any> {
+detalle(entmed_id:string |number| null ='', extra:string =''): Observable<any> {
     const url = `${this.url}/`+entmed_id+extra;
     return new Observable(observer => {
         axios.get(url, {

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Login } from '../services/login';
+import { Permiso } from '../services/permiso';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
 
     private router: Router,
-    private LoginService: Login
+    private LoginService: Login,
+    private permisoService: Permiso
   ) { }
 
   ngOnInit() {
@@ -51,29 +53,72 @@ export class LoginPage implements OnInit {
     });
   }
 
+  
   async submitLogin() {
-    localStorage.clear();
-    const loginData = this.login?.value;
-    try {
-      await this.LoginService.login(loginData).subscribe(
-        async response => {
-          if (response?.status == 200 && response?.data !== '') {
-            await localStorage.setItem('token', response?.data);
-            localStorage.setItem('sesion', 'login');
-            localStorage.setItem('username', loginData.username);
-            this.router.navigate(['/medicamento']);
-          } else if (response?.data === '') {
-            this.alertError();
-          }
-        },
-        error => {
-          console.log(error);
+  localStorage.clear();
+  const loginData = this.login?.value;
+
+  try {
+    await this.LoginService.login(loginData).subscribe(
+      async response => {
+        if (response?.status === 200 && response?.data) {
+          // Guardar token y sesión
+          await localStorage.setItem('token', response.data);
+          localStorage.setItem('sesion', 'login');
+          localStorage.setItem('username', loginData.username);
+
+          // Obtener permisos
+          this.permisoService.permisos().subscribe(
+            async permisosResponse => {
+              const permisos = permisosResponse?.data || [];
+              localStorage.setItem('permisos', JSON.stringify(permisos));
+
+              // Determinar rol según permisos
+              let rol = '';
+              if (permisos.includes('cliente')) {
+                rol = 'Admin';
+              } else if (permisos.includes('medicamento')) {
+                rol = 'Cliente';
+              } else if (permisos.includes('entidad-medicamento')) {
+                rol = 'Prov/Dis';
+              }
+
+              // Redirigir según rol
+              switch (rol) {
+                case 'Admin':
+                  this.router.navigate(['/cliente']);
+                  break;
+                case 'Cliente':
+                  this.router.navigate(['/medicamento']);
+                  break;
+                case 'Prov/Dis':
+                  this.router.navigate(['/entidad-medicamento']);
+                  break;
+                default:
+                  this.router.navigate(['/']);
+                  break;
+              }
+            },
+            error => {
+              console.error('Error obteniendo permisos:', error);
+              this.alertError();
+            }
+          );
+
+        } else {
+          this.alertError();
         }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+      },
+      error => {
+        console.error('Error en login:', error);
+        this.alertError();
+      }
+    );
+  } catch (error) {
+    console.error('Error inesperado en submitLogin:', error);
+    this.alertError();
   }
+}
 
   async alertError() {
     const alert = await this.alertCtrl.create({

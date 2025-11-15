@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Detalles del Cliente</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,63 +7,72 @@
 <ion-content [fullscreen]="true">
 
   <ion-card *ngIf="cliente as cliente">
-  <div class="center">
-    <img src="assets/img/mimido.jpg" alt="Foto">
-  </div>
-  <ion-card-header class="center">
-    <ion-card-title>
-      <h3> Cliente {{cliente.cli_id}}</h3>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <p>Nombre del cliente</p>
-          <h2>{{cliente.cli_nombre}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Apellidos del cliente</p>
-          <h2>{{cliente.cli_apellido_paterno}} {{cliente.cli_apellido_materno}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Fecha de nacimiento</p>
-          <h2>{{cliente.cli_fecha_nacimiento}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Dirección</p>
-          <h2>{{cliente.cli_direccion}}; {{cliente.ciudadNombre}}, {{cliente.municipioNombre}}, {{cliente.estadoNombre}} </h2>
-        </ion-label>
-      </ion-item>
-            <ion-item>
-        <ion-label>
-          <p>Telefono</p>
-          <h2>{{cliente.cli_telefono}}</h2>
-        </ion-label>
-      </ion-item>
+    <div class="center">
+      <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
+    </div>
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3> Cliente {{cliente.cli_id}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Nombre del cliente</p>
+            <h2>{{cliente.cli_nombre}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Apellidos del cliente</p>
+            <h2>{{cliente.cli_apellido_paterno}} {{cliente.cli_apellido_materno}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Fecha de nacimiento</p>
+            <h2>{{cliente.cli_fecha_nacimiento}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Dirección</p>
+            <h2>{{cliente.cli_direccion}}; {{cliente.ciudadNombre}}, {{cliente.municipioNombre}},
+              {{cliente.estadoNombre}} </h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Telefono</p>
+            <h2>{{cliente.cli_telefono}}</h2>
+          </ion-label>
+        </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <p>Correo</p>
-          <h2>{{cliente.cli_correo}}</h2>
-        </ion-label>
-      </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Correo</p>
+            <h2>{{cliente.cli_correo}}</h2>
+          </ion-label>
+        </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <p>RFC</p>
-          <h2>{{cliente.cli_rfc}}</h2>
-        </ion-label>
-      </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>RFC</p>
+            <h2>{{cliente.cli_rfc}}</h2>
+          </ion-label>
+        </ion-item>
 
-    </ion-list>
-  </ion-card-content>
-</ion-card>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </ion-card>
 
 </ion-content>

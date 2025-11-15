@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Nuevos registros para distribucion de medicamentos</ion-title>
+  <ion-toolbar color="primario">
+    <ion-title>Nuevos registros para pedidos/envios de medicamentos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Medicamento</ion-label>
+            <ion-label position="floating" color="secundario">Medicamento</ion-label>
             <ion-select formControlName="med_id" class="form-control">
               <ion-select-option *ngFor="let medicamento of medicamento" [value]="medicamento.med_id">
                 {{medicamento.med_nombre}}
@@ -28,7 +28,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Entidad Comercial</ion-label>
+            <ion-label position="floating" color="secundario">Entidad Comercial</ion-label>
             <ion-select formControlName="ent_id" class="form-control">
               <ion-select-option *ngFor="let entidadcomercial of entidadcomercial" [value]="entidadcomercial.ent_id">
                 {{entidadcomercial.ent_nombre}}
@@ -44,7 +44,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Precio</ion-label>
+            <ion-label position="floating" color="secundario">Precio</ion-label>
             <ion-input type="number" step="0.01" formControlName="entmed_precio" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.entmed_precio">
@@ -57,8 +57,9 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Tiempo de entrega</ion-label>
-            <ion-input type="text" formControlName="entmed_tiempo_entrega" class="form-control"></ion-input>
+            <ion-label position="floating" color="secundario">Tiempo de entrega</ion-label>
+            <ion-input type="text" color="secundario" formControlName="entmed_tiempo_entrega"
+              class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.entmed_tiempo_entrega">
             <ion-note color="danger" *ngIf="getError('entmed_tiempo_entrega')[(validation.type)]">
@@ -67,9 +68,9 @@
           </div>
         </ion-col>
 
-        <ion-col size="12">
+        <!--         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Fecha de recepcion</ion-label>
+            <ion-label position="floating" color="secundario">Fecha de recepcion</ion-label>
             <ion-datetime presentation="datetime" formControlName="entmed_fecha_recepcion"
               class="form-control"></ion-datetime>
           </ion-item>
@@ -78,12 +79,12 @@
               <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
             </ion-note>
           </div>
-        </ion-col>
+        </ion-col> -->
 
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Estado</ion-label>
+            <ion-label position="floating" color="secundario">Estado</ion-label>
             <ion-select formControlName="entmed_fkestado_id" class="form-control">
               <ion-select-option *ngFor="let estado of estados" [value]="estado.entmed_fkestado_id">
                 {{ estado.entidadmed }}
@@ -100,7 +101,10 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" [disabled]="!entidadmedicamento.valid">Guardar</ion-button>
+            <ion-button type="submit" color="secundario" [disabled]="!entidadmedicamento.valid">
+              <ion-icon name="save-sharp" slot="start"></ion-icon>
+
+              Guardar</ion-button>
           </p>
         </ion-col>
       </ion-row>

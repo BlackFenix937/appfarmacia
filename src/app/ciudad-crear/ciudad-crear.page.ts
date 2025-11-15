@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Ciudad } from '../services/ciudad';
+import { Municipio } from '../services/municipio';
 
 @Component({
     selector: 'app-ciudad-crear',
@@ -14,18 +14,17 @@ export class CiudadCrearPage implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private loadingCtrl: LoadingController,
         private alert: AlertController,
         private modalCtrl: ModalController,
-        private CiudadService: Ciudad
+        private CiudadService: Ciudad,
+        private MunicipioService: Municipio
     ) { }
 
     private editarDatos = [];
     @Input() ciu_id: number | undefined;
     public ciudades!: FormGroup;
-    baseUrl: string = "http://localhost:8080/ciudads";
-    municipioUrl: string = "http://localhost:8080/municipio";
     municipios: any = [];
-
 
     ngOnInit() {
         this.cargarMunicipios();
@@ -55,70 +54,26 @@ export class CiudadCrearPage implements OnInit {
     }
 
     async cargarMunicipios() {
-        const response = await axios({
-            method: 'get',
-            url: this.municipioUrl,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then((response) => {
-            this.municipios = response.data;
-        }).catch(function (error) {
-            console.log(error);
+        const loading = await this.loadingCtrl.create({
+            message: 'Cargando',
+            spinner: 'bubbles',
         });
+        await loading.present();
+        try {
+            await this.MunicipioService.listado().subscribe(
+                response => {
+                    this.municipios = response;
+                },
+                error => {
+                    console.error('Error:', error);
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
+        loading.dismiss();
     }
 
-    /*    async guardarDatos() {
-            try {
-    
-                const ciudad = this.ciudades?.value;
-                if (this.ciu_id === undefined) {
-    
-                    const ciudad = this.ciudades?.value;
-                    const response = await axios({
-                        method: 'post',
-                        url: this.baseUrl,
-                        data: ciudad,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer 100-token'
-                        }
-                    }).then((response) => {
-                        if (response?.status == 201) {
-                            this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido registrada.');
-                        }
-                    }).catch((error) => {
-                        if (error?.response?.status == 422) {
-                            this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
-                        }
-                    });
-    
-                } else {
-    
-                    const response = await axios({
-                        method: 'put',
-                        url: this.baseUrl + '/' + this.ciu_id,
-                        data: ciudad,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer 100-token'
-                        }
-                    }).then((response) => {
-                        if (response?.status == 200) {
-                            this.alertGuardado(response.data.ciu_nombre, 'La ciudad ' + response.data.ciu_nombre + ' ha sido actualizada');
-                        }
-                    }).catch((error) => {
-                        if (error?.response?.status == 422) {
-                            this.alertGuardado(ciudad.ciu_nombre, error?.response?.data[0]?.message, "Error");
-                        }
-                    });
-                }
-    
-            } catch (e) {
-                console.log(e);
-            }
-        }*/
 
     async guardarDatos() {
         try {
@@ -138,6 +93,10 @@ export class CiudadCrearPage implements OnInit {
                             if (error?.response?.status == 500) {
                                 this.alertGuardado(ciudad.ciu_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
                             }
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(ciudad.ciu_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
+
                         }
                     );
                 } catch (error) {
@@ -153,6 +112,9 @@ export class CiudadCrearPage implements OnInit {
                             }
                         },
                         error => {
+                            if (error?.response?.status == 401) {
+                                this.alertGuardado(ciudad.ciu_id, "No tienes permisos para realizar esta acción.", "Error")
+                            }
                             if (error?.response?.status == 422) {
                                 this.alertGuardado(ciudad.ciu_id, error?.response?.data[0]?.message, "Error");
                             }
@@ -199,25 +161,21 @@ export class CiudadCrearPage implements OnInit {
         await alert.present();
     }
 
-    async getDetalles() {
-        const response = await axios({
-            method: 'get',
-            url: this.baseUrl + "/" + this.ciu_id,
-            withCredentials: true,
-            headers: {
-                'Accept': 'application/json'
+    getDetalles() {
+        this.CiudadService.detalle(this.ciu_id).subscribe({
+            next: (data) => {
+                this.editarDatos = data;
+                Object.keys(this.editarDatos).forEach((key: any) => {
+                    const control = this.ciudades.get(String(key));
+                    if (control !== null) {
+                        control.markAsTouched();
+                        control.patchValue(this.editarDatos[key]);
+                    }
+                });
+            },
+            error: (error) => {
+                console.error('Error al obtener detalles de la ciudad:', error);
             }
-        }).then((response) => {
-            this.editarDatos = response.data;
-            Object.keys(this.editarDatos).forEach((key: any) => {
-                const control = this.ciudades.get(String(key));
-                if (control !== null) {
-                    control.markAsTouched();
-                    control.patchValue(this.editarDatos[key]);
-                }
-            })
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 

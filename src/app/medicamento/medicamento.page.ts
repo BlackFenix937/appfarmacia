@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
 import { MedicamentoCrearPage } from '../medicamento-crear/medicamento-crear.page';
 import { Router } from '@angular/router';
 import { Medicamento } from '../services/medicamento';
@@ -21,8 +20,6 @@ export class MedicamentoPage implements OnInit {
     private medicamentosService: Medicamento,
 
   ) { }
-
-  baseUrl: string = "http://localhost:8080/medicamento";
   medicamentos: any = [];
   total: number = 0;
   page: string = "1";
@@ -31,36 +28,9 @@ export class MedicamentoPage implements OnInit {
   ngOnInit() {
     this.cargarMedicamentos();
     this.cargarTotal();
-
   }
-/*
-  async cargarMedicamentos(event?: InfiniteScrollCustomEvent) {
 
-    let url: string = this.baseUrl + "/buscar";
-    if (this.busqueda !== '') {
-      url = this.baseUrl + "s/buscar/" + this.busqueda;
-    }
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando',
-      spinner: 'bubbles',
-    });
-    await loading.present();
-    const response = await axios({
-      method: 'get',
-      url: url + "?page=" + this.page,
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then((response) => {
-      this.medicamentos = response.data;
-      event?.target.complete();
-    }).catch(function (error) {
-      console.log(error);
-    });
-    loading.dismiss();
-  }*/
-    async cargarMedicamentos() {
+  async cargarMedicamentos() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando',
       spinner: 'bubbles',
@@ -132,26 +102,6 @@ export class MedicamentoPage implements OnInit {
     await alert.present();
   }
 
-  /*async eliminar(med_id: number, med_nombre: string) {
-    const response = await axios({
-      method: 'delete',
-      url: this.baseUrl + 's/' + med_id,
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 100-token'
-      }
-    }).then((response) => {
-      if (response?.status == 204) {
-        this.alertEliminado(med_id, 'El medicamento ' + med_nombre + ' ha sido eliminado');
-      }
-    }).catch((error) => {
-      if (error?.response.status == 500) {
-        this.alertEliminado(med_id, 'El medicamento ' + med_nombre + ' no se puede eliminar pq hay una relación');
-      }
-      console.log(error);
-    });
-  }*/
 
   async eliminar(med_id: number, med_nombre: string) {
     try {

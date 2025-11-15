@@ -1,30 +1,38 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Detalle de la ciudad</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-<ion-card *ngIf="ciudad as ciudad">
-  <div class="center">
-    <img src="assets/img/crush.png" alt="Foto">
-  </div>
-  <ion-card-header class="center">
-    <ion-card-title>
-      <h3> {{ciudad.ciu_nombre}}</h3>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <p>Municipio al que pertenece la ciudad</p>
-          <h2>{{ciudad.municipioNombre}}</h2>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-card-content>
-</ion-card>
+  <ion-card *ngIf="ciudad as ciudad">
+    <div class="center">
+      <img src="assets/img/crush.png" alt="Foto">
+    </div>
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3> {{ciudad.ciu_nombre}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Municipio al que pertenece la ciudad</p>
+            <h2>{{ciudad.municipioNombre}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </ion-card>
 
 </ion-content>

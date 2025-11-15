@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() { }
 
   @Input('nombre') nombre: string | undefined;
-  @Input('color') color: string = "primary";
+  @Input('color') color: string = "primario";
 
   cerrarSesion() {
     localStorage.clear();

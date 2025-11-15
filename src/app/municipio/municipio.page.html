@@ -17,7 +17,7 @@
 
       <ion-badge slot="end"></ion-badge>
       <ion-button [routerLink]="['/municipio-detalle', municipio.mun_id]">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="map-sharp"></ion-icon>
       </ion-button>
 
       <ion-button (click)="editar(municipio.mun_id)" color="warning">
@@ -34,7 +34,7 @@
   </ion-list>
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button (click)="new()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

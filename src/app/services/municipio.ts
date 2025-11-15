@@ -37,7 +37,7 @@ export class Municipio {
 
   //detalle de elemento
 
-  detalle(mun_id: string | null = '', extra: string = '?expand=estadoNombre'): Observable<any> {
+  detalle(mun_id: string |number| null = '', extra: string = '?expand=estadoNombre'): Observable<any> {
     const url = `${this.url}/` + mun_id + extra;
     return new Observable(observer => {
       axios.get(url, {

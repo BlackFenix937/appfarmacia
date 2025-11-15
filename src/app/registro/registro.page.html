@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-toolbar color="personalizado">
+  <ion-toolbar color="primario">
     <ion-buttons slot="start">
       <ion-button (click)="login()">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+        <ion-icon name="arrow-back-circle-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Registrarme</ion-title>
@@ -15,7 +15,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Usuario</ion-label>
+            <ion-label position="floating" color="secundario">Usuario</ion-label>
             <ion-input type="text" formControlName="username" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.username">
@@ -26,8 +26,9 @@
         </ion-col>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Contraseña</ion-label>
-            <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password" clearOnEdit="false" class="form-control"></ion-input>
+            <ion-label position="floating" color="secundario">Contraseña</ion-label>
+            <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password" clearOnEdit="false"
+              class="form-control"></ion-input>
             <button slot="end" class="btn_eye_icon" (click)="togglePasswordMode()">
               <ion-icon [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
             </button>
@@ -40,8 +41,9 @@
         </ion-col>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Confirmar Contraseña</ion-label>
-            <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password_confirm" clearOnEdit="false" class="form-control"></ion-input>
+            <ion-label position="floating" color="secundario">Confirmar Contraseña</ion-label>
+            <ion-input #passwordEyeRegister [type]="passwordTypeInput" formControlName="password_confirm"
+              clearOnEdit="false" class="form-control"></ion-input>
             <button slot="end" class="btn_eye_icon" (click)="togglePasswordMode()">
               <ion-icon [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
             </button>
@@ -53,9 +55,9 @@
           </div>
         </ion-col>
 
- <ion-col size="12">
+        <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Nombre del cliente</ion-label>
+            <ion-label position="floating" color="secundario">Nombre del cliente</ion-label>
             <ion-input type="text" formControlName="cli_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_nombre">
@@ -67,7 +69,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Apellido paterno</ion-label>
+            <ion-label position="floating" color="secundario">Apellido paterno</ion-label>
             <ion-input type="text" formControlName="cli_apellido_paterno" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_apellido_paterno">
@@ -79,7 +81,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Apellido materno</ion-label>
+            <ion-label position="floating" color="secundario">Apellido materno</ion-label>
             <ion-input type="text" formControlName="cli_apellido_materno" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_apellido_materno">
@@ -91,8 +93,9 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Fecha de nacimiento</ion-label>
-            <ion-datetime presentation="date" formControlName="cli_fecha_nacimiento" class="form-control"></ion-datetime>
+            <ion-label position="floating" color="secundario">Fecha de nacimiento</ion-label>
+            <ion-datetime presentation="date" formControlName="cli_fecha_nacimiento" color="secundario"
+              class="form-control"></ion-datetime>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_fecha_nacimiento">
             <ion-note color="danger" *ngIf="getError('cli_fecha_nacimiento')[validation.type]">
@@ -103,7 +106,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Direccion</ion-label>
+            <ion-label position="floating" color="secundario">Direccion</ion-label>
             <ion-input type="text" formControlName="cli_direccion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_direccion">
@@ -115,7 +118,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Telefono</ion-label>
+            <ion-label position="floating" color="secundario">Telefono</ion-label>
             <ion-input type="text" formControlName="cli_telefono" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_telefono">
@@ -127,7 +130,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">Correo</ion-label>
+            <ion-label position="floating" color="secundario">Correo</ion-label>
             <ion-input type="text" formControlName="cli_correo" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_correo">
@@ -139,7 +142,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="primary">RFC</ion-label>
+            <ion-label position="floating" color="secundario">RFC</ion-label>
             <ion-input type="text" formControlName="cli_rfc" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of validation_messages.cli_rfc">
@@ -151,24 +154,27 @@
 
 
         <ion-col size="12">
-                    <ion-item>
-                        <ion-label position="floating" color="primary">Ciudad</ion-label>
-                        <ion-select formControlName="cli_fkciu_id" class="form-control">
-                            <ion-select-option *ngFor="let ciudad of ciudad" [value]="ciudad.ciu_id">
-                                {{ciudad.ciu_nombre}}
-                            </ion-select-option>
-                        </ion-select>
-                    </ion-item>
-                    <div id="note" *ngFor="let validation of validation_messages.cli_fkciu_id">
-                        <ion-note color="danger" *ngIf="getError('cli_fkciu_id')[(validation.type)]">
-                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-                        </ion-note>
-                    </div>
-                </ion-col>
+          <ion-item>
+            <ion-label position="floating" color="secundario">Ciudad</ion-label>
+            <ion-select formControlName="cli_fkciu_id" class="form-control">
+              <ion-select-option *ngFor="let ciudad of ciudad" [value]="ciudad.ciu_id">
+                {{ciudad.ciu_nombre}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div id="note" *ngFor="let validation of validation_messages.cli_fkciu_id">
+            <ion-note color="danger" *ngIf="getError('cli_fkciu_id')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" [disabled]="!registro.valid">Guardar</ion-button>
+            <ion-button type="submit" color="secundario" [disabled]="!registro.valid">
+              <ion-icon name="people-circle-sharp" slot="start"></ion-icon>
+
+              REGISTRAR</ion-button>
           </p>
         </ion-col>
       </ion-row>

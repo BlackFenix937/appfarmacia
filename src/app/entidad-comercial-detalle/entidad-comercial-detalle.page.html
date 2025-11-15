@@ -1,55 +1,64 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Entidad Comercial Detalle</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-<ion-card *ngIf="entidadcomercial as entidadcomercial">
-  <div class="center">
-    <img src="assets/img/crush.png" alt="Foto">
-  </div>
-  <ion-card-header class="center">
-    <ion-card-title>
-      <h3> {{entidadcomercial.ent_nombre}}, {{entidadcomercial.ciudadNombre}}</h3>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <p>Tipo de entidad comercial</p>
-          <h2>{{entidadcomercial.ent_tipo}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Telefono de la entidad comercial</p>
-          <h2>{{entidadcomercial.ent_telefono}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Correo de entidad comercial</p>
-          <h2>{{entidadcomercial.ent_correo}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Direccion de la entidad comercial</p>
-          <h2>{{entidadcomercial.ent_direccion}}</h2>
-        </ion-label>
-      </ion-item>
+  <ion-card *ngIf="entidadcomercial as entidadcomercial">
+    <div class="center">
+      <img src="assets/img/crush.png" alt="Foto">
+    </div>
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3> {{entidadcomercial.ent_nombre}}, {{entidadcomercial.ciudadNombre}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Tipo de entidad comercial</p>
+            <h2>{{entidadcomercial.ent_tipo}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Telefono de la entidad comercial</p>
+            <h2>{{entidadcomercial.ent_telefono}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Correo de entidad comercial</p>
+            <h2>{{entidadcomercial.ent_correo}}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>Direccion de la entidad comercial</p>
+            <h2>{{entidadcomercial.ent_direccion}}</h2>
+          </ion-label>
+        </ion-item>
 
-            <ion-item>
-        <ion-label>
-          <p>Codigo postal de entidad comercial</p>
-          <h2>{{entidadcomercial.ent_codigo_postal}}</h2>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-card-content>
-</ion-card>
+        <ion-item>
+          <ion-label>
+            <p>Codigo postal de entidad comercial</p>
+            <h2>{{entidadcomercial.ent_codigo_postal}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+
+    <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </ion-card>
 
 </ion-content>

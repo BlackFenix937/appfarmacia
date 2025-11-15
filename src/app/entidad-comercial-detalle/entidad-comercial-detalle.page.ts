@@ -1,52 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import axios from 'axios';
 import { EntidadComercial } from '../services/entidad-comercial';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-entidad-comercial-detalle',
   templateUrl: './entidad-comercial-detalle.page.html',
   styleUrls: ['./entidad-comercial-detalle.page.scss'],
-  standalone:false
+  standalone: false
 })
 export class EntidadComercialDetallePage implements OnInit {
 
   constructor(
-  private route: ActivatedRoute,
-  private loading: LoadingController,
-  private EntidadComercialService: EntidadComercial,
+    private route: ActivatedRoute,
+    private loading: LoadingController,
+    private EntidadComercialService: EntidadComercial,
+    private location: Location
   ) { }
 
-  entidadcomercial:any=null;
+  entidadcomercial: any = null;
 
   ngOnInit(): void {
     this.cargarEntidadComercial();
   }
 
-/*  async cargarEntidadComercial() {
-  const ent_id = this.route.snapshot.paramMap.get('ent_id');
-  const loading = await this.loading.create({
-    message: 'Cargando',
-    spinner: 'bubbles',
-  });
-  await loading.present();
-  const response = await axios({
-    method: 'get',
-    url: "http://localhost:8080/entidadcomercials/"+ent_id,
-    withCredentials: true,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }).then((response) => {
-    this.entidadcomercial = response.data;
-  }).catch(function (error) {
-    console.log(error);
-  });
-  loading.dismiss();
-}*/
-
-async cargarEntidadComercial() {
+  async cargarEntidadComercial() {
     const med_id = this.route.snapshot.paramMap.get('ent_id');
     const loading = await this.loading.create({
       message: 'Cargando',
@@ -66,6 +45,10 @@ async cargarEntidadComercial() {
       console.log(error);
     }
     loading.dismiss();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
