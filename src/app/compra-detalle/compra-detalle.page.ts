@@ -1,47 +1,55 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import axios from 'axios';
+import { Compra } from '../services/compra';
 
 @Component({
   selector: 'app-compra-detalle',
   templateUrl: './compra-detalle.page.html',
   styleUrls: ['./compra-detalle.page.scss'],
-  standalone:false,
+  standalone: false,
 })
 export class CompraDetallePage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private loading: LoadingController
+    private loading: LoadingController,
+    private location: Location,
+    private compraService: Compra
   ) { }
 
-  compra:any=false;
+  compra: any = null;
 
   ngOnInit(): void {
     this.cargarCompra();
   }
 
   async cargarCompra() {
-  const comp_id = this.route.snapshot.paramMap.get('comp_id');
-  const loading = await this.loading.create({
-    message: 'Cargando',
-    spinner: 'bubbles',
-  });
-  await loading.present();
-  const response = await axios({
-    method: 'get',
-    url: "http://localhost:8080/compras/"+comp_id+"?expand=clienteNombre, estadoCompra, compraDetalle",
-    withCredentials: true,
-    headers: {
-      'Accept': 'application/json'
+    const comp_id = this.route.snapshot.paramMap.get('comp_id');
+    const loading = await this.loading.create({
+      message: 'Cargando',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+    try {
+      await this.compraService.detalle(comp_id, '?expand=clienteNombre,estadoCompra,compraDetalle').subscribe(
+        response => {
+          this.compra = response;
+        },
+        error => {
+          console.error('Error:', error);
+        }
+      );
+    } catch (error) {
+      console.log(error);
     }
-  }).then((response) => {
-    this.compra = response.data;
-  }).catch(function (error) {
-    console.log(error);
-  });
-  loading.dismiss();
-}
+    loading.dismiss();
+  }
+
+  goBack() {
+    this.location.back();
+  }
 
 }

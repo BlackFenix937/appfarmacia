@@ -7,20 +7,22 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor() { }
 
-  enlaces:any = [
+  enlaces: any = [
     { ruta: '/cliente', texto: 'Clientes' },
     { ruta: '/medicamento', texto: 'Medicamentos' },
     { ruta: '/entidad-comercial', texto: 'Entidad comercial' },
     { ruta: '/entidad-medicamento', texto: 'Entidad medicamento' },
     { ruta: '/ciudad', texto: 'Ciudad' },
+    { ruta: '/compra', texto: 'Compra' },
+    { ruta: '/compradetalle', texto: 'Compra Detalle' },
     { ruta: '/devolucion', texto: 'Devolucion' },
     { ruta: '/estado', texto: 'Estado' },
     { ruta: '/factura', texto: 'Factura' },
     { ruta: '/municipio', texto: 'Municipio' },
     { ruta: '/pago', texto: 'Pago' },
     { ruta: '/pais', texto: 'País' }
-];
+  ];
 
 }

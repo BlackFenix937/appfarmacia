@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { DevolucionPageRoutingModule } from './devolucion-routing.module';
 
 import { DevolucionPage } from './devolucion.page';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DevolucionPageRoutingModule
+    DevolucionPageRoutingModule,
+    PaginacionModule,
+    ToolbarModule
   ],
   declarations: [DevolucionPage]
 })

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CompradetallePageRoutingModule } from './compradetalle-routing.module';
 
 import { CompradetallePage } from './compradetalle.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CompradetallePageRoutingModule
+    CompradetallePageRoutingModule,
+    ToolbarModule
   ],
   declarations: [CompradetallePage]
 })

@@ -3,6 +3,7 @@ import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalCon
 import { MedicamentoCrearPage } from '../medicamento-crear/medicamento-crear.page';
 import { Router } from '@angular/router';
 import { Medicamento } from '../services/medicamento';
+import { CompraCrearPage } from '../compra-crear/compra-crear.page';
 
 @Component({
   selector: 'app-medicamento',
@@ -76,6 +77,17 @@ export class MedicamentoPage implements OnInit {
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
       this.cargarMedicamentos();
+    });
+  }
+
+    async buy() {
+    const paginaModal = await this.modalCtrl.create({
+      component: CompraCrearPage,
+      breakpoints: [0, 0.3, 0.5, 0.95],
+      initialBreakpoint: 0.95
+    });
+    await paginaModal.present();
+    paginaModal.onDidDismiss().then((data) => {
     });
   }
 

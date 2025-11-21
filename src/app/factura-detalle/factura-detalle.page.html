@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primario">
     <ion-title>Detalles de la factura</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,64 +7,80 @@
 <ion-content [fullscreen]="true">
 
   <ion-card *ngIf="factura as factura">
-  <div class="center">
-    <img src="assets/img/crush.png" alt="Foto">
-  </div>
-  <ion-card-header class="center">
-    <ion-card-title>
-      <h3> Factura {{factura.fac_id}}</h3>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>
-          <p>Detalles de la compra facturada</p>
-          <h2>{{factura.medicamentosFacturados}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Folio de la factura</p>
-          <h2>{{factura.fac_folio}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Estado de la factura</p>
-          <h2>{{factura.estadoFactura}}</h2>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <p>Fecha de la transaccion</p>
-          <h2>{{factura.fac_fecha_emision}}</h2>
-        </ion-label>
-      </ion-item>
-            <ion-item>
-        <ion-label>
-          <p>Subtotal</p>
-          <h2>${{factura.fac_subtotal}}</h2>
-        </ion-label>
+    <div class="center">
+      <img src="assets/img/crush.png" width="500px" alt="Foto">
+    </div>
+
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3>Factura {{ factura.fac_id }}</h3>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
 
         <ion-item>
-        <ion-label>
-          <p>Impuestos</p>
-          <h2>${{factura.fac_impuestos}}</h2>
-        </ion-label>
-
+          <ion-label>
+            <p>Detalles de la compra facturada</p>
+            <h2>{{ factura.medicamentosFacturados }}</h2>
+          </ion-label>
         </ion-item>
 
         <ion-item>
-        <ion-label>
-          <p>Total</p>
-          <h2>${{factura.fac_total}}</h2>
-        </ion-label>
-
-      </ion-item>
-
+          <ion-label>
+            <p>Folio de la factura</p>
+            <h2>{{ factura.fac_folio }}</h2>
+          </ion-label>
         </ion-item>
-    </ion-list>
-  </ion-card-content>
+
+        <ion-item>
+          <ion-label>
+            <p>Estado de la factura</p>
+            <h2>{{ factura.estadoFactura }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Fecha de la transacción</p>
+            <h2>{{ factura.fac_fecha_emision }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Subtotal</p>
+            <h2>${{ factura.fac_subtotal }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Impuestos</p>
+            <h2>${{ factura.fac_impuestos }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <p>Total</p>
+            <h2>${{ factura.fac_total }}</h2>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+
+      <!-- Botón Volver (igual que en el ejemplo) -->
+      <div class="back-button">
+        <ion-button (click)="goBack()" color="secundario">
+          <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+          Volver
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+
   </ion-card>
+
 </ion-content>

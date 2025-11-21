@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 export class Ciudad {
   
   url: string = `${environment.apiUrl}ciudads`;
-  headers: any = { 'Content-Type': 'application/json', 'Authorization':/* 'Bearer '+localStorage.getItem('token') || aún no se usa */ 'Bearer 100-token' };
+  headers: any = { 'Content-Type': 'application/json', 'Authorization':'Bearer '+localStorage.getItem('token')};
 
     //listado
   listado(extra: string = '', busqueda:string=''): Observable<any> {

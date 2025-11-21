@@ -1,27 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Compras</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Compras" color="primario"></app-toolbar>
 
-<ion-content [fullscreen]="true">
-  <ion-item button *ngFor="let compra of compras">
-    <ion-avatar slot="start">
-      <img src="assets/img/uwu.jpg" alt="Foto">
-    </ion-avatar>
+<ion-content>
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
 
-    <ion-label class="ion-text-wrap">
-      <h3>Compra de </h3>
+  <ion-list>
+    <ion-item button *ngFor="let compra of compras">
+      <ion-avatar slot="start">
+        <img src="assets/img/uwu.jpg" alt="Foto">
+      </ion-avatar>
 
-    </ion-label>
-    <ion-badge slot="end"></ion-badge>
-    <ion-button [routerLink]="['/compra-detalle', compra.comp_id]">
-      <ion-icon name="reader-sharp"></ion-icon>
-    </ion-button>
-  </ion-item>
+      <ion-label class="ion-text-wrap">
+        <h3>Compra de {{compra.medicamentoNombre}}</h3>
+
+      </ion-label>
+      <ion-badge slot="end"></ion-badge>
+      <ion-button [routerLink]="['/compra-detalle', compra.comp_id]">
+        <ion-icon name="cart-sharp"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="editar(compra.comp_id)" color="warning">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="alertEliminar(compra.comp_id, compra.medicamentoNombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+
+
+  </ion-list>
 </ion-content>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
   <ion-fab-button (click)="new()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>

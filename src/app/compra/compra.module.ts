@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { CompraPageRoutingModule } from './compra-routing.module';
 
 import { CompraPage } from './compra.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CompraPageRoutingModule
+    CompraPageRoutingModule,
+    ToolbarModule,
+    PaginacionModule
   ],
   declarations: [CompraPage]
 })

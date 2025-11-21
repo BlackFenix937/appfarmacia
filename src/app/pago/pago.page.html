@@ -1,22 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Pagos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Pagos" color="primario"></app-toolbar>
 
-<ion-content [fullscreen]="true">
-<ion-item button *ngFor="let pago of pagos">
-    <ion-avatar slot="start">
+<ion-content>
+
+  <ion-list>
+    <ion-item button *ngFor="let pago of pagos">
+
+      <ion-avatar slot="start">
         <img src="assets/img/leshu.jpg" alt="Foto">
-    </ion-avatar>
+      </ion-avatar>
 
-    <ion-label class="ion-text-wrap">
-        <h3>Pago {{pago.pag_id}}</h3>
-        
-    </ion-label>
-    <ion-badge slot="end"></ion-badge>
-<ion-button [routerLink]="['/pago-detalle', pago.pag_id]">
-  <ion-icon name="person-circle"></ion-icon>
-</ion-button>
+      <ion-label class="ion-text-wrap">
+        <p>Registro de pago</p>
+        <h3>Pago {{ pago.pag_id }}</h3>
+      </ion-label>
+
+      <ion-badge slot="end"></ion-badge>
+      <ion-button [routerLink]="['/pago-detalle', pago.pag_id]">
+        <ion-icon name="map-sharp"></ion-icon>
+      </ion-button>
+
     </ion-item>
+  </ion-list>
+
 </ion-content>
