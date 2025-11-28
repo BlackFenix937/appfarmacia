@@ -1,10 +1,10 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>Tipo Estados</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 <ion-list>
     <ion-item button *ngFor="let tipoestado of tipoEstados">
     <ion-avatar slot="start">
@@ -16,7 +16,7 @@
         
     </ion-label>
 
-    <ion-badge slot="end">Estado: {{tipoestado.test_nombre}}</ion-badge>
+    <ion-badge slot="end">Estado: {{tipoestado.test_nombre}}  {{tipoestado.test_id}}</ion-badge>
     </ion-item>
 </ion-list>
 </ion-content>

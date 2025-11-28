@@ -38,7 +38,7 @@ export class FacturaPage implements OnInit {
     });
     await loading.present();
     try {
-      await this.facturaService.listado('?page=' + this.page, this.busqueda).subscribe(
+      await this.facturaService.listado('?page=' + this.page+'&expand=medicamentosFacturados', this.busqueda).subscribe(
         response => {
           this.facturas = response;
           this.cargarTotal();
@@ -90,5 +90,75 @@ export class FacturaPage implements OnInit {
     this.cargarFacturas();
   }
 
+    async alertEliminar(fac_id: number, medicamentosFacturados: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Factura',
+      subHeader: 'Eliminar',
+      message: '¿Estás seguro de eliminar la factura de ' + medicamentosFacturados + '?',
+      cssClass: 'alert-center',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+            this.eliminar(fac_id, medicamentosFacturados);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async eliminar(fac_id: number, medicamentosFacturados: string) {
+    try {
+      await this.facturaService.eliminar(fac_id, medicamentosFacturados).subscribe(
+        response => {
+          this.alertEliminado(fac_id, 'La factura de ' + medicamentosFacturados + ' sido eliminada.');
+        },
+        error => {
+          console.error('Error:', error);
+          if (error.response?.status == 204) {
+            this.alertEliminado(fac_id, 'La factura ha sido eliminada');
+          }
+          if (error.response?.status == 500) {
+            this.alertEliminado(fac_id, 'No puedes eliminar porque tiene relaciones con otra tabla');
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async alertEliminado(fac_id: number, msg = "") {
+    const alert = await this.alertCtrl.create({
+      header: 'Factura',
+      subHeader: msg.includes('no se puede eliminar') ? 'Error al eliminar' : 'Eliminado',
+      message: msg,
+      cssClass: 'alert-center',
+      buttons: [
+
+        {
+          text: 'Salir',
+          role: 'confirm',
+          handler: () => {
+            this.regresar();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  private regresar() {
+    this.router.navigate(['/factura']).then(() => {
+      window.location.reload();
+    });
+  }
 
 }

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primario">
+    <ion-title>Nueva Categoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="categoriamedicamentos" (ngSubmit)="guardarDatos()">
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="secundario">Medicamentos</ion-label>
+            <ion-select formControlName="med_id" class="form-control">
+              <ion-select-option *ngFor="let medicamento of medicamentos" [value]="medicamento.med_id">
+                {{medicamento.med_nombre}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.med_id">
+            <ion-note color="danger" *ngIf="getError('med_id')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="secundario">Nombre de la categoria</ion-label>
+            <ion-input type="text" formControlName="catmed_nombre" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.catmed_nombre">
+            <ion-note color="danger" *ngIf="getError('catmed_nombre')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="secundario">Descripción de la categoria</ion-label>
+            <ion-input type="text" formControlName="catmed_descripcion" class="form-control"></ion-input>
+          </ion-item>
+          <div id="note" *ngFor="let validation of mensajes_validacion.catmed_descripcion">
+            <ion-note color="danger" *ngIf="getError('catmed_descripcion')[(validation.type)]">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+            </ion-note>
+          </div>
+        </ion-col>
+
+
+        <ion-col size="12">
+          <p class="ion-text-center">
+            <ion-button type="submit" color="secundario" [disabled]="!categoriamedicamentos.valid">
+              <ion-icon name="save-sharp" slot="start"></ion-icon>
+
+              Guardar</ion-button>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

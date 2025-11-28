@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primario">
+    <ion-title>Detalles de la categoria del medicamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="categoriamedicamento as catmed">
+    <div class="center">
+      <img src="assets/img/crush.png" alt="Foto">
+    </div>
+
+    <ion-card-header class="center">
+      <ion-card-title>
+        <h3>Categoria del {{catmed.medicamentoNombre}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Nombre de la categoria</p>
+            <h2>{{catmed.catmed_nombre}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Descripción de la categoria</p>
+            <h2>{{catmed.catmed_descripcion}}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+
+    <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </ion-card>
+</ion-content>

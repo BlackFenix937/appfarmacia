@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primario">
+    <ion-title>Detalles del componente medicamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="medicamentocomponente as medicamentocomponente">
+    <div class="center">
+      <img src="assets/img/mimido.jpg" width="500px" alt="Foto">
+    </div>
+    <ion-card-header class="center">
+      <ion-card-title>
+        <ion-label><p>Nombre del medicamento:</p></ion-label>
+        <h3>{{medicamentocomponente.medicamentoNombre}}</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <p>Nombre del componente (Principio activo)</p>
+            <h2> {{medicamentocomponente.componenteNombre}}</h2>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+
+    <div class="back-button">
+      <ion-button (click)="goBack()" color="secundario">
+        <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+        Volver
+      </ion-button>
+    </div>
+
+  </ion-card>
+</ion-content>

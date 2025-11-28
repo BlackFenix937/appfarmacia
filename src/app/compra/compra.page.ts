@@ -66,21 +66,6 @@ export class CompraPage implements OnInit {
     });
   }
 
-  async editar(comp_id: number) {
-    const paginaModal = await this.modalCtrl.create({
-      component: CompraCrearPage,
-      componentProps: {
-        'comp_id': comp_id
-      },
-      breakpoints: [0, 0.3, 0.5, 0.95],
-      initialBreakpoint: 0.95
-    });
-    await paginaModal.present();
-    paginaModal.onDidDismiss().then((data) => {
-      this.cargarCompra();
-    });
-  }
-
   async alertEliminar(comp_id: number, medicamentoNombre: string) {
     const alert = await this.alertCtrl.create({
       header: 'Compra',

@@ -1,10 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primario">
     <ion-title>Detalles del pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
 <ion-card *ngIf="pago as pago">
   <div class="center">
@@ -48,6 +48,14 @@
         </ion-label>
       </ion-item>
     </ion-list>
+
+          <div class="back-button">
+        <ion-button (click)="goBack()" color="secundario">
+          <ion-icon name="arrow-back-sharp" slot="start"></ion-icon>
+          Volver
+        </ion-button>
+      </div>
+
   </ion-card-content>
 </ion-card>
 

@@ -9,68 +9,95 @@
     <ion-grid>
       <ion-row>
 
-        <ion-item>
-          <ion-label position="floating" color="secundario">Cliente</ion-label>
-          <ion-select formControlName="cli_id" class="form-control">
-            <ion-select-option *ngFor="let cliente of cliente" [value]="cliente.cli_id">
-              {{cliente.cli_nombre}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div id="note" *ngFor="let validation of mensajes_validacion.cli_id">
-          <ion-note color="danger" *ngIf="getError('cli_id')[(validation.type)]">
-            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-          </ion-note>
-        </div>
-
-
+        <!-- Cliente -->
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Fecha de compra</ion-label>
-            <ion-datetime presentation="date" color="secundario" formControlName="comp_fecha"
-              class="form-control"></ion-datetime>
+            <ion-label position="floating" color="secundario">Cliente</ion-label>
+            <ion-select formControlName="cli_id" class="form-control">
+              <ion-select-option *ngFor="let cliente of cliente" [value]="cliente.cli_id">
+                {{ cliente.cli_nombre }}
+              </ion-select-option>
+            </ion-select>
           </ion-item>
-          <div id="note" *ngFor="let validation of mensajes_validacion.comp_fecha">
-            <ion-note color="danger" *ngIf="getError('comp_fecha')[validation.type]">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </ion-note>
-          </div>
         </ion-col>
 
+        <!-- Fecha de compra -->
+        <!--       <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" color="secundario">Fecha de compra</ion-label>
+            <ion-datetime presentation="date" color="secundario" formControlName="comp_fecha" class="form-control"></ion-datetime>
+          </ion-item>
+        </ion-col> -->
+
+        <!--         <ion-datetime presentation="date" color="secundario" formControlName="comp_fecha" class="form-control" [disabled]="false"></ion-datetime>
+ -->
+
+        <!-- Total de la compra -->
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating" color="secundario">Total de la compra</ion-label>
-            <ion-input type="number" step="0.01" formControlName="comp_total" class="form-control"></ion-input>
+            <ion-input type="number" formControlName="comp_total" class="form-control" [disabled]="true"></ion-input>
           </ion-item>
-          <div id="note" *ngFor="let validation of mensajes_validacion.comp_total">
-            <ion-note color="danger" *ngIf="getError('comp_total')[validation.type]">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </ion-note>
-          </div>
         </ion-col>
 
-                <ion-col size="12">
+        <!-- Estado de la compra -->
+        <!--         <ion-col size="12">
           <ion-item>
             <ion-label position="floating" color="secundario">Estado de la compra</ion-label>
             <ion-select formControlName="comp_fkestado_id" class="form-control">
               <ion-select-option *ngFor="let estado of estados" [value]="estado.comp_fkestado_id">
-                {{estado.compest}}
+                {{ estado.compest }}
               </ion-select-option>
             </ion-select>
           </ion-item>
-          <div id="note" *ngFor="let validation of mensajes_validacion.comp_fkestado_id">
-            <ion-note color="danger" *ngIf="getError('comp_fkestado_id')[validation.type]">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-            </ion-note>
+        </ion-col> -->
+
+        <!-- Medicamentos -->
+        <ion-col size="12">
+          <ion-item>
+            <ion-label color="secundario">Medicamentos</ion-label>
+            <ion-button size="small" color="secundario" (click)="agregarMedicamento()">Agregar Medicamento</ion-button>
+          </ion-item>
+
+          <div formArrayName="medicamentos">
+            <ion-item *ngFor="let medicamento of medicamentosFA.controls; let i = index" [formGroupName]="i">
+              <ion-label position="floating" color="secundario">Medicamento {{ i + 1 }}</ion-label>
+
+              <!-- Medicamento -->
+              <ion-select formControlName="med_id" class="form-control" (ionChange)="actualizarPrecioUnitario(i)">
+                <ion-select-option *ngFor="let medicamento of medicamentos" [value]="medicamento.med_id">
+                  {{ medicamento.med_nombre }}
+                </ion-select-option>
+              </ion-select>
+
+              <p>Cantidad</p>
+              <ion-input type="number" formControlName="det_cantidad" placeholder="Cantidad"
+                (ionChange)="calcularSubtotal(i)"></ion-input>
+              <p>Precio Unitario</p>
+              <ion-input type="number" formControlName="det_precio_unitario" placeholder="Precio Unitario" step="0.01"
+                [disabled]="true"></ion-input>
+              <p>Subtotal</p>
+              <ion-input type="number" formControlName="det_subtotal" placeholder="Subtotal"
+                [disabled]="true"></ion-input>
+
+              <!-- Eliminar Medicamento -->
+              <ion-button fill="clear" color="danger" (click)="eliminarMedicamento(i)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
           </div>
         </ion-col>
 
-
+        <!-- Botón de Guardar -->
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!compra.valid">Guardar</ion-button>
+            <ion-button type="submit" color="secundario" [disabled]="!compra.valid">
+              <ion-icon name="save-sharp" slot="start"></ion-icon>
+
+              Guardar</ion-button>
           </p>
         </ion-col>
+
       </ion-row>
     </ion-grid>
   </form>

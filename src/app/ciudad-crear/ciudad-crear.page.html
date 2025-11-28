@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar color="primario">
         <ion-title>Nueva Ciudad</ion-title>
     </ion-toolbar>
@@ -36,7 +36,9 @@
                 </ion-col>
                 <ion-col size="12">
                     <p class="ion-text-center">
-                        <ion-button type="submit" color="secundario" [disabled]="!ciudades.valid">Guardar</ion-button>
+                        <ion-button type="submit" color="secundario" [disabled]="!ciudades.valid">
+                            <ion-icon name="save-sharp" slot="start"></ion-icon>
+                            Guardar</ion-button>
                     </p>
                 </ion-col>
             </ion-row>

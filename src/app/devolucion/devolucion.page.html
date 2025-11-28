@@ -16,7 +16,11 @@
       <ion-badge slot="end"></ion-badge>
 
       <ion-button [routerLink]="['/devolucion-detalle', devolucion.dev_id]">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="newspaper-sharp"></ion-icon>
+      </ion-button>
+
+       <ion-button (click)="alertEliminar(devolucion.dev_id, devolucion.medicamentoNombre)" color="danger">
+        <ion-icon name="trash"></ion-icon>
       </ion-button>
 
     </ion-item>
@@ -24,3 +28,9 @@
 
   </ion-list>
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="new()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

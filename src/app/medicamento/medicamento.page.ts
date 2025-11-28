@@ -3,7 +3,6 @@ import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalCon
 import { MedicamentoCrearPage } from '../medicamento-crear/medicamento-crear.page';
 import { Router } from '@angular/router';
 import { Medicamento } from '../services/medicamento';
-import { CompraCrearPage } from '../compra-crear/compra-crear.page';
 
 @Component({
   selector: 'app-medicamento',
@@ -19,7 +18,6 @@ export class MedicamentoPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router,
     private medicamentosService: Medicamento,
-
   ) { }
   medicamentos: any = [];
   total: number = 0;
@@ -80,7 +78,8 @@ export class MedicamentoPage implements OnInit {
     });
   }
 
-    async buy() {
+
+/*     async buy() {
     const paginaModal = await this.modalCtrl.create({
       component: CompraCrearPage,
       breakpoints: [0, 0.3, 0.5, 0.95],
@@ -89,7 +88,7 @@ export class MedicamentoPage implements OnInit {
     await paginaModal.present();
     paginaModal.onDidDismiss().then((data) => {
     });
-  }
+  } */
 
   async alertEliminar(med_id: number, med_nombre: string) {
     const alert = await this.alertCtrl.create({
@@ -187,6 +186,5 @@ export class MedicamentoPage implements OnInit {
     this.busqueda = event.target.value.toLowerCase();
     this.cargarMedicamentos();
   }
-
 
 }

@@ -74,7 +74,6 @@ export class CiudadCrearPage implements OnInit {
         loading.dismiss();
     }
 
-
     async guardarDatos() {
         try {
             const ciudad = this.ciudades?.value;
@@ -178,5 +177,4 @@ export class CiudadCrearPage implements OnInit {
             }
         });
     }
-
 }

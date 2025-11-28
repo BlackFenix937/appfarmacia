@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { ComponentePageRoutingModule } from './componente-routing.module';
 
 import { ComponentePage } from './componente.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
+import { PaginacionModule } from '../components/paginacion/paginacion.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentePageRoutingModule
+    ComponentePageRoutingModule,
+    ToolbarModule,
+    PaginacionModule
   ],
   declarations: [ComponentePage]
 })

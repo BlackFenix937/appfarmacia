@@ -10,13 +10,18 @@
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
-        <h3>Factura {{factura.fac_id}}</h3>
+        <h3>Factura de {{factura.medicamentosFacturados}}</h3>
 
       </ion-label>
       <ion-badge slot="end"></ion-badge>
       <ion-button [routerLink]="['/factura-detalle', factura.fac_id]">
-        <ion-icon name="person-circle"></ion-icon>
+        <ion-icon name="document-text-sharp"></ion-icon>
       </ion-button>
+
+      <ion-button (click)="alertEliminar(factura.fac_id, factura.medicamentosFacturados)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
     </ion-item>
     <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
 

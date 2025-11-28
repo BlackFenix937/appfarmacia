@@ -2,6 +2,8 @@
 
 <ion-content>
 
+  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+
   <ion-list>
     <ion-item button *ngFor="let pago of pagos">
 
@@ -11,7 +13,7 @@
 
       <ion-label class="ion-text-wrap">
         <p>Registro de pago</p>
-        <h3>Pago {{ pago.pag_id }}</h3>
+        <h3>Pago de {{pago.medicamentosComprados}}</h3>
       </ion-label>
 
       <ion-badge slot="end"></ion-badge>
@@ -19,7 +21,20 @@
         <ion-icon name="map-sharp"></ion-icon>
       </ion-button>
 
+      <ion-button (click)="alertEliminar(pago.pag_id, pago.medicamentosComprados)" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
     </ion-item>
+
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+
   </ion-list>
 
 </ion-content>
+
+<ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="new()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

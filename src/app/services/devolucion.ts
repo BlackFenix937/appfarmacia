@@ -89,7 +89,7 @@ export class Devolucion {
     });
   }
 
-  eliminar(dev_id: number, dev_motivo: string): Observable<any> {
+  eliminar(dev_id: number, medicamentoNombre: string): Observable<any> {
     const url = `${this.url}/${dev_id}`;
     return new Observable(observer => {
       axios.delete(url, {

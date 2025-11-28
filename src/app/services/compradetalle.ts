@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class Compradetalle {
   url: string = `${environment.apiUrl}compradetalles`;
-  headers: any = { 'Content-Type': 'application/json', 'Authorization': /*'Bearer ' + localStorage.getItem('token') || */ 'Bearer 100-token'  };
+  headers: any = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')/* ||  'Bearer 100-token'  */};
 
   listado(extra: string = '', busqueda: string = ''): Observable<any> {
     let url: string = '';

@@ -22,7 +22,7 @@ export class CiudadPage implements OnInit {
     private CiudadService: Ciudad,
   ) { }
 
-  ciudades: any = []
+  ciudades: any = [];
   total: number = 0;
   page: string = "1";
   busqueda: string = '';
@@ -66,7 +66,6 @@ export class CiudadPage implements OnInit {
       this.cargarCiudades();
 
     });
-    canActivate: [permisoGuard]
   }
 
   async editar(ciu_id: number) {
