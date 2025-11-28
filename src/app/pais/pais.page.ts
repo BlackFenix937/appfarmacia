@@ -19,7 +19,6 @@ export class PaisPage implements OnInit {
         private alertCtrl: AlertController,
         private router: Router,
         private PaisService: Pais
-
     ) { }
 
     paises: any = [];

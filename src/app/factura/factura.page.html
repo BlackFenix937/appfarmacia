@@ -6,7 +6,7 @@
   <ion-list>
     <ion-item button *ngFor="let factura of facturas">
       <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
+        <img src="assets/img/factura.png" alt="Foto">
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
@@ -27,8 +27,3 @@
 
   </ion-list>
 </ion-content>
-
-<ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="new()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>

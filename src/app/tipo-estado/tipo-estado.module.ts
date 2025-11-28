@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TipoEstadoPageRoutingModule } from './tipo-estado-routing.module';
 
 import { TipoEstadoPage } from './tipo-estado.page';
+import { ToolbarModule } from '../components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TipoEstadoPageRoutingModule
+    TipoEstadoPageRoutingModule,
+    ToolbarModule
   ],
   declarations: [TipoEstadoPage]
 })

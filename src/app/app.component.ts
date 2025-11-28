@@ -10,18 +10,23 @@ export class AppComponent {
   constructor() { }
 
   enlaces: any = [
+    { ruta: '/categoriamedicamento', texto: 'Categoria de los medicamentos' },
+    { ruta: '/ciudad', texto: 'Ciudad' },
     { ruta: '/cliente', texto: 'Clientes' },
-    { ruta: '/medicamento', texto: 'Medicamentos' },
+    { ruta: '/componente', texto: 'Componentes' },
+    { ruta: '/compra', texto: 'Compra' },
+    { ruta: '/compradetalle', texto: 'Compra Detalle (Vista)' },
+    { ruta: '/devolucion', texto: 'Devolucion' },
     { ruta: '/entidad-comercial', texto: 'Entidad comercial' },
     { ruta: '/entidad-medicamento', texto: 'Entidad medicamento' },
-    { ruta: '/ciudad', texto: 'Ciudad' },
-    { ruta: '/compra', texto: 'Compra' },
-    { ruta: '/devolucion', texto: 'Devolucion' },
     { ruta: '/estado', texto: 'Estado' },
     { ruta: '/factura', texto: 'Factura' },
+    { ruta: '/medicamento', texto: 'Medicamentos' },
+    { ruta: '/medicamentocomponente', texto: 'Medicamento Componente' },
     { ruta: '/municipio', texto: 'Municipio' },
     { ruta: '/pago', texto: 'Pago' },
-    { ruta: '/pais', texto: 'País' }
+    { ruta: '/pais', texto: 'País' },
+    { ruta: '/tipo-estado', texto: 'Tipos de estados' },
   ];
 
 }

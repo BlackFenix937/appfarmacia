@@ -5,7 +5,7 @@
   <ion-list>
     <ion-item button *ngFor="let medicamento of medicamentos">
       <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
+        <img src="assets/img/medicamento.png" alt="Foto">
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
@@ -13,11 +13,7 @@
 
       </ion-label>
 
-      <!--       <ion-badge slot="end"></ion-badge>
-      <ion-button (click)="buy()" color="secundario">
-        <ion-icon name="cart-sharp"></ion-icon>
-      </ion-button>
- -->
+      <ion-badge slot="end"></ion-badge>
       <ion-button [routerLink]="['/medicamento-detalle', medicamento.med_id]">
         <ion-icon name="information-circle-sharp"></ion-icon>
       </ion-button>

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
 import axios from 'axios';
 import { Factura } from '../services/factura';
-import { FacturaCrearPage } from '../factura-crear/factura-crear.page';
 
 @Component({
   selector: 'app-factura',
@@ -51,18 +50,6 @@ export class FacturaPage implements OnInit {
       console.log(error);
     }
     loading.dismiss();
-  }
-
-  async new() {
-    const paginaModal = await this.modalCtrl.create({
-      component: FacturaCrearPage,
-      breakpoints: [0, 0.3, 0.5, 0.95],
-      initialBreakpoint: 0.95
-    });
-    await paginaModal.present();
-    paginaModal.onDidDismiss().then((data) => {
-      this.cargarFacturas();
-    });
   }
 
   async cargarTotal() {

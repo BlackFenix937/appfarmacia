@@ -9,7 +9,6 @@
     <ion-grid>
       <ion-row>
 
-        <!-- Cliente -->
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating" color="secundario">Cliente</ion-label>
@@ -21,18 +20,6 @@
           </ion-item>
         </ion-col>
 
-        <!-- Fecha de compra -->
-        <!--       <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="secundario">Fecha de compra</ion-label>
-            <ion-datetime presentation="date" color="secundario" formControlName="comp_fecha" class="form-control"></ion-datetime>
-          </ion-item>
-        </ion-col> -->
-
-        <!--         <ion-datetime presentation="date" color="secundario" formControlName="comp_fecha" class="form-control" [disabled]="false"></ion-datetime>
- -->
-
-        <!-- Total de la compra -->
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating" color="secundario">Total de la compra</ion-label>
@@ -40,19 +27,6 @@
           </ion-item>
         </ion-col>
 
-        <!-- Estado de la compra -->
-        <!--         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="secundario">Estado de la compra</ion-label>
-            <ion-select formControlName="comp_fkestado_id" class="form-control">
-              <ion-select-option *ngFor="let estado of estados" [value]="estado.comp_fkestado_id">
-                {{ estado.compest }}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col> -->
-
-        <!-- Medicamentos -->
         <ion-col size="12">
           <ion-item>
             <ion-label color="secundario">Medicamentos</ion-label>
@@ -63,7 +37,6 @@
             <ion-item *ngFor="let medicamento of medicamentosFA.controls; let i = index" [formGroupName]="i">
               <ion-label position="floating" color="secundario">Medicamento {{ i + 1 }}</ion-label>
 
-              <!-- Medicamento -->
               <ion-select formControlName="med_id" class="form-control" (ionChange)="actualizarPrecioUnitario(i)">
                 <ion-select-option *ngFor="let medicamento of medicamentos" [value]="medicamento.med_id">
                   {{ medicamento.med_nombre }}
@@ -80,7 +53,6 @@
               <ion-input type="number" formControlName="det_subtotal" placeholder="Subtotal"
                 [disabled]="true"></ion-input>
 
-              <!-- Eliminar Medicamento -->
               <ion-button fill="clear" color="danger" (click)="eliminarMedicamento(i)">
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
@@ -88,12 +60,10 @@
           </div>
         </ion-col>
 
-        <!-- Botón de Guardar -->
         <ion-col size="12">
           <p class="ion-text-center">
             <ion-button type="submit" color="secundario" [disabled]="!compra.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
-
               Guardar</ion-button>
           </p>
         </ion-col>

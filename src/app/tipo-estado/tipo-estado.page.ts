@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
-import axios from 'axios';
+import {LoadingController } from '@ionic/angular';
+import { Tipoestado } from '../services/tipoestado';
 
 @Component({
   selector: 'app-tipo-estado',
@@ -12,34 +12,34 @@ export class TipoEstadoPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
-) { }
+    private tipoestadoService: Tipoestado,
+  ) { }
 
-tipoEstados:any=[];
+  tipoEstados: any = [];
 
   ngOnInit() {
     this.cargarTipoestados();
   }
 
-  async cargarTipoestados (event?: InfiniteScrollCustomEvent) {
+  async cargarTipoestados() {
     const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
+      message: 'Cargando',
+      spinner: 'bubbles',
     });
     await loading.present();
-    const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/tipoestados",
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
+    try {
+      await this.tipoestadoService.listado().subscribe(
+        response => {
+          this.tipoEstados = response;
+        },
+        error => {
+          console.error('Error:', error);
         }
-    }).then((response) => {
-        this.tipoEstados = response.data;
-        event?.target.complete();
-    }).catch(function (error) {
-        console.log(error);     
-    });
+      );
+    } catch (error) {
+      console.log(error);
+    }
     loading.dismiss();
-}
+  }
 
 }

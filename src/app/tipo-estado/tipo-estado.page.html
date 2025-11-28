@@ -1,22 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Tipo Estados</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar nombre="Tipo Estado" color="primario"></app-toolbar>
 
 <ion-content>
-<ion-list>
+  <ion-list>
     <ion-item button *ngFor="let tipoestado of tipoEstados">
-    <ion-avatar slot="start">
-        <img src="assets/img/crush.png" alt="Foto">
-    </ion-avatar>
+      <ion-avatar slot="start">
+        <img src="assets/img/checkbox.png" alt="Foto">
+      </ion-avatar>
 
-    <ion-label class="ion-text-wrap">
-        <h3></h3>
-        
-    </ion-label>
+      <ion-label class="ion-text-wrap">
+        <p>Id: {{tipoestado.test_id}}</p>
+        <h3>Estado: {{tipoestado.test_nombre}}</h3>
 
-    <ion-badge slot="end">Estado: {{tipoestado.test_nombre}}  {{tipoestado.test_id}}</ion-badge>
+      </ion-label>
+
+      <ion-badge slot="end"></ion-badge>
     </ion-item>
-</ion-list>
+  </ion-list>
 </ion-content>

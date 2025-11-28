@@ -6,7 +6,7 @@
   <ion-list>
     <ion-item button *ngFor="let compra of compras">
       <ion-avatar slot="start">
-        <img src="assets/img/uwu.jpg" alt="Foto">
+        <img src="assets/img/compra.png" alt="Foto">
       </ion-avatar>
 
       <ion-label class="ion-text-wrap">
@@ -25,7 +25,6 @@
     </ion-item>
 
     <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
-
 
   </ion-list>
 </ion-content>

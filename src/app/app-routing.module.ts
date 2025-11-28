@@ -8,8 +8,16 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'pais',
-    loadChildren: () => import('./pais/pais.module').then(m => m.PaisPageModule),
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule)
+  },
+  {
+    path: 'categoriamedicamento',
+    loadChildren: () => import('./categoriamedicamento/categoriamedicamento.module').then(m => m.CategoriamedicamentoPageModule),
     canActivate: [permisoGuard]
   },
   {
@@ -18,53 +26,8 @@ const routes: Routes = [
     canActivate: [permisoGuard]
   },
   {
-    path: 'municipio',
-    loadChildren: () => import('./municipio/municipio.module').then(m => m.MunicipioPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'estado',
-    loadChildren: () => import('./estado/estado.module').then(m => m.EstadoPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'tipo-estado',
-    loadChildren: () => import('./tipo-estado/tipo-estado.module').then(m => m.TipoEstadoPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'pago',
-    loadChildren: () => import('./pago/pago.module').then(m => m.PagoPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'medicamento',
-    loadChildren: () => import('./medicamento/medicamento.module').then(m => m.MedicamentoPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'factura',
-    loadChildren: () => import('./factura/factura.module').then(m => m.FacturaPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'entidad-medicamento',
-    loadChildren: () => import('./entidad-medicamento/entidad-medicamento.module').then(m => m.EntidadMedicamentoPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'entidad-comercial',
-    loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then(m => m.EntidadComercialPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'devolucion',
-    loadChildren: () => import('./devolucion/devolucion.module').then(m => m.DevolucionPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
-    path: 'compra',
-    loadChildren: () => import('./compra/compra.module').then(m => m.CompraPageModule),
+    path: 'cliente',
+    loadChildren: () => import('./cliente/cliente.module').then(m => m.ClientePageModule),
     canActivate: [permisoGuard]
   },
   {
@@ -73,13 +36,68 @@ const routes: Routes = [
     canActivate: [permisoGuard]
   },
   {
-    path: 'cliente',
-    loadChildren: () => import('./cliente/cliente.module').then(m => m.ClientePageModule),
+    path: 'compra',
+    loadChildren: () => import('./compra/compra.module').then(m => m.CompraPageModule),
     canActivate: [permisoGuard]
   },
   {
-    path: 'entidad-comercial-detalle/:ent_id',
-    loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then(m => m.EntidadComercialDetallePageModule),
+    path: 'devolucion',
+    loadChildren: () => import('./devolucion/devolucion.module').then(m => m.DevolucionPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'entidad-comercial',
+    loadChildren: () => import('./entidad-comercial/entidad-comercial.module').then(m => m.EntidadComercialPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'entidad-medicamento',
+    loadChildren: () => import('./entidad-medicamento/entidad-medicamento.module').then(m => m.EntidadMedicamentoPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'estado',
+    loadChildren: () => import('./estado/estado.module').then(m => m.EstadoPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'factura',
+    loadChildren: () => import('./factura/factura.module').then(m => m.FacturaPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'medicamento',
+    loadChildren: () => import('./medicamento/medicamento.module').then(m => m.MedicamentoPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'medicamentocomponente',
+    loadChildren: () => import('./medicamentocomponente/medicamentocomponente.module').then(m => m.MedicamentocomponentePageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'municipio',
+    loadChildren: () => import('./municipio/municipio.module').then(m => m.MunicipioPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'pago',
+    loadChildren: () => import('./pago/pago.module').then(m => m.PagoPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'pais',
+    loadChildren: () => import('./pais/pais.module').then(m => m.PaisPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'tipo-estado',
+    loadChildren: () => import('./tipo-estado/tipo-estado.module').then(m => m.TipoEstadoPageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'categoriamedicamento-detalle/:catmed_id',
+    loadChildren: () => import('./categoriamedicamento-detalle/categoriamedicamento-detalle.module').then(m => m.CategoriamedicamentoDetallePageModule),
     canActivate: [permisoGuard]
   },
   {
@@ -108,11 +126,6 @@ const routes: Routes = [
     canActivate: [permisoGuard]
   },
   {
-    path: 'compradetalle',
-    loadChildren: () => import('./compradetalle/compradetalle.module').then(m => m.CompradetallePageModule),
-    canActivate: [permisoGuard]
-  },
-  {
     path: 'cliente-detalle/:cli_id',
     loadChildren: () => import('./cliente-detalle/cliente-detalle.module').then(m => m.ClienteDetallePageModule),
     canActivate: [permisoGuard]
@@ -125,6 +138,11 @@ const routes: Routes = [
   {
     path: 'compra-detalle/:comp_id',
     loadChildren: () => import('./compra-detalle/compra-detalle.module').then(m => m.CompraDetallePageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'compradetalle',
+    loadChildren: () => import('./compradetalle/compradetalle.module').then(m => m.CompradetallePageModule),
     canActivate: [permisoGuard]
   },
   {
@@ -188,52 +206,32 @@ const routes: Routes = [
     canActivate: [permisoGuard]
   },
   {
-    path: 'factura-crear',
-    loadChildren: () => import('./factura-crear/factura-crear.module').then(m => m.FacturaCrearPageModule),
-    canActivate: [permisoGuard]
-  },
-  {
     path: 'pago-crear',
     loadChildren: () => import('./pago-crear/pago-crear.module').then(m => m.PagoCrearPageModule),
     canActivate: [permisoGuard]
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
-  {
-    path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule)
-  },
-  {
-    path: 'categoriamedicamento',
-    loadChildren: () => import('./categoriamedicamento/categoriamedicamento.module').then( m => m.CategoriamedicamentoPageModule)
-  },
-  {
-    path: 'categoriamedicamento-detalle/:catmed_id',
-    loadChildren: () => import('./categoriamedicamento-detalle/categoriamedicamento-detalle.module').then( m => m.CategoriamedicamentoDetallePageModule)
-  },
-  {
     path: 'categoriamedicamento-crear',
-    loadChildren: () => import('./categoriamedicamento-crear/categoriamedicamento-crear.module').then( m => m.CategoriamedicamentoCrearPageModule)
+    loadChildren: () => import('./categoriamedicamento-crear/categoriamedicamento-crear.module').then(m => m.CategoriamedicamentoCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'componente-crear',
-    loadChildren: () => import('./componente-crear/componente-crear.module').then( m => m.ComponenteCrearPageModule)
-  },
-  {
-    path: 'medicamentocomponente',
-    loadChildren: () => import('./medicamentocomponente/medicamentocomponente.module').then( m => m.MedicamentocomponentePageModule)
+    loadChildren: () => import('./componente-crear/componente-crear.module').then(m => m.ComponenteCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'medicamentocomponente-crear',
-    loadChildren: () => import('./medicamentocomponente-crear/medicamentocomponente-crear.module').then( m => m.MedicamentocomponenteCrearPageModule)
+    loadChildren: () => import('./medicamentocomponente-crear/medicamentocomponente-crear.module').then(m => m.MedicamentocomponenteCrearPageModule),
+    canActivate: [permisoGuard]
   },
   {
     path: 'medicamentocomponente-detalle/:medcomp_id',
-    loadChildren: () => import('./medicamentocomponente-detalle/medicamentocomponente-detalle.module').then( m => m.MedicamentocomponenteDetallePageModule)
+    loadChildren: () => import('./medicamentocomponente-detalle/medicamentocomponente-detalle.module').then(m => m.MedicamentocomponenteDetallePageModule),
+    canActivate: [permisoGuard]
   }
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
