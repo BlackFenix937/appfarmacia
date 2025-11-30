@@ -81,7 +81,7 @@ export class EntidadMedicamentoPage implements OnInit {
 
   async alertEliminar(entmed_id: number, medicamentoNombre: string) {
     const alert = await this.alertCtrl.create({
-      header: 'EntidadMedicamento',
+      header: 'Entidad Medicamento',
       subHeader: 'Eliminar',
       message: '¿Estás seguro de eliminar el registro ' + entmed_id + '?',
       cssClass: 'alert-center',
@@ -125,7 +125,7 @@ export class EntidadMedicamentoPage implements OnInit {
 
   async alertEliminado(med_id: number, msg = "") {
     const alert = await this.alertCtrl.create({
-      header: 'EntidadMedicamento',
+      header: 'Entidad Medicamento',
       subHeader: msg.includes('no se puede eliminar') ? 'Error al eliminar' : 'Eliminado',
       message: msg,
       cssClass: 'alert-center',
@@ -145,7 +145,7 @@ export class EntidadMedicamentoPage implements OnInit {
   }
 
   private regresar() {
-    this.router.navigate(['/medicamento']).then(() => {
+    this.router.navigate(['/entidad-medicamento']).then(() => {
       window.location.reload();
     });
   }

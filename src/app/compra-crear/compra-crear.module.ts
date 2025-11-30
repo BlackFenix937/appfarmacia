@@ -18,4 +18,4 @@ import { CompraCrearPage } from './compra-crear.page';
   ],
   declarations: [CompraCrearPage]
 })
-export class CompraCrearPageModule {}
+export class CompraCrearPageModule { }

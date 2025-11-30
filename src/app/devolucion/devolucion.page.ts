@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Devolucion } from '../services/devolucion';
 import { DevolucionCrearPage } from '../devolucion-crear/devolucion-crear.page';
 
@@ -31,29 +30,6 @@ export class DevolucionPage implements OnInit {
     this.cargarTotal();
 
   }
-
-  /*  async cargarDevoluciones(event?: InfiniteScrollCustomEvent) {
-      const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
-      });
-      await loading.present();
-      const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/devolucions?expand=medicamentoNombre,estadoDevolucion",
-        withCredentials: true,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then((response) => {
-        this.devoluciones = response.data;
-        event?.target.complete();
-      }).catch(function (error) {
-        console.log(error);
-      });
-      loading.dismiss();
-    }*/
-
 
   async cargarDevoluciones() {
     const loading = await this.loadingCtrl.create({
@@ -114,7 +90,7 @@ export class DevolucionPage implements OnInit {
     });
   }
 
-    async alertEliminar(dev_id: number, medicamentoNombre: string) {
+  async alertEliminar(dev_id: number, medicamentoNombre: string) {
     const alert = await this.alertCtrl.create({
       header: 'Devolución',
       subHeader: 'Eliminar',

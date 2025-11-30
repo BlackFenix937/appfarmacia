@@ -149,7 +149,7 @@ export class EntidadMedicamentoCrearPage implements OnInit {
                         response => {
                             console.log(response)
                             if (response?.status == 200) {
-                                this.alertGuardado(response.data.entmed_id, 'El registro ' + this.entmed_id + ' ha sido actualizado.');
+                                this.alertGuardado(response.data.entmed_id, 'El pedido ' + this.entmed_id + ' ha sido actualizado.');
                             }
                         },
                         error => {

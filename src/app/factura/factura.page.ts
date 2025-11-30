@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Factura } from '../services/factura';
 
 @Component({
@@ -14,7 +13,6 @@ export class FacturaPage implements OnInit {
 
   constructor(
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     private router: Router,
     private facturaService: Factura
@@ -37,7 +35,7 @@ export class FacturaPage implements OnInit {
     });
     await loading.present();
     try {
-      await this.facturaService.listado('?page=' + this.page+'&expand=medicamentosFacturados', this.busqueda).subscribe(
+      await this.facturaService.listado('?page=' + this.page + '&expand=medicamentosFacturados', this.busqueda).subscribe(
         response => {
           this.facturas = response;
           this.cargarTotal();
@@ -77,7 +75,7 @@ export class FacturaPage implements OnInit {
     this.cargarFacturas();
   }
 
-    async alertEliminar(fac_id: number, medicamentosFacturados: string) {
+  async alertEliminar(fac_id: number, medicamentosFacturados: string) {
     const alert = await this.alertCtrl.create({
       header: 'Factura',
       subHeader: 'Eliminar',

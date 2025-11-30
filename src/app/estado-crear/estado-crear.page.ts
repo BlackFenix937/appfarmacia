@@ -37,7 +37,7 @@ export class EstadoCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'estd_nombre': [
-            { type: 'required', message: 'El nombre del estado es obligatorio' },
+            { type: 'required', message: 'El nombre del estado es obligatorio.' },
 
         ],
         'estd_fkpai_id': [

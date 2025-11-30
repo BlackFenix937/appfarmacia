@@ -1,18 +1,19 @@
 <app-toolbar nombre="Compra detalle" color="primario"></app-toolbar>
 
 <ion-content>
-<ion-item button *ngFor="let compradetalle of compradetalles">
-    <ion-avatar slot="start">
-        <img src="assets/img/compra.png" alt="Foto">
-    </ion-avatar>
+    <ion-item button *ngFor="let compradetalle of compradetalles">
+        <ion-avatar slot="start">
+            <img src="assets/img/compra.png" alt="Foto">
+        </ion-avatar>
 
-    <ion-label class="ion-text-wrap">
-        <h3>Medicamento comprado: {{compradetalle.medicamentoNombre}} 
-            <br> Cantidad comprada: {{compradetalle.det_cantidad}} 
-            <br> Precio de la compra: {{compradetalle.det_precio_unitario}}
-            <br> Subtotal de la compra: {{compradetalle.det_subtotal}}</h3>
-        
-    </ion-label>
-    <ion-badge slot="end"></ion-badge>
-</ion-item>
+        <ion-label class="ion-text-wrap">
+            <h3>Medicamento comprado: {{compradetalle.medicamentoNombre}}
+                <br> Cantidad comprada: {{compradetalle.det_cantidad}}
+                <br> Precio de la compra: {{compradetalle.det_precio_unitario}}
+                <br> Subtotal de la compra: {{compradetalle.det_subtotal}}
+            </h3>
+
+        </ion-label>
+        <ion-badge slot="end"></ion-badge>
+    </ion-item>
 </ion-content>

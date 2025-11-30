@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { MedicamentoCrearPage } from '../medicamento-crear/medicamento-crear.page';
 import { Router } from '@angular/router';
 import { Medicamento } from '../services/medicamento';
@@ -78,18 +78,6 @@ export class MedicamentoPage implements OnInit {
     });
   }
 
-
-/*     async buy() {
-    const paginaModal = await this.modalCtrl.create({
-      component: CompraCrearPage,
-      breakpoints: [0, 0.3, 0.5, 0.95],
-      initialBreakpoint: 0.95
-    });
-    await paginaModal.present();
-    paginaModal.onDidDismiss().then((data) => {
-    });
-  } */
-
   async alertEliminar(med_id: number, med_nombre: string) {
     const alert = await this.alertCtrl.create({
       header: 'Medicamento',
@@ -118,7 +106,7 @@ export class MedicamentoPage implements OnInit {
     try {
       await this.medicamentosService.eliminar(med_id, med_nombre).subscribe(
         response => {
-          this.alertEliminado(med_id, 'El medicamento ' + med_nombre + ' sido eliminado');
+          this.alertEliminado(med_id, 'El medicamento ' + med_nombre + ' ha sido eliminado');
         },
         error => {
           console.error('Error:', error);

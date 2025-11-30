@@ -40,16 +40,16 @@ export class EntidadComercialCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'ent_nombre': [
-            { type: 'required', message: 'El nombre es obligatorio' },
+            { type: 'required', message: 'El nombre de la entidad es obligatorio.' },
         ],
         'ent_tipo': [
-            { type: 'required', message: 'Es obligatorio definir que tipo de entidad es.' },
+            { type: 'required', message: 'Es obligatorio definir el tipo de entidad.' },
         ],
         'ent_telefono': [
             { type: 'required', message: 'El numero telefonico es obligatorio.' },
         ],
         'ent_correo': [
-            { type: 'required', message: 'El correo electronico es obligatoria.' },
+            { type: 'required', message: 'El correo electronico es obligatorio.' },
         ],
         'ent_direccion': [
             { type: 'required', message: 'La direccion es obligatoria.' },

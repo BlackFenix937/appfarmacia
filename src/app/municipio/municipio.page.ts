@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { MunicipioCrearPage } from '../municipio-crear/municipio-crear.page';
 import { Router } from '@angular/router';
 import { Municipio } from '../services/municipio';
@@ -106,7 +106,7 @@ export class MunicipioPage implements OnInit {
         try {
             await this.MunicipioService.eliminar(mun_id, mun_nombre).subscribe(
                 response => {
-                    this.alertEliminado(mun_id, 'El municipio ' + mun_nombre + ' sido eliminado');
+                    this.alertEliminado(mun_id, 'El municipio ' + mun_nombre + ' ha sido eliminado');
                 },
                 error => {
                     console.error('Error:', error);

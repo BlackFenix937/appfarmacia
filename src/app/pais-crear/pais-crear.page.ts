@@ -31,7 +31,7 @@ export class PaisCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'pai_nombre': [
-            { type: 'required', message: 'El nombre del pais es obligatorio' },
+            { type: 'required', message: 'El nombre del pais es obligatorio.' },
 
         ]
     }

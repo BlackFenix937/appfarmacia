@@ -15,8 +15,8 @@ export class CompradetallePage implements OnInit {
     private compradetService: Compradetalle
   ) { }
 
-  compradetalles:any=[];
-    total: number = 0;
+  compradetalles: any = [];
+  total: number = 0;
   page: string = "1";
   busqueda: string = '';
 
@@ -24,14 +24,14 @@ export class CompradetallePage implements OnInit {
     this.cargarCompraDetalle();
   }
 
-    async cargarCompraDetalle() {
+  async cargarCompraDetalle() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando',
       spinner: 'bubbles',
     });
     await loading.present();
     try {
-      await this.compradetService.listado('?page=' + this.page+"&expand=medicamentoNombre", this.busqueda).subscribe(
+      await this.compradetService.listado('?page=' + this.page + "&expand=medicamentoNombre", this.busqueda).subscribe(
         response => {
           this.compradetalles = response;
           this.cargarTotal();
@@ -46,29 +46,7 @@ export class CompradetallePage implements OnInit {
     loading.dismiss();
   }
 
-/*  async cargarCompraDetalle (event?: InfiniteScrollCustomEvent) {
-    const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        spinner: 'bubbles',
-    });
-    await loading.present();
-    const response = await axios({
-        method: 'get',
-        url: "http://localhost:8080/compradetalles?expand=medicamentoNombre",
-        withCredentials: true,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then((response) => {
-        this.compradetalles = response.data;
-        event?.target.complete();
-    }).catch(function (error) {
-        console.log(error);     
-    });
-    loading.dismiss();
-}*/
-
- async cargarTotal() {
+  async cargarTotal() {
     try {
       await this.compradetService.total(this.busqueda).subscribe(
         response => {
@@ -92,7 +70,5 @@ export class CompradetallePage implements OnInit {
     this.busqueda = event.target.value.toLowerCase();
     this.cargarCompraDetalle();
   }
-
-
 
 }

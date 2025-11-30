@@ -36,7 +36,7 @@ export class ClienteCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'cli_nombre': [
-            { type: 'required', message: 'El nombre es obligatorio' },
+            { type: 'required', message: 'El nombre del cliente es obligatorio.' },
 
         ],
 

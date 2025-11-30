@@ -36,32 +36,32 @@ export class DevolucionCrearPage implements OnInit {
 
   mensajes_validacion: any = {
     'det_id': [
-      { type: 'required', message: 'Cargar la compra es obligatorio' },
+      { type: 'required', message: 'Es obligatorio cargar la compra para la devolución.' },
     ],
     'dev_cantidad': [
-      { type: 'required', message: 'La cantidad a devolver es obligatoria' },
+      { type: 'required', message: 'La cantidad a devolver es obligatoria.' },
     ],
     'dev_motivo': [
-      { type: 'required', message: 'El motivo de la devolución es obligatorio' },
+      { type: 'required', message: 'El motivo de la devolución es obligatorio.' },
     ],
     'dev_fecha': [
-      { type: 'required', message: 'La fecha de la devolución es obligatoria' },
+      { type: 'required', message: 'La fecha de la devolución es obligatoria.' },
     ],
   }
 
   private formulario() {
-        const fechaActual = new Date().toISOString().split('T')[0]; // Formato yyyy-MM-dd
+    const fechaActual = new Date().toISOString().split('T')[0];
 
     this.devolucion = this.formBuilder.group({
       det_id: ['', [Validators.required]],
       dev_motivo: ['', [Validators.required]],
       dev_fecha: [fechaActual, [Validators.required]],
       dev_fkestado_id: ['6', [Validators.required]],
-      dev_cantidad: ['', [Validators.required]], // debe estar habilitado
+      dev_cantidad: ['', [Validators.required]],
 
-      
+
     });
-        this.devolucion.get('dev_fecha')?.disable();  // Deshabilitamos el campo dev_fecha
+    this.devolucion.get('dev_fecha')?.disable();
   }
 
   async cargarCompraDetalle() {
@@ -86,81 +86,80 @@ export class DevolucionCrearPage implements OnInit {
   }
 
   onCompraSeleccionada(event: any) {
-  const det_id = event.detail.value;
-  const compra = this.compradetalle.find((c: any) => c.det_id === det_id);
+    const det_id = event.detail.value;
+    const compra = this.compradetalle.find((c: any) => c.det_id === det_id);
 
-  if (compra) {
-    this.devolucion.patchValue({
-      dev_cantidad: compra.det_cantidad
-    });
-  }
-  console.log('dev_cantidad:', this.devolucion.get('dev_cantidad')?.value);
-
-}
-
-
-async guardarDatos() {
-  try {
-    const devolucion = this.devolucion?.value;
-
-    // Obtener el nombre del medicamento según det_id seleccionado
-    const detalleSeleccionado = this.compradetalle.find((c: any) => c.det_id === devolucion.det_id);
-    const nombreMedicamento = detalleSeleccionado ? detalleSeleccionado.medicamentoNombre : 'Medicamento';
-
-    if (this.dev_id === undefined) {
-      try {
-        await this.devolucionService.crear(devolucion).subscribe(
-          response => {
-            if (response?.status == 201) {
-              this.alertGuardado(
-                response.data.dev_id,
-                `La devolución de ${nombreMedicamento} ha sido registrada`
-              );
-            }
-          },
-          error => {
-            if (error?.response?.status == 401) {
-              this.alertGuardado(devolucion.det_id, "No tienes permisos para realizar esta acción.", "Error");
-            }
-            if (error?.response?.status == 422) {
-              this.alertGuardado(devolucion.det_id, error?.response?.data[0]?.message, "Error");
-            }
-            if (error?.response?.status == 500) {
-              this.alertGuardado(devolucion.det_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
-            }
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await this.devolucionService.actualizar(this.dev_id, devolucion).subscribe(
-          response => {
-            if (response?.status == 200) {
-              this.alertGuardado(
-                response.data.dev_id,
-                `La devolución de ${nombreMedicamento} ha sido actualizada`
-              );
-            }
-          },
-          error => {
-            if (error?.response?.status == 401) {
-              this.alertGuardado(devolucion.det_id, "No tienes permisos para realizar esta acción.", "Error");
-            }
-            if (error?.response?.status == 422) {
-              this.alertGuardado(devolucion.det_id, error?.response?.data[0]?.message, "Error");
-            }
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
+    if (compra) {
+      this.devolucion.patchValue({
+        dev_cantidad: compra.det_cantidad
+      });
     }
-  } catch (e) {
-    console.log(e);
+    console.log('dev_cantidad:', this.devolucion.get('dev_cantidad')?.value);
+
   }
-}
+
+
+  async guardarDatos() {
+    try {
+      const devolucion = this.devolucion?.value;
+
+      const detalleSeleccionado = this.compradetalle.find((c: any) => c.det_id === devolucion.det_id);
+      const nombreMedicamento = detalleSeleccionado ? detalleSeleccionado.medicamentoNombre : 'Medicamento';
+
+      if (this.dev_id === undefined) {
+        try {
+          await this.devolucionService.crear(devolucion).subscribe(
+            response => {
+              if (response?.status == 201) {
+                this.alertGuardado(
+                  response.data.dev_id,
+                  `La devolución de ${nombreMedicamento} ha sido registrada`
+                );
+              }
+            },
+            error => {
+              if (error?.response?.status == 401) {
+                this.alertGuardado(devolucion.det_id, "No tienes permisos para realizar esta acción.", "Error");
+              }
+              if (error?.response?.status == 422) {
+                this.alertGuardado(devolucion.det_id, error?.response?.data[0]?.message, "Error");
+              }
+              if (error?.response?.status == 500) {
+                this.alertGuardado(devolucion.det_id, "No puedes eliminar porque tiene relaciones con otra tabla", "Error");
+              }
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          await this.devolucionService.actualizar(this.dev_id, devolucion).subscribe(
+            response => {
+              if (response?.status == 200) {
+                this.alertGuardado(
+                  response.data.dev_id,
+                  `La devolución de ${nombreMedicamento} ha sido actualizada`
+                );
+              }
+            },
+            error => {
+              if (error?.response?.status == 401) {
+                this.alertGuardado(devolucion.det_id, "No tienes permisos para realizar esta acción.", "Error");
+              }
+              if (error?.response?.status == 422) {
+                this.alertGuardado(devolucion.det_id, error?.response?.data[0]?.message, "Error");
+              }
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
   public getError(controlName: string) {

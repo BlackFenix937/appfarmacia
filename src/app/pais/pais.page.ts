@@ -107,12 +107,12 @@ export class PaisPage implements OnInit {
         try {
             await this.PaisService.eliminar(pai_id, pai_nombre).subscribe(
                 response => {
-                    this.alertEliminado(pai_id, 'El Pais ' + pai_nombre + ' sido eliminado');
+                    this.alertEliminado(pai_id, 'El Pais ' + pai_nombre + ' ha sido eliminado');
                 },
                 error => {
                     console.error('Error:', error);
                     if (error.response?.status == 204) {
-                        this.alertEliminado(pai_id, 'El municipio ha sido eliminado');
+                        this.alertEliminado(pai_id, 'El pais ha sido eliminado');
                     }
                     if (error.response?.status == 500) {
                         this.alertEliminado(pai_id, 'No puedes eliminar porque tiene relaciones con otra tabla');

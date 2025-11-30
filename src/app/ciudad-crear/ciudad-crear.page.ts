@@ -36,7 +36,7 @@ export class CiudadCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'ciu_nombre': [
-            { type: 'required', message: 'El nombre de la ciudad es obligatorio' },
+            { type: 'required', message: 'El nombre de la ciudad es obligatorio.' },
 
         ],
 

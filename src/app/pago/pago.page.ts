@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
-import axios from 'axios';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { Pago } from '../services/pago';
 import { PagoCrearPage } from '../pago-crear/pago-crear.page';
 import { Router } from '@angular/router';
@@ -18,8 +17,6 @@ export class PagoPage implements OnInit {
     private modalCtrl: ModalController,
     private router: Router,
     private alertCtrl: AlertController,
-
-
     private pagoService: Pago
 
   ) { }
@@ -40,7 +37,7 @@ export class PagoPage implements OnInit {
     });
     await loading.present();
     try {
-      await this.pagoService.listado('?page=' + this.page+"&expand=medicamentosComprados", this.busqueda).subscribe(
+      await this.pagoService.listado('?page=' + this.page + "&expand=medicamentosComprados", this.busqueda).subscribe(
         response => {
           this.pagos = response;
           this.cargarTotal();
@@ -94,7 +91,7 @@ export class PagoPage implements OnInit {
     try {
       await this.pagoService.eliminar(pag_id, medicamentosComprados).subscribe(
         response => {
-          this.alertEliminado(pag_id, 'El pago de ' + medicamentosComprados + ' sido eliminado');
+          this.alertEliminado(pag_id, 'El pago de ' + medicamentosComprados + ' ha sido eliminado');
         },
         error => {
           console.error('Error:', error);

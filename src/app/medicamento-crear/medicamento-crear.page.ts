@@ -31,7 +31,7 @@ export class MedicamentoCrearPage implements OnInit {
 
     mensajes_validacion: any = {
         'med_nombre': [
-            { type: 'required', message: 'El nombre del medicamento es obligatorio' },
+            { type: 'required', message: 'El nombre del medicamento es obligatorio.' },
 
         ],
 

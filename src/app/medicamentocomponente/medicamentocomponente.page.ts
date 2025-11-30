@@ -131,7 +131,7 @@ export class MedicamentocomponentePage implements OnInit {
     try {
       await this.medicompService.eliminar(medcomp_id, medicamentoNombre).subscribe(
         response => {
-          this.alertEliminado(medcomp_id, 'El componente del medicamento ' + medicamentoNombre + ' sido eliminado');
+          this.alertEliminado(medcomp_id, 'El componente del medicamento ' + medicamentoNombre + ' ha sido eliminado');
         },
         error => {
           console.error('Error:', error);

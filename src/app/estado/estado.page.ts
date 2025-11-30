@@ -108,7 +108,7 @@ export class EstadoPage implements OnInit {
     try {
       await this.EstadosService.eliminar(estd_id, estd_nombre).subscribe(
         response => {
-          this.alertEliminado(estd_id, 'El estado ' + estd_nombre + ' sido eliminado');
+          this.alertEliminado(estd_id, 'El estado ' + estd_nombre + 'ha sido eliminado');
         },
         error => {
           console.error('Error:', error);
