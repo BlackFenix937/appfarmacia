@@ -10,7 +10,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Nombre de la entidad comercial</ion-label>
+            <ion-label position="floating" color="primario-one">Nombre de la entidad comercial</ion-label>
             <ion-input type="text" formControlName="ent_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.ent_nombre">
@@ -22,7 +22,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Tipo de entidad comercial</ion-label>
+            <ion-label position="floating" color="primario-one">Tipo de entidad comercial</ion-label>
             <ion-select formControlName="ent_tipo" class="form-control">
               <ion-select-option *ngFor="let tipo of tipos" [value]="tipo.ent_tipo">
                 {{ tipo.ent_tipo }}
@@ -39,7 +39,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Telefono de la entidad comercial</ion-label>
+            <ion-label position="floating" color="primario-one">Telefono de la entidad comercial</ion-label>
             <ion-input type="text" formControlName="ent_telefono" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.ent_telefono">
@@ -51,7 +51,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Correo electronico</ion-label>
+            <ion-label position="floating" color="primario-one">Correo electronico</ion-label>
             <ion-input type="text" formControlName="ent_correo" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.ent_correo">
@@ -63,7 +63,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Direccion</ion-label>
+            <ion-label position="floating" color="primario-one">Direccion</ion-label>
             <ion-input type="text" formControlName="ent_direccion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.ent_direccion">
@@ -75,7 +75,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Codigo postal</ion-label>
+            <ion-label position="floating" color="primario-one">Codigo postal</ion-label>
             <ion-input type="text" formControlName="ent_codigo_postal" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.ent_codigo_postal">
@@ -88,7 +88,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Ciudad</ion-label>
+            <ion-label position="floating" color="primario-one">Ciudad</ion-label>
             <ion-select formControlName="ent_fkciu_id" class="form-control">
               <ion-select-option *ngFor="let ciudad of ciudad" [value]="ciudad.ciu_id">
                 {{ciudad.ciu_nombre}}
@@ -105,7 +105,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!entidadcomercial.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!entidadcomercial.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

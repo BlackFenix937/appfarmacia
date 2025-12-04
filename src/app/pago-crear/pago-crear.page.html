@@ -12,7 +12,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Compra</ion-label>
+            <ion-label position="floating" color="primario-one">Compra</ion-label>
             <ion-select formControlName="comp_id" (ionChange)="onCompraChange($event)">
               <ion-select-option *ngFor="let compras of compras" [value]="compras.comp_id">
                 {{compras.medicamentoNombre}}
@@ -28,7 +28,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Monto del Pago</ion-label>
+            <ion-label position="floating" color="primario-one">Monto del Pago</ion-label>
             <ion-input [value]="selectedCompra?.comp_total" formControlName="pag_monto" readonly></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.pag_monto">
@@ -41,7 +41,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">¿Solicitar factura?</ion-label>
+            <ion-label position="floating" color="primario-one">¿Solicitar factura?</ion-label>
             <ion-select formControlName="pag_factura_solicitada">
               <ion-select-option [value]="1">Sí</ion-select-option>
               <ion-select-option [value]="0">No</ion-select-option>
@@ -56,7 +56,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!pagos.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!pagos.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

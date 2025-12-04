@@ -106,6 +106,11 @@ const routes: Routes = [
     canActivate: [permisoGuard]
   },
   {
+    path: 'entidad-comercial-detalle/:ent_id',
+    loadChildren: () => import('./entidad-comercial-detalle/entidad-comercial-detalle.module').then(m => m.EntidadComercialDetallePageModule),
+    canActivate: [permisoGuard]
+  },
+  {
     path: 'entidad-medicamento-detalle/:entmed_id',
     loadChildren: () => import('./entidad-medicamento-detalle/entidad-medicamento-detalle.module').then(m => m.EntidadMedicamentoDetallePageModule),
     canActivate: [permisoGuard]
@@ -138,6 +143,11 @@ const routes: Routes = [
   {
     path: 'compra-detalle/:comp_id',
     loadChildren: () => import('./compra-detalle/compra-detalle.module').then(m => m.CompraDetallePageModule),
+    canActivate: [permisoGuard]
+  },
+  {
+    path: 'medicamentocomponente-detalle/:medcomp_id',
+    loadChildren: () => import('./medicamentocomponente-detalle/medicamentocomponente-detalle.module').then(m => m.MedicamentocomponenteDetallePageModule),
     canActivate: [permisoGuard]
   },
   {
@@ -225,11 +235,6 @@ const routes: Routes = [
     loadChildren: () => import('./medicamentocomponente-crear/medicamentocomponente-crear.module').then(m => m.MedicamentocomponenteCrearPageModule),
     canActivate: [permisoGuard]
   },
-  {
-    path: 'medicamentocomponente-detalle/:medcomp_id',
-    loadChildren: () => import('./medicamentocomponente-detalle/medicamentocomponente-detalle.module').then(m => m.MedicamentocomponenteDetallePageModule),
-    canActivate: [permisoGuard]
-  }
 ];
 
 @NgModule({

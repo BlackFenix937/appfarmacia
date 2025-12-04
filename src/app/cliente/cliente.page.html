@@ -1,37 +1,45 @@
 <app-toolbar nombre="Cliente" color="primario"></app-toolbar>
 
-<ion-content>
-  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
-  <ion-list>
-    <ion-item button *ngFor="let cliente of clientes">
+<ion-content class="bg-light">
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+  </div>
+
+  <ion-list class="list-list">
+    <ion-item *ngFor="let cliente of clientes" class="list-card" lines="none">
+
       <ion-avatar slot="start">
         <img src="assets/img/cliente.png" alt="Foto">
       </ion-avatar>
 
-      <ion-label class="ion-text-wrap">
+      <ion-label class="ion-text-wrap list-info">
         <h3>{{cliente.cli_nombre}}</h3>
-
       </ion-label>
-      <ion-badge slot="end"></ion-badge>
-      <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]">
-        <ion-icon name="person-circle-sharp"></ion-icon>
 
-      </ion-button>
-      <ion-button (click)="editar(cliente.cli_id)" color="warning">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-button>
+      <div class="action-buttons" slot="end">
 
-      <ion-button (click)="alertEliminar(cliente.cli_id, cliente.cli_nombre)" color="danger">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+        <ion-button [routerLink]="['/cliente-detalle', cliente.cli_id]" fill="clear" class="btn-ver">
+          <ion-icon slot="icon-only" name="person-circle-sharp"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="editar(cliente.cli_id)" fill="clear" class="btn-editar">
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="alertEliminar(cliente.cli_id, cliente.cli_nombre)" fill="clear" class="btn-borrar">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+
+      </div>
 
     </ion-item>
+
     <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
-
   </ion-list>
-
 </ion-content>
+
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="new()">
+  <ion-fab-button (click)="new()" class="fab-gradient">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
+</ion-fab>

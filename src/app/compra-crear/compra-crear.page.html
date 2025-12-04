@@ -11,7 +11,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Cliente</ion-label>
+            <ion-label position="floating" color="primario-one">Cliente</ion-label>
             <ion-select formControlName="cli_id" class="form-control">
               <ion-select-option *ngFor="let cliente of cliente" [value]="cliente.cli_id">
                 {{ cliente.cli_nombre }}
@@ -22,20 +22,20 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Total de la compra</ion-label>
+            <ion-label position="floating" color="primario-one">Total de la compra</ion-label>
             <ion-input type="number" formControlName="comp_total" class="form-control" [disabled]="true"></ion-input>
           </ion-item>
         </ion-col>
 
         <ion-col size="12">
           <ion-item>
-            <ion-label color="secundario">Medicamentos</ion-label>
-            <ion-button size="small" color="secundario" (click)="agregarMedicamento()">Agregar Medicamento</ion-button>
+            <ion-label color="primario-one">Medicamentos</ion-label>
+            <ion-button size="small" color="primario-one" (click)="agregarMedicamento()">Agregar Medicamento</ion-button>
           </ion-item>
 
           <div formArrayName="medicamentos">
             <ion-item *ngFor="let medicamento of medicamentosFA.controls; let i = index" [formGroupName]="i">
-              <ion-label position="floating" color="secundario">Medicamento {{ i + 1 }}</ion-label>
+              <ion-label position="floating" color="primario-one">Medicamento {{ i + 1 }}</ion-label>
 
               <ion-select formControlName="med_id" class="form-control" (ionChange)="actualizarPrecioUnitario(i)">
                 <ion-select-option *ngFor="let medicamento of medicamentos" [value]="medicamento.med_id">
@@ -62,7 +62,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!compra.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!compra.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

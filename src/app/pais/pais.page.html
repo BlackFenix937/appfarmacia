@@ -1,34 +1,39 @@
 <app-toolbar nombre="Paises" color="primario"></app-toolbar>
 
-<ion-content>
+<ion-content class="bg-light">
+  <div class="search-container">
     <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+  </div>
 
-    <ion-list>
-        <ion-item button *ngFor="let pais of paises">
-            <ion-avatar slot="start">
-                <img src="assets/img/paises.png" alt="Foto">
-            </ion-avatar>
+  <ion-list class="list-list">
+    <ion-item *ngFor="let pais of paises" class="list-card" lines="none">
+      
+      <ion-avatar slot="start">
+        <img src="assets/img/paises.png" alt="Foto">
+      </ion-avatar>
 
-            <ion-label class="ion-text-wrap">
-                <h3>{{pais.pai_nombre}}</h3>
+      <ion-label class="ion-text-wrap list-info">
+        <h3>{{pais.pai_nombre}}</h3>
+      </ion-label>
 
-            </ion-label>
+      <div class="action-buttons" slot="end">
+        <ion-button (click)="editar(pais.pai_id)" fill="clear" class="btn-editar">
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
+        </ion-button>
 
-            <ion-badge slot="end"></ion-badge>
-            <ion-button (click)="editar(pais.pai_id)" color="warning">
-                <ion-icon name="pencil"></ion-icon>
-            </ion-button>
+        <ion-button (click)="alertEliminar(pais.pai_id, pais.pai_nombre)" fill="clear" class="btn-borrar">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </div>
 
-            <ion-button (click)="alertEliminar(pais.pai_id, pais.pai_nombre)" color="danger">
-                <ion-icon name="trash"></ion-icon>
-            </ion-button>
-        </ion-item>
-        <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+    </ion-item>
 
-    </ion-list>
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
+  </ion-list>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="new()">
-        <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
+  <ion-fab-button (click)="new()" class="fab-gradient">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

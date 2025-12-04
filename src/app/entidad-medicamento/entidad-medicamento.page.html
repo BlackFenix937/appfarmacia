@@ -1,39 +1,46 @@
 <app-toolbar nombre="Entidad Medicamento" color="primario"></app-toolbar>
 
-<ion-content>
-  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+<ion-content class="bg-light">
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+  </div>
 
-  <ion-list>
-    <ion-item button *ngFor="let entidadmedicamento of entidadmedicamentos">
+  <ion-list class="list-list">
+    <ion-item *ngFor="let entidadmedicamento of entidadmedicamentos" class="list-card" lines="none">
+
       <ion-avatar slot="start">
         <img src="assets/img/entmed.png" alt="Foto">
       </ion-avatar>
 
-      <ion-label class="ion-text-wrap">
+      <ion-label class="ion-text-wrap list-info">
+        <p>Pedido de:</p>
         <h3>{{entidadmedicamento.medicamentoNombre}}</h3>
-
       </ion-label>
-      <ion-badge slot="end">Pedido {{entidadmedicamento.entmed_id}}</ion-badge>
-      <ion-button [routerLink]="['/entidad-medicamento-detalle', entidadmedicamento.entmed_id]">
-        <ion-icon name="cube-sharp"></ion-icon>
 
-      </ion-button>
+      <div class="action-buttons" slot="end">
 
-      <ion-button (click)="editar(entidadmedicamento.entmed_id)" color="warning">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-button>
+        <ion-button [routerLink]="['/entidad-medicamento-detalle', entidadmedicamento.entmed_id]" fill="clear" class="btn-ver">
+          <ion-icon slot="icon-only" name="cube-sharp"></ion-icon>
+        </ion-button>
 
-      <ion-button (click)="alertEliminar(entidadmedicamento.entmed_id, entidadmedicamento.medicamento_nombre)"
-        color="danger">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+        <ion-button (click)="editar(entidadmedicamento.entmed_id)" fill="clear" class="btn-editar">
+          <ion-icon slot="icon-only" name="pencil"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="alertEliminar(entidadmedicamento.entmed_id, entidadmedicamento.medicamento_nombre)" fill="clear" class="btn-borrar">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+
+      </div>
 
     </ion-item>
+
     <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
   </ion-list>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="new()">
+  <ion-fab-button (click)="new()" class="fab-gradient">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
+</ion-fab>

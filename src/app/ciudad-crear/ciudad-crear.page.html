@@ -10,7 +10,7 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-item>
-                        <ion-label position="floating" color="secundario">Nombre de la ciudad</ion-label>
+                        <ion-label position="floating" color="primario-one">Nombre de la ciudad</ion-label>
                         <ion-input type="text" formControlName="ciu_nombre" class="form-control"></ion-input>
                     </ion-item>
                     <div id="note" *ngFor="let validation of mensajes_validacion.ciu_nombre">
@@ -21,7 +21,7 @@
                 </ion-col>
                 <ion-col size="12">
                     <ion-item>
-                        <ion-label position="floating" color="secundario">Municipio</ion-label>
+                        <ion-label position="floating" color="primario-one">Municipio</ion-label>
                         <ion-select formControlName="ciu_fkmun_id" class="form-control">
                             <ion-select-option *ngFor="let municipio of municipios" [value]="municipio.mun_id">
                                 {{municipio.mun_nombre}}
@@ -36,7 +36,7 @@
                 </ion-col>
                 <ion-col size="12">
                     <p class="ion-text-center">
-                        <ion-button type="submit" color="secundario" [disabled]="!ciudades.valid">
+                        <ion-button type="submit" color="primario-one" [disabled]="!ciudades.valid">
                             <ion-icon name="save-sharp" slot="start"></ion-icon>
                             Guardar</ion-button>
                     </p>

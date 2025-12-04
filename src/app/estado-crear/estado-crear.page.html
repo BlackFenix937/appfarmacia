@@ -10,7 +10,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Nombre del estado</ion-label>
+            <ion-label position="floating" color="primario-one">Nombre del estado</ion-label>
             <ion-input type="text" formControlName="estd_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.estd_nombre">
@@ -21,7 +21,7 @@
         </ion-col>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Pais</ion-label>
+            <ion-label position="floating" color="primario-one">Pais</ion-label>
             <ion-select formControlName="estd_fkpai_id" class="form-control">
               <ion-select-option *ngFor="let pais of pais" [value]="pais.pai_id">
                 {{pais.pai_nombre}}
@@ -36,7 +36,7 @@
         </ion-col>
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!estados.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!estados.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

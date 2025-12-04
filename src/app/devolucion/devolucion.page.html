@@ -1,36 +1,41 @@
 <app-toolbar nombre="Devolución" color="primario"></app-toolbar>
 
-<ion-content>
-  <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+<ion-content class="bg-light">
+  <div class="search-container">
+    <ion-searchbar [debounce]="1000" (ionInput)="handleInput($event)" placeholder="Buscar..."></ion-searchbar>
+  </div>
 
-  <ion-list>
-    <ion-item button *ngFor="let devolucion of devoluciones">
+  <ion-list class="list-list">
+    <ion-item *ngFor="let devolucion of devoluciones" class="list-card" lines="none">
+
       <ion-avatar slot="start">
         <img src="assets/img/devolucion.png" alt="Foto">
       </ion-avatar>
 
-      <ion-label class="ion-text-wrap">
+      <ion-label class="ion-text-wrap list-info">
         <h3>Devolución de {{devolucion.medicamentoNombre}}</h3>
-
       </ion-label>
-      <ion-badge slot="end"></ion-badge>
 
-      <ion-button [routerLink]="['/devolucion-detalle', devolucion.dev_id]">
-        <ion-icon name="newspaper-sharp"></ion-icon>
-      </ion-button>
+      <div class="action-buttons" slot="end">
 
-      <ion-button (click)="alertEliminar(devolucion.dev_id, devolucion.medicamentoNombre)" color="danger">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+        <ion-button [routerLink]="['/devolucion-detalle', devolucion.dev_id]" fill="clear" class="btn-ver">
+          <ion-icon slot="icon-only" name="newspaper-sharp"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="alertEliminar(devolucion.dev_id, devolucion.medicamentoNombre)" fill="clear" class="btn-borrar">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+
+      </div>
 
     </ion-item>
-    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
 
+    <app-paginacion [total]="total" (click)="pagina($event)"></app-paginacion>
   </ion-list>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-  <ion-fab-button (click)="new()">
+  <ion-fab-button (click)="new()" class="fab-gradient">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

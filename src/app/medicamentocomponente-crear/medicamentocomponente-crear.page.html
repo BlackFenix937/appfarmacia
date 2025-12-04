@@ -11,7 +11,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Medicamento</ion-label>
+            <ion-label position="floating" color="primario-one">Medicamento</ion-label>
             <ion-select formControlName="med_id" class="form-control">
               <ion-select-option *ngFor="let medicamento of medicamento" [value]="medicamento.med_id">
                 {{medicamento.med_nombre}}
@@ -27,7 +27,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Componente</ion-label>
+            <ion-label position="floating" color="primario-one">Componente</ion-label>
             <ion-select formControlName="comp_id" class="form-control">
               <ion-select-option *ngFor="let componente of componente" [value]="componente.comp_id">
                 {{componente.comp_nombre}}
@@ -43,7 +43,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" [disabled]="!medicamentocomponentes.valid" color="secundario">
+            <ion-button type="submit" [disabled]="!medicamentocomponentes.valid" color="primario-one">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

@@ -4,59 +4,60 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-  <ion-card *ngIf="cliente as cliente">
-    <div class="img">
-      <img src="assets/img/clientedet.png" alt="Foto">
+  <ion-card *ngIf="cliente as cliente" class="detail-card">
+
+    <div class="avatar-header">
+      <div class="img">
+        <img src="assets/img/clientedet.png" alt="Foto">
+      </div>
+    
     </div>
-    <ion-card-header class="center">
-      <ion-card-title>
-        <h3> Cliente {{cliente.cli_id}}</h3>
-      </ion-card-title>
-    </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
-        <ion-item>
+      <ion-list class="info-list">
+
+        <ion-item lines="none">
           <ion-label>
             <p>Nombre del cliente</p>
             <h2>{{cliente.cli_nombre}}</h2>
           </ion-label>
         </ion-item>
-        <ion-item>
+
+        <ion-item lines="none">
           <ion-label>
             <p>Apellidos del cliente</p>
             <h2>{{cliente.cli_apellido_paterno}} {{cliente.cli_apellido_materno}}</h2>
           </ion-label>
         </ion-item>
-        <ion-item>
+
+        <ion-item lines="none">
           <ion-label>
             <p>Fecha de nacimiento</p>
             <h2>{{cliente.cli_fecha_nacimiento}}</h2>
           </ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none" class="location-item">
           <ion-label>
             <p>Dirección</p>
             <h2>{{cliente.cli_direccion}}; {{cliente.ciudadNombre}}, {{cliente.municipioNombre}},
               {{cliente.estadoNombre}} </h2>
           </ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>
-            <p>Telefono</p>
+            <p>Teléfono</p>
             <h2>{{cliente.cli_telefono}}</h2>
           </ion-label>
         </ion-item>
-
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>
             <p>Correo</p>
             <h2>{{cliente.cli_correo}}</h2>
           </ion-label>
         </ion-item>
-
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>
             <p>RFC</p>
             <h2>{{cliente.cli_rfc}}</h2>
@@ -67,7 +68,7 @@
     </ion-card-content>
 
     <div class="back-button">
-      <ion-button (click)="goBack()" color="secundario">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>

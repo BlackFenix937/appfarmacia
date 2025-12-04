@@ -7,10 +7,12 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-      <ion-list>
-        <ion-item *ngFor="let enlace of enlaces" [routerLink]="enlace.ruta" routerDirection="root">
-          {{ enlace.texto }}
+    <ion-content class="bg-light">
+      <ion-list class="list-list">
+        <ion-item *ngFor="let enlace of enlaces" [routerLink]="enlace.ruta" routerDirection="root" class="list-card" lines="none">
+         <ion-label class="ion-text-wrap list-info">
+          <h3>{{ enlace.texto }}</h3>
+         </ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

@@ -11,7 +11,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Compra</ion-label>
+            <ion-label position="floating" color="primario-one">Compra</ion-label>
             <ion-select formControlName="det_id" (ionChange)="onCompraSeleccionada($event)">
               <ion-select-option *ngFor="let compdet of compradetalle" [value]="compdet.det_id">
                 {{compdet.medicamentoNombre}} - {{ compdet.det_cantidad }}
@@ -26,13 +26,13 @@
         </ion-col>
 
         <ion-item>
-          <ion-label position="floating" color="secundario">Cantidad a devolver</ion-label>
+          <ion-label position="floating" color="primario-one">Cantidad a devolver</ion-label>
           <ion-input type="number" formControlName="dev_cantidad" readonly></ion-input>
         </ion-item>
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Motivo de la devolución</ion-label>
+            <ion-label position="floating" color="primario-one">Motivo de la devolución</ion-label>
             <ion-input type="text" formControlName="dev_motivo" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.dev_motivo">
@@ -44,7 +44,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!devolucion.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!devolucion.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

@@ -10,7 +10,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Nombre del componente</ion-label>
+            <ion-label position="floating" color="primario-one">Nombre del componente</ion-label>
             <ion-input type="text" formControlName="comp_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.comp_nombre">
@@ -22,7 +22,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!componentes.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!componentes.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
               Guardar</ion-button>
           </p>

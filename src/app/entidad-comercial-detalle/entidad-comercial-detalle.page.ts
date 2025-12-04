@@ -26,14 +26,14 @@ export class EntidadComercialDetallePage implements OnInit {
   }
 
   async cargarEntidadComercial() {
-    const med_id = this.route.snapshot.paramMap.get('ent_id');
+    const ent_id = this.route.snapshot.paramMap.get('ent_id');
     const loading = await this.loading.create({
       message: 'Cargando',
       spinner: 'bubbles',
     });
     await loading.present();
     try {
-      await this.EntidadComercialService.detalle(med_id).subscribe(
+      await this.EntidadComercialService.detalle(ent_id).subscribe(
         response => {
           this.entidadcomercial = response;
         },

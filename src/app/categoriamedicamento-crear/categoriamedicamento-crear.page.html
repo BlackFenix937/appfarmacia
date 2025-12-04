@@ -11,7 +11,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Medicamentos</ion-label>
+            <ion-label position="floating" color="primario-one">Medicamentos</ion-label>
             <ion-select formControlName="med_id" class="form-control">
               <ion-select-option *ngFor="let medicamento of medicamentos" [value]="medicamento.med_id">
                 {{medicamento.med_nombre}}
@@ -27,7 +27,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Nombre de la categoria</ion-label>
+            <ion-label position="floating" color="primario-one">Nombre de la categoria</ion-label>
             <ion-input type="text" formControlName="catmed_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.catmed_nombre">
@@ -39,7 +39,7 @@
 
         <ion-col size="12">
           <ion-item>
-            <ion-label position="floating" color="secundario">Descripción de la categoria</ion-label>
+            <ion-label position="floating" color="primario-one">Descripción de la categoria</ion-label>
             <ion-input type="text" formControlName="catmed_descripcion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.catmed_descripcion">
@@ -52,7 +52,7 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="secundario" [disabled]="!categoriamedicamentos.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!categoriamedicamentos.valid">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
 
               Guardar</ion-button>
