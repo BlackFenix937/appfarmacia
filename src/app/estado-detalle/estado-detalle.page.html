@@ -4,30 +4,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngIf="estado as estado">
+<ion-content class="bg-light">
+
+  <ion-card *ngIf="estado as estado" class="detail-card">
     <div class="img">
       <img src="assets/img/estadodet.png" alt="Foto">
     </div>
+
     <ion-card-header class="center">
       <ion-card-title>
         <h3>{{estado.estd_nombre}}</h3>
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
-            <p>Pais donde se encuentra</p>
-            <h2> {{estado.paisNombre}}</h2>
+            <p>País donde se encuentra</p>
+            <h2>{{estado.paisNombre}}</h2>
           </ion-label>
         </ion-item>
       </ion-list>
 
       <div class="back-button">
-        <ion-button (click)="goBack()" color="primario-one">
+        <ion-button (click)="goBack()" color="primario-one" class="return-btn">
           <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
           Volver
         </ion-button>
       </div>
     </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

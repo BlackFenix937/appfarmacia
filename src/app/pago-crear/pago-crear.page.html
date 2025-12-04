@@ -1,21 +1,20 @@
 <ion-header>
   <ion-toolbar color="primario">
-    <ion-title>Nuevo Pago</ion-title>
+    <ion-title class="ion-text-center">Nuevo Pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="bg-light">
   <form [formGroup]="pagos" (ngSubmit)="guardarDatos()">
-    <ion-grid>
+    <ion-grid class="form-card">
       <ion-row>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Compra</ion-label>
-            <ion-select formControlName="comp_id" (ionChange)="onCompraChange($event)">
+            <ion-select formControlName="comp_id" (ionChange)="onCompraChange($event)" class="form-control">
               <ion-select-option *ngFor="let compras of compras" [value]="compras.comp_id">
-                {{compras.medicamentoNombre}}
+                {{ compras.medicamentoNombre }}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -27,9 +26,9 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Monto del Pago</ion-label>
-            <ion-input [value]="selectedCompra?.comp_total" formControlName="pag_monto" readonly></ion-input>
+            <ion-input [value]="selectedCompra?.comp_total" formControlName="pag_monto" readonly class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.pag_monto">
             <ion-note color="danger" *ngIf="getError('pag_monto')[(validation.type)]">
@@ -38,11 +37,10 @@
           </div>
         </ion-col>
 
-
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">¿Solicitar factura?</ion-label>
-            <ion-select formControlName="pag_factura_solicitada">
+            <ion-select formControlName="pag_factura_solicitada" class="form-control">
               <ion-select-option [value]="1">Sí</ion-select-option>
               <ion-select-option [value]="0">No</ion-select-option>
             </ion-select>
@@ -56,14 +54,14 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="primario-one" [disabled]="!pagos.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!pagos.valid" class="save-button">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
-              Guardar</ion-button>
+              Guardar
+            </ion-button>
           </p>
         </ion-col>
 
       </ion-row>
     </ion-grid>
   </form>
-
 </ion-content>

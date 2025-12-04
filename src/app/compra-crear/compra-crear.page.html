@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar color="primario">
-    <ion-title>Nueva compra</ion-title>
+    <ion-title>Nueva Compra</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
   <form [formGroup]="compra" (ngSubmit)="guardarDatos()">
-    <ion-grid>
+    <ion-grid class="form-card">
       <ion-row>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Cliente</ion-label>
             <ion-select formControlName="cli_id" class="form-control">
               <ion-select-option *ngFor="let cliente of cliente" [value]="cliente.cli_id">
@@ -21,20 +21,22 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Total de la compra</ion-label>
             <ion-input type="number" formControlName="comp_total" class="form-control" [disabled]="true"></ion-input>
           </ion-item>
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label color="primario-one">Medicamentos</ion-label>
-            <ion-button size="small" color="primario-one" (click)="agregarMedicamento()">Agregar Medicamento</ion-button>
+            <ion-button size="small" color="primario-one" (click)="agregarMedicamento()">Agregar
+              Medicamento</ion-button>
           </ion-item>
 
           <div formArrayName="medicamentos">
-            <ion-item *ngFor="let medicamento of medicamentosFA.controls; let i = index" [formGroupName]="i">
+            <ion-item *ngFor="let medicamento of medicamentosFA.controls; let i = index" [formGroupName]="i"
+              class="custom-item">
               <ion-label position="floating" color="primario-one">Medicamento {{ i + 1 }}</ion-label>
 
               <ion-select formControlName="med_id" class="form-control" (ionChange)="actualizarPrecioUnitario(i)">
@@ -43,15 +45,21 @@
                 </ion-select-option>
               </ion-select>
 
-              <p>Cantidad</p>
-              <ion-input type="number" formControlName="det_cantidad" placeholder="Cantidad"
-                (ionChange)="calcularSubtotal(i)"></ion-input>
-              <p>Precio Unitario</p>
-              <ion-input type="number" formControlName="det_precio_unitario" placeholder="Precio Unitario" step="0.01"
-                [disabled]="true"></ion-input>
-              <p>Subtotal</p>
-              <ion-input type="number" formControlName="det_subtotal" placeholder="Subtotal"
-                [disabled]="true"></ion-input>
+              <ion-item class="custom-item" lines="none">
+                <ion-label position="floating" color="primario-one">Cantidad</ion-label>
+                <ion-input type="number" formControlName="det_cantidad" (ionChange)="calcularSubtotal(i)"></ion-input>
+              </ion-item>
+
+              <ion-item class="custom-item" lines="none">
+                <ion-label position="floating" color="primario-one">Precio Unitario</ion-label>
+                <ion-input type="number" formControlName="det_precio_unitario" step="0.01"
+                  [disabled]="true"></ion-input>
+              </ion-item>
+
+              <ion-item class="custom-item" lines="none">
+                <ion-label position="floating" color="primario-one">Subtotal</ion-label>
+                <ion-input type="number" formControlName="det_subtotal" [disabled]="true"></ion-input>
+              </ion-item>
 
               <ion-button fill="clear" color="danger" (click)="eliminarMedicamento(i)">
                 <ion-icon name="trash"></ion-icon>
@@ -62,9 +70,10 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" color="primario-one" [disabled]="!compra.valid">
+            <ion-button type="submit" color="primario-one" [disabled]="!compra.valid" class="save-button">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
-              Guardar</ion-button>
+              Guardar
+            </ion-button>
           </p>
         </ion-col>
 

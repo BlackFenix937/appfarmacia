@@ -4,19 +4,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-  <ion-card *ngIf="entidadmedicamento as entidadmedicamento">
+  <ion-card *ngIf="entidadmedicamento as entidadmedicamento" class="detail-card">
     <div class="img">
       <img src="assets/img/entmeddet.png" alt="Foto">
     </div>
+
     <ion-card-header class="center">
       <ion-card-title>
-        <h3> {{entidadmedicamento.medicamentoNombre}}</h3>
+        <h3>{{entidadmedicamento.medicamentoNombre}}</h3>
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <p>Entidad que Distribuye/Provee</p>
@@ -37,23 +39,21 @@
         </ion-item>
         <ion-item>
           <ion-label>
-            <p>Tiempo de recepcion</p>
+            <p>Tiempo de recepción</p>
             <h2>{{entidadmedicamento.entmed_fecha_recepcion}}</h2>
           </ion-label>
         </ion-item>
-
         <ion-item>
           <ion-label>
-            <p>Estado del envio </p>
+            <p>Estado del envío</p>
             <h2>{{entidadmedicamento.estadoEntrega}}</h2>
           </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
 
-
     <div class="back-button">
-      <ion-button (click)="goBack()" color="primario-one">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>

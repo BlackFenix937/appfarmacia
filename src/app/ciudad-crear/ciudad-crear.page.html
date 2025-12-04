@@ -4,41 +4,44 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
     <form [formGroup]="ciudades" (ngSubmit)="guardarDatos()">
-        <ion-grid>
+        <ion-grid class="form-card">
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="custom-item" lines="none">
                         <ion-label position="floating" color="primario-one">Nombre de la ciudad</ion-label>
                         <ion-input type="text" formControlName="ciu_nombre" class="form-control"></ion-input>
                     </ion-item>
-                    <div id="note" *ngFor="let validation of mensajes_validacion.ciu_nombre">
+                    <div class="error-message" *ngFor="let validation of mensajes_validacion.ciu_nombre">
                         <ion-note color="danger" *ngIf="getError('ciu_nombre')[(validation.type)]">
                             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
                         </ion-note>
                     </div>
                 </ion-col>
+
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="custom-item" lines="none">
                         <ion-label position="floating" color="primario-one">Municipio</ion-label>
-                        <ion-select formControlName="ciu_fkmun_id" class="form-control">
+                        <ion-select formControlName="ciu_fkmun_id" class="form-control" placeholder="Selecciona un municipio">
                             <ion-select-option *ngFor="let municipio of municipios" [value]="municipio.mun_id">
-                                {{municipio.mun_nombre}}
+                                {{ municipio.mun_nombre }}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
-                    <div id="note" *ngFor="let validation of mensajes_validacion.ciu_fkmun_id">
+                    <div class="error-message" *ngFor="let validation of mensajes_validacion.ciu_fkmun_id">
                         <ion-note color="danger" *ngIf="getError('ciu_fkmun_id')[(validation.type)]">
                             <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
                         </ion-note>
                     </div>
                 </ion-col>
-                <ion-col size="12">
-                    <p class="ion-text-center">
-                        <ion-button type="submit" color="primario-one" [disabled]="!ciudades.valid">
+
+                <ion-col size="12" class="ion-padding-top ion-text-center">
+                    <p>
+                        <ion-button type="submit" [disabled]="!ciudades.valid" class="save-button" color="primario-one">
                             <ion-icon name="save-sharp" slot="start"></ion-icon>
-                            Guardar</ion-button>
+                            Guardar
+                        </ion-button>
                     </p>
                 </ion-col>
             </ion-row>

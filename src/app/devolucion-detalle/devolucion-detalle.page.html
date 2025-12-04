@@ -1,49 +1,55 @@
 <ion-header>
   <ion-toolbar color="primario">
-    <ion-title>Detalle de la devolucion</ion-title>
+    <ion-title>Detalle de la devolución</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-  <ion-card *ngIf="devolucion as devolucion">
+  <ion-card *ngIf="devolucion as devolucion" class="detail-card">
     <div class="img">
       <img src="assets/img/devoluciondet.png" alt="Foto">
     </div>
+
     <ion-card-header class="center">
       <ion-card-title>
-        <h3> Devolucion {{devolucion.dev_id}}</h3>
+        <h3>Devolución {{devolucion.dev_id}}</h3>
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <p>Medicamentos devueltos</p>
             <h2>{{devolucion.medicamentoNombre}}</h2>
           </ion-label>
         </ion-item>
+
         <ion-item>
           <ion-label>
             <p>Cantidad devuelta</p>
             <h2>{{devolucion.dev_cantidad}}</h2>
           </ion-label>
         </ion-item>
+
         <ion-item>
           <ion-label>
-            <p>Motivo de la devolucion</p>
+            <p>Motivo de la devolución</p>
             <h2>{{devolucion.dev_motivo}}</h2>
           </ion-label>
         </ion-item>
+
         <ion-item>
           <ion-label>
-            <p>Fecha de la devolucion</p>
+            <p>Fecha de la devolución</p>
             <h2>{{devolucion.dev_fecha}}</h2>
           </ion-label>
         </ion-item>
+
         <ion-item>
           <ion-label>
-            <p>Estado de la devolucion</p>
+            <p>Estado de la devolución</p>
             <h2>{{devolucion.estadoDevolucion}}</h2>
           </ion-label>
         </ion-item>
@@ -51,11 +57,12 @@
     </ion-card-content>
 
     <div class="back-button">
-      <ion-button (click)="goBack()" color="primario-one">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>
     </div>
 
   </ion-card>
+
 </ion-content>

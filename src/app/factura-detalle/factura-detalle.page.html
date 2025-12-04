@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-  <ion-card *ngIf="factura as factura">
+  <ion-card *ngIf="factura as factura" class="detail-card">
     <div class="img">
       <img src="assets/img/facturadet.png" alt="Foto">
     </div>
@@ -18,7 +18,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
+      <ion-list class="info-list">
 
         <ion-item>
           <ion-label>
@@ -72,7 +72,7 @@
       </ion-list>
 
       <div class="back-button">
-        <ion-button (click)="goBack()" color="primario-one">
+        <ion-button (click)="goBack()" color="primario-one" class="return-btn">
           <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
           Volver
         </ion-button>

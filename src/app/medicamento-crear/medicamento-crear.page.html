@@ -4,14 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content>
+<ion-content class="bg-light">
   <form [formGroup]="medicamento" (ngSubmit)="guardarDatos()">
-    <ion-grid>
+    <ion-grid class="form-card">
       <ion-row>
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="primario-one">Nombre del medicameto</ion-label>
+          <ion-item class="custom-item" lines="none">
+            <ion-label position="floating" color="primario-one">Nombre del medicamento</ion-label>
             <ion-input type="text" formControlName="med_nombre" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_nombre">
@@ -22,8 +21,8 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="primario-one">Descripción del medicameto</ion-label>
+          <ion-item class="custom-item" lines="none">
+            <ion-label position="floating" color="primario-one">Descripción del medicamento</ion-label>
             <ion-input type="text" formControlName="med_descripcion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_descripcion">
@@ -34,8 +33,8 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="primario-one">Presentación del medicameto</ion-label>
+          <ion-item class="custom-item" lines="none">
+            <ion-label position="floating" color="primario-one">Presentación del medicamento</ion-label>
             <ion-input type="text" formControlName="med_presentacion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_presentacion">
@@ -46,9 +45,9 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="primario-one">Concentración del medicameto</ion-label>
-            <ion-input type="int" formControlName="med_concentracion" class="form-control"></ion-input>
+          <ion-item class="custom-item" lines="none">
+            <ion-label position="floating" color="primario-one">Concentración del medicamento</ion-label>
+            <ion-input type="number" formControlName="med_concentracion" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_concentracion">
             <ion-note color="danger" *ngIf="getError('med_concentracion')[(validation.type)]">
@@ -58,10 +57,9 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Fecha de caducidad</ion-label>
-            <ion-datetime presentation="date" formControlName="med_fecha_caducidad" color="primario-one"
-              class="form-control"></ion-datetime>
+            <ion-datetime presentation="date" formControlName="med_fecha_caducidad" color="primario-one" class="form-control"></ion-datetime>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_fecha_caducidad">
             <ion-note color="danger" *ngIf="getError('med_fecha_caducidad')[validation.type]">
@@ -71,7 +69,7 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Precio unitario</ion-label>
             <ion-input type="number" step="0.01" formControlName="med_precio_unitario" class="form-control"></ion-input>
           </ion-item>
@@ -82,10 +80,9 @@
           </div>
         </ion-col>
 
-
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="primario-one">Lote del medicameto</ion-label>
+          <ion-item class="custom-item" lines="none">
+            <ion-label position="floating" color="primario-one">Lote del medicamento</ion-label>
             <ion-input type="text" formControlName="med_lote" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_lote">
@@ -96,9 +93,9 @@
         </ion-col>
 
         <ion-col size="12">
-          <ion-item>
+          <ion-item class="custom-item" lines="none">
             <ion-label position="floating" color="primario-one">Stock del medicamento</ion-label>
-            <ion-input type="int" formControlName="med_stock" class="form-control"></ion-input>
+            <ion-input type="number" formControlName="med_stock" class="form-control"></ion-input>
           </ion-item>
           <div id="note" *ngFor="let validation of mensajes_validacion.med_stock">
             <ion-note color="danger" *ngIf="getError('med_stock')[(validation.type)]">
@@ -109,9 +106,10 @@
 
         <ion-col size="12">
           <p class="ion-text-center">
-            <ion-button type="submit" [disabled]="!medicamento.valid" color="primario-one">
+            <ion-button type="submit" [disabled]="!medicamento.valid" color="primario-one" class="save-button">
               <ion-icon name="save-sharp" slot="start"></ion-icon>
-              Guardar</ion-button>
+              Guardar
+            </ion-button>
           </p>
         </ion-col>
       </ion-row>

@@ -1,25 +1,25 @@
 <ion-header>
   <ion-toolbar color="primario">
-    <ion-title>Detalles de la compras</ion-title>
+    <ion-title>Detalles de la compra</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngIf="compra as compra">
+<ion-content class="bg-light">
+
+  <ion-card *ngIf="compra as compra" class="detail-card">
     <div class="img">
       <img src="assets/img/compradet.png" alt="Foto">
     </div>
+
     <ion-card-header class="center">
       <ion-card-title>
         <h3>Detalles de compra:</h3>
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
 
-      <ion-card-title>
-      </ion-card-title>
-
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item *ngFor="let detalles of compra.compraDetalle">
           <ion-label>
             <h2>Compra de: {{detalles.producto}}</h2>
@@ -30,7 +30,7 @@
         </ion-item>
       </ion-list>
 
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <h2>Compra realizada por:</h2>
@@ -39,7 +39,7 @@
         </ion-item>
       </ion-list>
 
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <h2>Estado de la compra:</h2>
@@ -48,7 +48,7 @@
         </ion-item>
       </ion-list>
 
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <h2>Fecha de la compra:</h2>
@@ -60,11 +60,12 @@
     </ion-card-content>
 
     <div class="back-button">
-      <ion-button (click)="goBack()" color="primario-one">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>
     </div>
 
   </ion-card>
+
 </ion-content>

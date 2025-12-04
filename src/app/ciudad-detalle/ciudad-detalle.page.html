@@ -4,20 +4,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-  <ion-card *ngIf="ciudad as ciudad">
+  <ion-card *ngIf="ciudad as ciudad" class="detail-card">
     <div class="img">
       <img src="assets/img/ciudaddet.png" alt="Foto">
     </div>
+    
     <ion-card-header class="center">
       <ion-card-title>
-        <h3> {{ciudad.ciu_nombre}}</h3>
+        <h3>{{ciudad.ciu_nombre}}</h3>
       </ion-card-title>
     </ion-card-header>
+    
     <ion-card-content>
-      <ion-list>
-        <ion-item>
+      <ion-list class="info-list">
+        <ion-item lines="none">
           <ion-label>
             <p>Municipio al que pertenece la ciudad</p>
             <h2>{{ciudad.municipioNombre}}</h2>
@@ -27,7 +29,7 @@
     </ion-card-content>
 
     <div class="back-button">
-      <ion-button (click)="goBack()" color="primario-one">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>

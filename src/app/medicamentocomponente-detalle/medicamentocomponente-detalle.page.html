@@ -4,11 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngIf="medicamentocomponente as medicamentocomponente">
+<ion-content class="bg-light">
+
+  <ion-card *ngIf="medicamentocomponente as medicamentocomponente" class="detail-card">
     <div class="img">
       <img src="assets/img/detmedcomp.png" alt="Foto">
     </div>
+
     <ion-card-header class="center">
       <ion-card-title>
         <ion-label>
@@ -17,24 +19,25 @@
         <h3>{{medicamentocomponente.medicamentoNombre}}</h3>
       </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <ion-list>
+      <ion-list class="info-list">
         <ion-item>
           <ion-label>
             <p>Nombre del componente (Principio activo)</p>
-            <h2> {{medicamentocomponente.componenteNombre}}</h2>
+            <h2>{{medicamentocomponente.componenteNombre}}</h2>
           </ion-label>
         </ion-item>
-
       </ion-list>
     </ion-card-content>
 
     <div class="back-button">
-      <ion-button (click)="goBack()" color="primario-one">
+      <ion-button (click)="goBack()" color="primario-one" class="return-btn">
         <ion-icon name="arrow-back-circle-sharp" slot="start"></ion-icon>
         Volver
       </ion-button>
     </div>
 
   </ion-card>
+
 </ion-content>

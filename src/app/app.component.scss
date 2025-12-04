@@ -405,3 +405,10 @@ ion-content {
     font-weight: 500;
   }
 }
+
+.register-link{
+    color: var(--ion-color-primario);
+    display: flex; 
+    justify-content: center; 
+    margin-top: 16px;
+}
